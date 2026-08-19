@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createClient } from '@supabase/supabase-js';
 import { Montserrat, Poppins } from 'next/font/google';
 
-// 1. Professional E-commerce Fonts
+// Professional E-commerce Fonts
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
 const poppins = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
@@ -21,12 +21,12 @@ export default function Home() {
   // Pre-written WhatsApp message
   const customCakeMessage = "Hi Rupali! I would like to order a Custom Cake.%0A%0A*My Requirements:*%0A- Occasion: %0A- Flavor: %0A- Weight (kg): %0A- Date Needed: %0A- Reference Image: (I will attach below)";
 
-  // UPDATED: 4 Premium Cake Images for the Slider
+  // UPDATED: 4 Highly reliable, high-resolution cake images suitable for right-alignment
   const heroImages = [
-    "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1563716113315-769502b748cb?auto=format&fit=crop&q=80"
+    "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1563716113315-769502b748cb?auto=format&fit=crop&w=1920&q=80"
   ];
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div className={`min-h-screen bg-[#FAF9F6] text-stone-800 scroll-smooth ${poppins.className}`} id="home">
       
-      {/* CRISP EDGE-TO-EDGE NAVBAR (Restored seamless integration) */}
+      {/* CRISP EDGE-TO-EDGE NAVBAR */}
       <header className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? "bg-white shadow-sm border-b border-stone-200" : "bg-gradient-to-b from-black/60 to-transparent"}`}>
         <div className={`max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center transition-all duration-300 ${scrolled ? "py-4" : "py-6"}`}>
           
@@ -96,36 +96,36 @@ export default function Home() {
         </div>
       </header>
 
-      {/* FULL WIDTH HERO SECTION (Fixed Imagery & Overlay) */}
+      {/* FULL WIDTH HERO SECTION */}
       <section className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-start pt-16">
         
-        {/* Background Image Slider (Positioned heavily to the right) */}
+        {/* Background Image Slider - Shifted right naturally with object-position */}
         <div className="absolute inset-0 z-0 bg-stone-900">
           {heroImages.map((img, index) => (
             <img 
               key={index} 
               src={img} 
-              alt="Premium Cake" 
-              className={`absolute inset-0 w-full h-full object-cover object-[75%_center] transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+              alt="Fresh Cake" 
+              className={`absolute inset-0 w-full h-full object-cover object-[85%_center] md:object-right transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
             />
           ))}
         </div>
 
-        {/* Elegant Gradient Overlay (Fades from dark left to transparent right) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-10"></div>
+        {/* Elegant Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 md:via-black/40 to-transparent z-10"></div>
 
-        {/* Left-Aligned Text Content */}
+        {/* Left-Aligned Text Content (Local wording) */}
         <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-10">
-          <div className={`${montserrat.className} inline-flex items-center gap-2 px-6 py-2 border border-white/40 text-white text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-sm rounded-sm`}>
-            <span className="text-[#e70064]">VIRAR'S PREMIUM BAKERY</span>
+          <div className={`${montserrat.className} inline-flex items-center gap-2 px-6 py-2 border border-white/30 text-white text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-sm rounded-sm`}>
+            <span className="text-[#e70064]">VIRAR'S FAVORITE CAKE SHOP</span>
           </div>
           
           <h2 className={`${montserrat.className} text-4xl md:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg text-left`}>
-            Handcrafted Happiness,<br/> Baked Fresh in <span className="text-[#e70064]">Virar.</span>
+            Fresh Cakes,<br/> Baked with Love in <span className="text-[#e70064]">Virar.</span>
           </h2>
           
           <p className="text-base md:text-lg text-white/90 font-light max-w-xl mb-10 drop-shadow-md text-left">
-            Professional, crisp finish cakes made with premium ingredients for your most special moments.
+            Birthday ho, anniversary ho, ya bas kuch meetha khane ka mann ho — we bake fresh cakes for every special moment.
           </p>
           
           <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4`}>
@@ -146,14 +146,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* OVERLAPPING TRUST FACTORS (Added smooth hover scale) */}
+      {/* OVERLAPPING TRUST FACTORS */}
       <section className="relative -mt-10 z-30 max-w-6xl mx-auto px-6 mb-24">
         <div className="bg-white rounded-md p-6 md:p-10 shadow-lg border border-stone-100 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x divide-stone-100">
           {[ 
-            { icon: "✨", title: "Premium Ingredients" }, 
-            { icon: "🌿", title: "100% Eggless Option" }, 
-            { icon: "🎨", title: "Professional Finish" }, 
-            { icon: "🛵", title: "Fresh Local Delivery" } 
+            { icon: "✨", title: "100% Fresh & Pure" }, 
+            { icon: "🌿", title: "Eggless Options" }, 
+            { icon: "🎨", title: "Perfect Finishing" }, 
+            { icon: "🛵", title: "Safe Local Delivery" } 
           ].map((item, i) => (
             <div key={i} className={`group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 cursor-default ${i === 0 || i === 2 ? 'pl-0' : ''}`}>
               <div className="text-[#e70064] text-2xl mb-3 transform transition-transform duration-300 group-hover:-translate-y-1">{item.icon}</div>
@@ -163,18 +163,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHOP BY CATEGORY SECTION (Standardized active hover state) */}
+      {/* SHOP BY CATEGORY SECTION */}
       <section id="categories" className="py-16 max-w-7xl mx-auto px-6 scroll-mt-28">
         <div className="flex flex-col items-center mb-12">
           <h3 className={`${montserrat.className} text-4xl font-bold text-stone-900 mb-3`}>Shop by Category</h3>
-          <p className="text-stone-500 font-light">Find the perfect treat for your next occasion.</p>
+          <p className="text-stone-500 font-light">Har celebration ke liye perfect cake.</p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { title: "Birthday", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80", link: "/shop?category=Birthday+Cakes" },
             { title: "Wedding", img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80", link: "/shop?category=Wedding+%26+Anniversary" },
-            { title: "Bespoke", img: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80", link: "/custom-cake", text: "Custom Order ➔" },
+            { title: "Custom Cakes", img: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80", link: "/custom-cake", text: "Custom Order ➔" },
             { title: "Tea Cakes", img: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80", link: "/shop?category=Dry+%26+Tea+Cakes" }
           ].map((cat, index) => (
             <a key={index} href={cat.link} className="group relative h-[350px] rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-200">
@@ -191,13 +191,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BEST SELLERS (Updated to exact Shop Page compact cards) */}
+      {/* BEST SELLERS */}
       <section id="bestsellers" className="py-24 bg-stone-50 scroll-mt-28 border-t border-stone-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
               <h3 className={`${montserrat.className} text-4xl font-bold text-stone-900 mb-2`}>Our Best Sellers</h3>
-              <p className="text-stone-500 font-light">The most loved flavors by our Virar customers.</p>
+              <p className="text-stone-500 font-light">Virar's all-time favorites, loved by everyone.</p>
             </div>
             <a href="/shop" className={`${montserrat.className} text-xs font-bold uppercase tracking-widest text-[#e70064] hover:text-stone-900 transition border-b border-[#e70064] hover:border-stone-900 pb-1`}>
               View Entire Menu
@@ -245,37 +245,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CRISP EDITORIAL 'WHY US' SECTION */}
+      {/* WHY US SECTION */}
       <section id="about" className="py-24 bg-white scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-16 items-center">
           <div className="w-full md:w-1/2">
             <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80" alt="Baking Process" className="rounded-md shadow-lg w-full h-[600px] object-cover border border-stone-100" />
           </div>
           <div className="w-full md:w-1/2 space-y-8">
-            <h3 className={`${montserrat.className} text-4xl md:text-6xl font-bold text-stone-900 leading-tight`}>Why choose<br/><span className="text-[#e70064]">Cake By Rupali?</span></h3>
+            <h3 className={`${montserrat.className} text-4xl md:text-6xl font-bold text-stone-900 leading-tight`}>Why order from<br/><span className="text-[#e70064]">Cake By Rupali?</span></h3>
             <p className="text-stone-600 leading-relaxed font-light text-lg">
-              Based in Virar (East), we don't just bake cakes; we craft memories. Every single order is treated with the utmost care, ensuring a stunning visual finish and an unforgettable taste.
+              We are based right here in Virar (East). Hum sirf cake nahi banate, memories banate hain. Every cake is baked fresh to make your celebration extra special.
             </p>
             <div className="space-y-6 mt-8 border-t border-stone-100 pt-8">
               <div className="flex items-start gap-4">
                 <span className="text-[#e70064] font-bold text-xl mt-1">01.</span>
                 <div>
-                  <h5 className={`${montserrat.className} font-bold text-stone-900 text-sm tracking-wide uppercase mb-1`}>No Preservatives</h5>
-                  <p className="text-stone-500 text-sm font-light">Baked fresh to order with zero chemical preservatives.</p>
+                  <h5 className={`${montserrat.className} font-bold text-stone-900 text-sm tracking-wide uppercase mb-1`}>100% Fresh & Pure</h5>
+                  <p className="text-stone-500 text-sm font-light">No stale cakes. Baked fresh to order with pure ingredients.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <span className="text-[#e70064] font-bold text-xl mt-1">02.</span>
                 <div>
-                  <h5 className={`${montserrat.className} font-bold text-stone-900 text-sm tracking-wide uppercase mb-1`}>Attention to Detail</h5>
-                  <p className="text-stone-500 text-sm font-light">Professional icing and fondant work for a crisp, high-end look.</p>
+                  <h5 className={`${montserrat.className} font-bold text-stone-900 text-sm tracking-wide uppercase mb-1`}>Perfect Finishing</h5>
+                  <p className="text-stone-500 text-sm font-light">Beautiful designs that look great and taste even better.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <span className="text-[#e70064] font-bold text-xl mt-1">03.</span>
                 <div>
-                  <h5 className={`${montserrat.className} font-bold text-stone-900 text-sm tracking-wide uppercase mb-1`}>Hassle-Free Ordering</h5>
-                  <p className="text-stone-500 text-sm font-light">Discuss customizations directly on WhatsApp.</p>
+                  <h5 className={`${montserrat.className} font-bold text-stone-900 text-sm tracking-wide uppercase mb-1`}>Easy WhatsApp Ordering</h5>
+                  <p className="text-stone-500 text-sm font-light">No complicated apps. Just message us on WhatsApp to discuss your order.</p>
                 </div>
               </div>
             </div>
@@ -283,10 +283,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PREMIUM TESTIMONIALS (Refined design with richer background) */}
+      {/* PREMIUM TESTIMONIALS */}
       <section className="py-24 bg-stone-100 border-t border-stone-200">
         <div className="max-w-7xl mx-auto px-6">
-          <h3 className={`${montserrat.className} text-4xl font-bold text-center text-stone-900 mb-16`}>Loved by Virar</h3>
+          <h3 className={`${montserrat.className} text-4xl font-bold text-center text-stone-900 mb-16`}>Virar Loves Our Cakes</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { text: "The Black Forest cake was absolutely divine! The finishing was so professional, it looked like it came from a 5-star hotel. Highly recommended.", name: "Priya M.", initials: "PM" },
@@ -335,10 +335,10 @@ export default function Home() {
       {/* VIBRANT CTA BANNER */}
       <section className="bg-[#e70064] text-white py-24 text-center px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className={`${montserrat.className} text-4xl md:text-5xl font-bold mb-6`}>Have a special event coming up?</h2>
-          <p className="text-pink-100 text-lg mb-10 font-light max-w-2xl mx-auto">From intimate birthdays to grand weddings, let us add the perfect touch of sweetness to your celebration.</p>
+          <h2 className={`${montserrat.className} text-4xl md:text-5xl font-bold mb-6`}>Koi special celebration aane wala hai?</h2>
+          <p className="text-pink-100 text-lg mb-10 font-light max-w-2xl mx-auto">Chhota sa birthday ho ya grand wedding, let's make it extra sweet.</p>
           <a href="/custom-cake" className={`${montserrat.className} bg-white text-[#e70064] px-10 py-4 rounded-sm font-bold text-xs tracking-widest uppercase hover:bg-stone-900 hover:text-white transition-colors duration-300 shadow-md inline-block border border-white hover:border-stone-900`}>
-            Discuss Your Custom Order
+            Order Your Custom Cake
           </a>
         </div>
       </section>
@@ -350,7 +350,7 @@ export default function Home() {
           <div className="md:col-span-4">
             <h2 className={`${montserrat.className} text-2xl font-bold tracking-tight mb-4`}>Cake By Rupali.</h2>
             <p className="text-stone-400 text-sm font-light leading-relaxed mb-8 max-w-sm">
-              Premium handcrafted cakes designed with professional perfection in Virar. Elevating everyday celebrations into unforgettable memories.
+              Freshly baked, delicious cakes made with love in Virar. Making your everyday celebrations extra sweet.
             </p>
             <div className="flex gap-4">
               <a href="#" className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-sm flex items-center justify-center text-xs font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors cursor-pointer text-stone-300 hover:text-white`}>IG</a>
