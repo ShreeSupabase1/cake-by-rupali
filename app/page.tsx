@@ -21,13 +21,17 @@ export default function Home() {
   // Pre-written WhatsApp message
   const customCakeMessage = "Hi Rupali! I would like to order a Custom Cake.%0A%0A*My Requirements:*%0A- Occasion: %0A- Flavor: %0A- Weight (kg): %0A- Date Needed: %0A- Reference Image: (I will attach below)";
 
-  // UPDATED: 4 Highly reliable, high-resolution cake images suitable for right-alignment
+  // UPDATED: The 4 attached cake images. 
+  // IMPORTANT: Ensure these files are saved in your project's "public" folder!
   const heroImages = [
-    "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80",
-    "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1920&q=80",
-    "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=1920&q=80",
-    "https://images.unsplash.com/photo-1563716113315-769502b748cb?auto=format&fit=crop&w=1920&q=80"
+    "/hero-1.jpg", 
+    "/hero-2.jpg", 
+    "/hero-3.jpg", 
+    "/hero-4.jpg"  
   ];
+
+  const handleNext = () => setCurrentSlide((prev) => (prev === heroImages.length - 1 ? 0 : prev + 1));
+  const handlePrev = () => setCurrentSlide((prev) => (prev === 0 ? heroImages.length - 1 : prev - 1));
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,8 +41,8 @@ export default function Home() {
     fetchProducts();
 
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === heroImages.length - 1 ? 0 : prev + 1));
-    }, 5000);
+      handleNext();
+    }, 6000);
 
     const handleScroll = () => {
       if (window.scrollY > 50) setScrolled(true);
@@ -56,7 +60,7 @@ export default function Home() {
     <div className={`min-h-screen bg-[#FAF9F6] text-stone-800 scroll-smooth ${poppins.className}`} id="home">
       
       {/* CRISP EDGE-TO-EDGE NAVBAR */}
-      <header className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? "bg-white shadow-sm border-b border-stone-200" : "bg-gradient-to-b from-black/60 to-transparent"}`}>
+      <header className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? "bg-white shadow-sm border-b border-stone-200" : "bg-gradient-to-b from-black/80 to-transparent"}`}>
         <div className={`max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center transition-all duration-300 ${scrolled ? "py-4" : "py-6"}`}>
           
           <h1 className={`${montserrat.className} text-2xl font-bold tracking-tight ${scrolled ? "text-stone-900" : "text-white"}`}>
@@ -96,53 +100,81 @@ export default function Home() {
         </div>
       </header>
 
-      {/* FULL WIDTH HERO SECTION */}
-      <section className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-start pt-16">
+      {/* NEW REFERENCE HERO SECTION */}
+      <section className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-start bg-[#0d0907]">
         
-        {/* Background Image Slider - Shifted right naturally with object-position */}
-        <div className="absolute inset-0 z-0 bg-stone-900">
+        {/* Background Image Slider */}
+        <div className="absolute inset-0 z-0">
           {heroImages.map((img, index) => (
             <img 
               key={index} 
               src={img} 
               alt="Fresh Cake" 
-              className={`absolute inset-0 w-full h-full object-cover object-[85%_center] md:object-right transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+              className={`absolute inset-0 w-full h-full object-cover object-[75%_center] transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
             />
           ))}
         </div>
 
-        {/* Elegant Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 md:via-black/40 to-transparent z-10"></div>
+        {/* Elegant Gradient Overlays for Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0907]/95 via-[#0d0907]/60 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0907]/90 via-transparent to-transparent z-10 md:hidden"></div>
 
-        {/* Left-Aligned Text Content (Local wording) */}
-        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-10">
-          <div className={`${montserrat.className} inline-flex items-center gap-2 px-6 py-2 border border-white/30 text-white text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-sm rounded-sm`}>
-            <span className="text-[#e70064]">VIRAR'S FAVORITE CAKE SHOP</span>
+        {/* Left-Aligned Text Content (Reference Styling) */}
+        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-0 md:-mt-10">
+          
+          {/* Accent Text & Heart */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className={`${montserrat.className} text-[#dcb562] text-sm md:text-base italic tracking-wide`}>Made Fresh. Made Happy.</span>
+            <svg className="w-5 h-5 text-[#e70064]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
           </div>
           
-          <h2 className={`${montserrat.className} text-4xl md:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg text-left`}>
-            Fresh Cakes,<br/> Baked with Love in <span className="text-[#e70064]">Virar.</span>
+          <h2 className={`${montserrat.className} text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6 drop-shadow-2xl text-left tracking-tight`}>
+            Fresh Cakes,<br/> Baked with Love<br/> in <span className="text-[#e70064]">Virar.</span>
           </h2>
+
+          {/* Elegant Divider */}
+          <div className="flex items-center gap-4 mb-6 opacity-80">
+            <div className="h-[1px] bg-[#e70064] w-12"></div>
+            <svg className="w-3 h-3 text-[#e70064]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+            <div className="h-[1px] bg-[#e70064] w-12"></div>
+          </div>
           
-          <p className="text-base md:text-lg text-white/90 font-light max-w-xl mb-10 drop-shadow-md text-left">
+          <p className="text-base md:text-lg text-white/90 font-light max-w-md mb-10 drop-shadow-md text-left leading-relaxed">
             Birthday ho, anniversary ho, ya bas kuch meetha khane ka mann ho — we bake fresh cakes for every special moment.
           </p>
           
           <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4`}>
-            <a href="/shop" className="bg-[#e70064] text-white px-10 py-4 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm border border-[#e70064] hover:border-white text-center">
+            <a href="/shop" className="bg-[#e70064] text-white px-8 py-3.5 font-bold text-xs tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm shadow-lg text-center">
               Shop Now
             </a>
-            <a href="/custom-cake" className="bg-transparent text-white border border-white px-10 py-4 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm backdrop-blur-sm text-center">
+            <a href="/custom-cake" className="bg-transparent text-white border border-white/50 px-8 py-3.5 font-bold text-xs tracking-wider uppercase hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm text-center">
               Custom Order
             </a>
           </div>
         </div>
 
-        {/* Slider Controls */}
-        <div className="absolute bottom-12 w-full flex justify-center gap-3 z-20">
+        {/* Left/Right Slider Arrows */}
+        <div className="absolute inset-0 flex items-center justify-between px-4 md:px-8 z-20 pointer-events-none">
+          <button onClick={handlePrev} className="pointer-events-auto w-10 h-10 flex items-center justify-center rounded-full border border-white/30 bg-black/20 text-white hover:bg-[#e70064] hover:border-[#e70064] transition-all backdrop-blur-sm hidden md:flex">
+            <svg className="w-5 h-5 pr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+          </button>
+          <button onClick={handleNext} className="pointer-events-auto w-10 h-10 flex items-center justify-center rounded-full border border-white/30 bg-black/20 text-white hover:bg-[#e70064] hover:border-[#e70064] transition-all backdrop-blur-sm hidden md:flex">
+            <svg className="w-5 h-5 pl-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+
+        {/* Circular Slider Dots */}
+        <div className="absolute bottom-16 md:bottom-24 w-full flex justify-center gap-3 z-20">
           {heroImages.map((_, idx) => (
-            <button key={idx} onClick={() => setCurrentSlide(idx)} className={`h-1.5 transition-all duration-500 rounded-sm ${idx === currentSlide ? "bg-[#e70064] w-8" : "bg-white/50 w-4 hover:bg-white"}`}></button>
+            <button key={idx} onClick={() => setCurrentSlide(idx)} className={`w-2 h-2 transition-all duration-500 rounded-full ${idx === currentSlide ? "bg-[#e70064]" : "bg-white/70 hover:bg-white"}`}></button>
           ))}
+        </div>
+
+        {/* Bottom Wave Transition SVG */}
+        <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden leading-none pointer-events-none transform translate-y-[1px]">
+          <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="w-full h-[60px] md:h-[120px] block">
+            <path fill="#FAF9F6" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
         </div>
       </section>
 
