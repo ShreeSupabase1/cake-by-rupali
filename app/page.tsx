@@ -119,8 +119,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d0907]/95 via-[#0d0907]/60 to-transparent z-10"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0907]/90 via-transparent to-transparent z-10 md:hidden"></div>
 
-        {/* Left-Aligned Text Content (Reference Styling) */}
-        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-0 md:-mt-10">
+        {/* Left-Aligned Text Content (Added spacing below header & reduced heading size) */}
+        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-8 md:mt-16">
           
           {/* Accent Text & Heart */}
           <div className="flex items-center gap-2 mb-4">
@@ -128,7 +128,8 @@ export default function Home() {
             <svg className="w-5 h-5 text-[#e70064]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
           </div>
           
-          <h2 className={`${montserrat.className} text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6 drop-shadow-2xl text-left tracking-tight`}>
+          {/* Reduced size slightly for better visual balance */}
+          <h2 className={`${montserrat.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-6 drop-shadow-2xl text-left tracking-tight`}>
             Fresh Cakes,<br/> Baked with Love<br/> in <span className="text-[#e70064]">Virar.</span>
           </h2>
 
@@ -170,16 +171,19 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Bottom Wave Transition SVG */}
+        {/* Premium Multi-Layer Wave Transition */}
         <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden leading-none pointer-events-none transform translate-y-[1px]">
-          <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="w-full h-[60px] md:h-[120px] block">
-            <path fill="#FAF9F6" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="w-full h-[80px] md:h-[160px] block">
+            {/* Background Layer (Slightly Transparent) */}
+            <path fill="#FAF9F6" fillOpacity="0.4" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            {/* Foreground Solid Layer */}
+            <path fill="#FAF9F6" fillOpacity="1" d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,192C672,213,768,235,864,218.7C960,203,1056,149,1152,133.3C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
           </svg>
         </div>
       </section>
 
-      {/* OVERLAPPING TRUST FACTORS */}
-      <section className="relative -mt-10 z-30 max-w-6xl mx-auto px-6 mb-24">
+      {/* OVERLAPPING TRUST FACTORS (Margin corrected to sit nicely below the waves) */}
+      <section className="relative z-30 max-w-6xl mx-auto px-6 mb-24 mt-4 md:mt-8">
         <div className="bg-white rounded-md p-6 md:p-10 shadow-lg border border-stone-100 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x divide-stone-100">
           {[ 
             { icon: "✨", title: "100% Fresh & Pure" }, 
