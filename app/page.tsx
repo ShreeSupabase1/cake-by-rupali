@@ -21,10 +21,12 @@ export default function Home() {
   // Pre-written WhatsApp message
   const customCakeMessage = "Hi Rupali! I would like to order a Custom Cake.%0A%0A*My Requirements:*%0A- Occasion: %0A- Flavor: %0A- Weight (kg): %0A- Date Needed: %0A- Reference Image: (I will attach below)";
 
+  // UPDATED: Now an elegant 4-cake image slider
   const heroImages = [
     "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80",
     "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80"
+    "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1563716113315-769502b748cb?auto=format&fit=crop&q=80"
   ];
 
   useEffect(() => {
@@ -53,15 +55,15 @@ export default function Home() {
   return (
     <div className={`min-h-screen bg-[#FAF9F6] text-stone-800 scroll-smooth ${poppins.className}`} id="home">
       
-      {/* CRISP EDGE-TO-EDGE NAVBAR */}
-      <header className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? "bg-white shadow-sm border-b border-stone-200" : "bg-gradient-to-b from-black/60 to-transparent"}`}>
+      {/* CRISP EDGE-TO-EDGE NAVBAR (Updated text colors for light background) */}
+      <header className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? "bg-white shadow-sm border-b border-stone-200" : "bg-[#FAF9F6]/90 backdrop-blur-sm"}`}>
         <div className={`max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center transition-all duration-300 ${scrolled ? "py-4" : "py-6"}`}>
           
-          <h1 className={`${montserrat.className} text-2xl font-bold tracking-tight ${scrolled ? "text-stone-900" : "text-white"}`}>
+          <h1 className={`${montserrat.className} text-2xl font-bold tracking-tight text-stone-900`}>
             Cake By Rupali
           </h1>
           
-          <nav className={`hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide uppercase ${montserrat.className} ${scrolled ? "text-stone-700" : "text-white"}`}>
+          <nav className={`hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide uppercase ${montserrat.className} text-stone-700`}>
             <a href="#home" className="hover:text-[#e70064] transition-colors">Home</a>
             
             {/* Shop Dropdown Routing to Shop Page */}
@@ -79,7 +81,7 @@ export default function Home() {
                   <a href="/shop?category=Dry+%26+Tea+Cakes" className="hover:text-[#e70064] transition text-sm capitalize">Dry & Tea Cakes</a>
                 </div>
                 <div className="bg-stone-50 p-4 border-t border-stone-100">
-                  <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-semibold text-sm hover:text-pink-800 transition capitalize">🎉 Festive Specials</a>
+                  <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-semibold text-sm hover:text-pink-800 transition capitalize block">🎉 Festive Specials</a>
                 </div>
               </div>
             </div>
@@ -90,54 +92,72 @@ export default function Home() {
             <a href="/admin" className="hover:text-[#e70064] transition uppercase tracking-wide font-semibold text-stone-400">Admin</a>
           </nav>
 
-          <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} px-6 py-3 text-xs font-bold tracking-wider uppercase transition-all duration-300 rounded-sm border ${scrolled ? "bg-stone-900 text-white border-stone-900 hover:bg-stone-800" : "bg-white text-stone-900 border-white hover:bg-transparent hover:text-white"}`}>
+          <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} px-6 py-3 text-xs font-bold tracking-wider uppercase transition-all duration-300 rounded-sm border bg-stone-900 text-white border-stone-900 hover:bg-[#e70064] hover:border-[#e70064]`}>
             Order on WhatsApp
           </a>
         </div>
       </header>
 
-      {/* PARALLAX HERO SECTION */}
-      <section className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-center pt-16">
-        {heroImages.map((img, index) => (
-          <div key={index} className={`absolute inset-0 transition-all duration-1000 ease-out transform ${index === currentSlide ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 z-0"}`}>
-            <div className="absolute inset-0 bg-black/40 z-10"></div>
-            <img src={img} alt="Premium Cake" className="w-full h-full object-cover" />
-          </div>
-        ))}
+      {/* PREMIUM SPLIT HERO SECTION */}
+      <section className="relative h-screen min-h-[700px] w-full bg-[#FAF9F6] overflow-hidden flex flex-col md:flex-row items-center justify-center pt-16">
         
-        {/* ADDED pb-32 HERE: Safely distances the buttons from the overlapping trust factors */}
-        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-10 pb-32">
-          <div className={`${montserrat.className} inline-flex items-center gap-2 px-6 py-2 border border-white/40 text-white text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-sm rounded-sm`}>
-            <span className="text-[#e70064]">VIRAR'S PREMIUM BAKERY</span>
-          </div>
-          
-          {/* REDUCED FONT SIZE & SWAPPED TO MONTSERRAT */}
-          <h2 className={`${montserrat.className} text-4xl md:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-md`}>
-            Handcrafted Happiness,<br/> Baked Fresh in <span className="text-[#e70064]">Virar.</span>
-          </h2>
-          
-          <p className="text-base md:text-lg text-white/90 font-light max-w-2xl mx-auto mb-10 drop-shadow-md">
-            Professional, crisp finish cakes made with premium ingredients for your most special moments.
-          </p>
-          
-          <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4`}>
-            <a href="/shop" className="bg-[#e70064] text-white px-10 py-4 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm border border-[#e70064] hover:border-white">
-              Shop Now
-            </a>
-            <a href="/custom-cake" className="bg-transparent text-white border border-white px-10 py-4 font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm backdrop-blur-sm">
-              Custom Order
-            </a>
-          </div>
+        {/* Right Side Background Image Slider */}
+        <div className="absolute top-0 right-0 w-full md:w-[60%] h-[50vh] md:h-full z-0">
+          {/* Soft gradient mask to blend images seamlessly into the background color */}
+          <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-[#FAF9F6] via-[#FAF9F6]/80 md:via-transparent to-transparent z-10"></div>
+          {/* Bottom mask for mobile text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF9F6] via-transparent to-transparent z-10 md:hidden"></div>
+
+          {heroImages.map((img, index) => (
+            <img 
+              key={index} 
+              src={img} 
+              alt="Premium Cake" 
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"}`} 
+            />
+          ))}
         </div>
 
-        <div className="absolute bottom-16 w-full flex justify-center gap-3 z-20">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center mt-20 md:mt-0">
+          
+          {/* Left Side Content & Text Shadow */}
+          <div className="w-full md:w-1/2 text-center md:text-left relative pb-20 md:pb-0">
+            {/* Subtle text shadow blob: Keeps text readable against imagery without shading the images */}
+            <div className="absolute top-1/2 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 w-[120%] h-[140%] bg-[#FAF9F6]/90 blur-2xl rounded-full -z-10"></div>
+            
+            <div className={`${montserrat.className} inline-flex items-center gap-2 px-6 py-2 border border-stone-200 bg-white/60 text-stone-600 text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-sm rounded-sm shadow-sm`}>
+              <span className="text-[#e70064]">VIRAR'S PREMIUM BAKERY</span>
+            </div>
+            
+            <h2 className={`${montserrat.className} text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight mb-6 drop-shadow-sm`}>
+              Handcrafted Happiness,<br/> Baked Fresh in <span className="text-[#e70064]">Virar.</span>
+            </h2>
+            
+            <p className="text-base md:text-lg text-stone-600 font-light max-w-xl mx-auto md:mx-0 mb-10">
+              Professional, crisp finish cakes made with premium ingredients for your most special moments.
+            </p>
+            
+            <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4 justify-center md:justify-start`}>
+              <a href="/shop" className="bg-[#e70064] text-white px-10 py-4 font-bold text-sm tracking-wider uppercase hover:bg-stone-900 transition-all rounded-sm border border-[#e70064] hover:border-stone-900 shadow-md">
+                Shop Now
+              </a>
+              <a href="/custom-cake" className="bg-white text-stone-900 border border-stone-200 px-10 py-4 font-bold text-sm tracking-wider uppercase hover:border-stone-900 transition-all rounded-sm shadow-sm">
+                Custom Order
+              </a>
+            </div>
+          </div>
+
+        </div>
+        
+        {/* Slider Controls */}
+        <div className="absolute bottom-12 md:bottom-10 md:right-10 w-full md:w-auto flex justify-center gap-3 z-20">
           {heroImages.map((_, idx) => (
-            <button key={idx} onClick={() => setCurrentSlide(idx)} className={`h-1 transition-all duration-500 rounded-sm ${idx === currentSlide ? "bg-[#e70064] w-8" : "bg-white/50 w-4 hover:bg-white"}`}></button>
+            <button key={idx} onClick={() => setCurrentSlide(idx)} className={`h-1.5 transition-all duration-500 rounded-full ${idx === currentSlide ? "bg-[#e70064] w-8" : "bg-stone-300 w-3 hover:bg-[#e70064]/50"}`}></button>
           ))}
         </div>
       </section>
 
-      {/* CRISP OVERLAPPING TRUST FACTORS */}
+      {/* CRISP OVERLAPPING TRUST FACTORS (Added Smooth Hover) */}
       <section className="relative -mt-10 z-30 max-w-6xl mx-auto px-6 mb-24">
         <div className="bg-white rounded-md p-6 md:p-10 shadow-lg border border-stone-100 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x divide-stone-100">
           {[ 
@@ -146,58 +166,42 @@ export default function Home() {
             { icon: "🎨", title: "Professional Finish" }, 
             { icon: "🛵", title: "Fresh Local Delivery" } 
           ].map((item, i) => (
-            <div key={i} className={`flex flex-col items-center text-center ${i === 0 || i === 2 ? 'pl-0' : ''}`}>
-              <div className="text-[#e70064] text-2xl mb-3">{item.icon}</div>
-              <h4 className={`${montserrat.className} font-bold text-stone-800 text-xs tracking-wider uppercase`}>{item.title}</h4>
+            <div key={i} className={`group flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 cursor-default px-2 ${i === 0 || i === 2 ? 'pl-0' : ''}`}>
+              <div className="text-[#e70064] text-2xl mb-3 transform group-hover:-translate-y-1 transition-transform duration-300">{item.icon}</div>
+              <h4 className={`${montserrat.className} font-bold text-stone-800 text-xs tracking-wider uppercase transition-colors duration-300 group-hover:text-[#e70064]`}>{item.title}</h4>
             </div>
           ))}
         </div>
       </section>
 
-      {/* SHOP BY CATEGORY SECTION */}
+      {/* SHOP BY CATEGORY SECTION (Standardized Gradient & Hover states) */}
       <section id="categories" className="py-16 max-w-7xl mx-auto px-6 scroll-mt-28">
-        <div className="flex flex-col items-center mb-12">
+        <div className="flex flex-col items-center mb-12 text-center">
           <h3 className={`${montserrat.className} text-4xl font-bold text-stone-900 mb-3`}>Shop by Category</h3>
           <p className="text-stone-500 font-light">Find the perfect treat for your next occasion.</p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <a href="/shop?category=Birthday+Cakes" className="group relative h-[350px] rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-200">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition z-10"></div>
-            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Birthday" />
-            <div className="absolute bottom-6 left-6 z-20">
-              <h4 className={`${montserrat.className} text-white text-2xl font-bold mb-1`}>Birthday</h4>
-              <p className={`${montserrat.className} text-white/80 text-xs tracking-widest uppercase font-semibold group-hover:text-[#e70064] transition-colors`}>Shop Now ➔</p>
-            </div>
-          </a>
-          <a href="/shop?category=Wedding+%26+Anniversary" className="group relative h-[350px] rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-200">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition z-10"></div>
-            <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Wedding" />
-            <div className="absolute bottom-6 left-6 z-20">
-              <h4 className={`${montserrat.className} text-white text-2xl font-bold mb-1`}>Wedding</h4>
-              <p className={`${montserrat.className} text-white/80 text-xs tracking-widest uppercase font-semibold group-hover:text-[#e70064] transition-colors`}>Shop Now ➔</p>
-            </div>
-          </a>
-          <a href="/custom-cake" className="group relative h-[350px] rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-200">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#e70064]/90 via-black/30 to-transparent transition z-10"></div>
-            <img src="https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Custom" />
-            <div className="absolute bottom-6 left-6 z-20">
-              <h4 className={`${montserrat.className} text-white text-2xl font-bold mb-1`}>Bespoke</h4>
-              <p className={`${montserrat.className} text-white text-xs tracking-widest uppercase font-semibold`}>Custom Order ➔</p>
-            </div>
-          </a>
-          <a href="/shop?category=Dry+%26+Tea+Cakes" className="group relative h-[350px] rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-200">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition z-10"></div>
-            <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Dry Cakes" />
-            <div className="absolute bottom-6 left-6 z-20">
-              <h4 className={`${montserrat.className} text-white text-2xl font-bold mb-1`}>Tea Cakes</h4>
-              <p className={`${montserrat.className} text-white/80 text-xs tracking-widest uppercase font-semibold group-hover:text-[#e70064] transition-colors`}>Shop Now ➔</p>
-            </div>
-          </a>
+          {[
+            { title: "Birthday", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80", link: "/shop?category=Birthday+Cakes", text: "Shop Now ➔" },
+            { title: "Wedding", img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80", link: "/shop?category=Wedding+%26+Anniversary", text: "Shop Now ➔" },
+            { title: "Bespoke", img: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80", link: "/custom-cake", text: "Custom Order ➔" },
+            { title: "Tea Cakes", img: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80", link: "/shop?category=Dry+%26+Tea+Cakes", text: "Shop Now ➔" }
+          ].map((cat, idx) => (
+            <a key={idx} href={cat.link} className="group relative h-[350px] rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-200">
+              {/* Identical standardized gradient mask applied to all cards */}
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-stone-900/20 to-transparent transition duration-500 z-10 group-hover:from-stone-900/95"></div>
+              <img src={cat.img} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt={cat.title} />
+              <div className="absolute bottom-6 left-6 z-20">
+                <h4 className={`${montserrat.className} text-white text-2xl font-bold mb-1 group-hover:text-[#e70064] transition-colors duration-300`}>{cat.title}</h4>
+                <p className={`${montserrat.className} text-white/80 text-xs tracking-widest uppercase font-semibold group-hover:text-white transition-colors`}>{cat.text}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 
-      {/* BEST SELLERS */}
+      {/* BEST SELLERS (Updated to perfectly match Shop Page cards) */}
       <section id="bestsellers" className="py-24 bg-stone-50 scroll-mt-28 border-t border-stone-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -210,33 +214,37 @@ export default function Home() {
             </a>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {cakes.length > 0 ? (
               cakes.slice(0, 3).map((cake: any) => (
-                <div key={cake.id} className="group flex flex-col bg-white p-4 shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-200 rounded-md">
-                  <div className="w-full h-[300px] bg-stone-100 overflow-hidden mb-5 relative rounded-sm">
+                <a href={`/shop/${cake.id}`} key={cake.id} className="group flex flex-col bg-white border border-stone-200 p-3 rounded-sm shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="w-full aspect-square bg-stone-50 overflow-hidden mb-4 relative rounded-sm">
                     {cake.image_url ? (
-                      <img src={cake.image_url} alt={cake.name} className="object-cover w-full h-full group-hover:scale-105 transition duration-500 ease-out" />
+                      <img src={cake.image_url} alt={cake.name} className="object-cover w-full h-full group-hover:scale-105 transition duration-700 ease-out" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-stone-300">No Image</div>
+                      <div className={`${montserrat.className} w-full h-full flex items-center justify-center text-stone-300 font-semibold text-[10px] tracking-widest uppercase`}>No Image</div>
+                    )}
+                    {cake.is_eggless && (
+                      <div className={`${montserrat.className} absolute top-2 right-2 bg-white/95 backdrop-blur border border-stone-200 text-[#e70064] text-[8px] uppercase tracking-widest font-bold px-2 py-1 rounded-sm shadow-sm`}>
+                        Eggless
+                      </div>
                     )}
                   </div>
-                  <div className="px-2 flex-grow flex flex-col">
-                    <h4 className={`${montserrat.className} text-2xl font-bold text-stone-900 mb-2 leading-tight`}>{cake.name}</h4>
-                    <p className="text-stone-500 text-sm mb-6 flex-grow line-clamp-2 font-light">{cake.description}</p>
+                  <div className="flex-grow flex flex-col px-1">
+                    <h4 className={`${montserrat.className} text-sm font-bold text-stone-900 mb-1 leading-tight line-clamp-1`}>{cake.name}</h4>
+                    <p className="text-stone-500 text-xs mb-4 line-clamp-2 font-light min-h-[32px]">{cake.description}</p>
                     
-                    {/* UPDATED TO "VIEW DETAILS" AND "/shop/[id]" WITH STARTING PRICE */}
-                    <div className="flex justify-between items-center border-t border-stone-100 pt-4 mt-auto">
+                    <div className="flex justify-between items-center border-t border-stone-100 pt-3 mt-auto">
                       <div className="flex flex-col">
-                        <span className={`${montserrat.className} text-[9px] font-bold text-stone-400 uppercase tracking-widest`}>Starts at</span>
-                        <span className={`${montserrat.className} font-semibold text-lg text-stone-900`}>₹{cake.price}</span>
+                        <span className={`${montserrat.className} text-[8px] font-bold text-stone-400 uppercase tracking-widest`}>Starts at</span>
+                        <span className={`${montserrat.className} font-bold text-sm text-stone-900`}>₹{cake.price}</span>
                       </div>
-                      <a href={`/shop/${cake.id}`} className={`${montserrat.className} bg-stone-900 text-white px-6 py-2.5 rounded-sm font-semibold text-xs tracking-wider uppercase hover:bg-[#e70064] transition-colors shadow-sm`}>
+                      <span className={`${montserrat.className} bg-stone-50 border border-stone-200 text-stone-900 px-4 py-2 rounded-sm font-semibold text-[9px] tracking-widest uppercase hover:bg-[#e70064] hover:text-white hover:border-[#e70064] transition-colors`}>
                         View Details
-                      </a>
+                      </span>
                     </div>
                   </div>
-                </div>
+                </a>
               ))
             ) : (
               <div className="col-span-3 py-16 text-center bg-white border border-stone-200 rounded-md">
@@ -285,29 +293,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="py-24 bg-[#FAF9F6] border-t border-stone-200">
+      {/* PREMIUM TESTIMONIALS (Updated background and card styling) */}
+      <section className="py-24 bg-stone-100 border-t border-stone-200">
         <div className="max-w-7xl mx-auto px-6">
           <h3 className={`${montserrat.className} text-4xl font-bold text-center text-stone-900 mb-16`}>Loved by Virar</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-10 rounded-md shadow-sm border border-stone-200 relative">
-              <div className="text-[#e70064] text-4xl font-serif absolute top-6 right-8 opacity-20">"</div>
-              <div className="flex text-yellow-500 mb-6 text-xs">★★★★★</div>
-              <p className="text-stone-600 mb-8 font-light text-sm leading-relaxed">"The Black Forest cake was absolutely divine! The finishing was so professional, it looked like it came from a 5-star hotel. Highly recommended."</p>
-              <h5 className={`${montserrat.className} font-bold text-stone-900 text-xs tracking-widest uppercase`}>- Priya M.</h5>
-            </div>
-            <div className="bg-white p-10 rounded-md shadow-sm border border-stone-200 relative">
-              <div className="text-[#e70064] text-4xl font-serif absolute top-6 right-8 opacity-20">"</div>
-              <div className="flex text-yellow-500 mb-6 text-xs">★★★★★</div>
-              <p className="text-stone-600 mb-8 font-light text-sm leading-relaxed">"Ordered a custom Cocomelon theme cake for my son's 1st birthday. Rupali nailed the design perfectly and the eggless chocolate flavor was a hit!"</p>
-              <h5 className={`${montserrat.className} font-bold text-stone-900 text-xs tracking-widest uppercase`}>- Rahul D.</h5>
-            </div>
-            <div className="bg-white p-10 rounded-md shadow-sm border border-stone-200 relative">
-              <div className="text-[#e70064] text-4xl font-serif absolute top-6 right-8 opacity-20">"</div>
-              <div className="flex text-yellow-500 mb-6 text-xs">★★★★★</div>
-              <p className="text-stone-600 mb-8 font-light text-sm leading-relaxed">"Best tea cakes in Virar! The mawa cake brings back so many memories. Ordering through WhatsApp was also super easy and convenient."</p>
-              <h5 className={`${montserrat.className} font-bold text-stone-900 text-xs tracking-widest uppercase`}>- Sneha S.</h5>
-            </div>
+            {[
+              { text: "The Black Forest cake was absolutely divine! The finishing was so professional, it looked like it came from a 5-star hotel. Highly recommended.", name: "Priya M.", initials: "PM" },
+              { text: "Ordered a custom Cocomelon theme cake for my son's 1st birthday. Rupali nailed the design perfectly and the eggless chocolate flavor was a hit!", name: "Rahul D.", initials: "RD" },
+              { text: "Best tea cakes in Virar! The mawa cake brings back so many memories. Ordering through WhatsApp was also super easy and convenient.", name: "Sneha S.", initials: "SS" }
+            ].map((t, i) => (
+              <div key={i} className="bg-white p-8 rounded-sm shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-200 relative group flex flex-col hover:-translate-y-1">
+                <div className="text-[#e70064] text-6xl font-serif absolute top-4 right-6 opacity-10 group-hover:opacity-20 transition-opacity">"</div>
+                <div className="flex text-[#e70064] mb-6 text-sm gap-1">★★★★★</div>
+                <p className="text-stone-600 mb-8 font-light text-sm leading-relaxed z-10 italic flex-grow">"{t.text}"</p>
+                
+                <div className="flex items-center gap-4 mt-auto border-t border-stone-100 pt-6">
+                  <div className={`${montserrat.className} w-10 h-10 rounded-full bg-stone-50 border border-stone-200 text-stone-600 flex items-center justify-center text-xs font-bold`}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <h5 className={`${montserrat.className} font-bold text-stone-900 text-[10px] tracking-widest uppercase mb-1`}>{t.name}</h5>
+                    <p className={`${montserrat.className} text-stone-400 text-[8px] uppercase tracking-widest`}>Verified Order</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
