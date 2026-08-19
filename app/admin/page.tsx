@@ -34,7 +34,7 @@ export default function AdminPortal() {
   const [isEggless, setIsEggless] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
-  // NEW: Multiple Images State replacing single cakeImage
+  // Multiple Images State replacing single cakeImage
   const [cakeImages, setCakeImages] = useState<{ file?: File; url: string }[]>([]);
   const [mainImageIndex, setMainImageIndex] = useState<number>(0);
 
@@ -85,8 +85,20 @@ export default function AdminPortal() {
     if (data) setAllProducts(data);
   }
 
+  // UPDATED: Production-grade Google OAuth configuration
   async function loginWithGoogle() {
-    await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: `${window.location.origin}/admin` } });
+    // Safely capture the active domain (handles both localhost and live Vercel URL dynamically)
+    const activeOrigin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+    
+    await supabase.auth.signInWithOAuth({ 
+      provider: "google", 
+      options: { 
+        redirectTo: `${activeOrigin}/admin`,
+        queryParams: {
+          prompt: 'select_account' // Ensures Google shows the account selector reliably on live domains
+        }
+      } 
+    });
   }
 
   async function saveProfile() {
@@ -186,7 +198,7 @@ export default function AdminPortal() {
         pricing: validPricing, 
         category: cakeCategory,
         is_eggless: isEggless,
-        gallery_images: finalGalleryUrls // NEW JSON array
+        gallery_images: finalGalleryUrls // JSON array
       };
 
       // Safely update the legacy main image column
