@@ -208,7 +208,7 @@ export default function Home() {
       {/* SECTION 2: QUICK TRUST STRIP                              */}
       {/* ========================================================= */}
       <section className="relative z-30 max-w-6xl mx-auto px-6 mb-20 mt-0 md:mt-2">
-        <div className="bg-white/95 backdrop-blur-sm rounded-[1.5rem] p-5 md:p-7 shadow-xl border border-stone-100/80 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 divide-x divide-stone-100">
+        <div className="bg-white rounded-[1.75rem] p-5 md:p-8 shadow-[0_18px_45px_rgba(62,39,35,0.14)] border border-stone-200 ring-1 ring-black/[0.02] grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 divide-x divide-stone-100">
           {[ 
             { icon: "✨", title: "100% Fresh & Pure" }, 
             { icon: "🌿", title: "Eggless Options" }, 
@@ -232,7 +232,7 @@ export default function Home() {
           <p className="text-stone-500 font-light text-base md:text-lg">Har celebration ke liye kuch special.</p>
         </div>
         
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
           {[
             { title: "Birthday Cakes", sub: "For the special day", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80", link: "/shop?category=Birthday+Cakes" },
             { title: "Wedding & Anniversary", sub: "For your forever moments", img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80", link: "/shop?category=Wedding+%26+Anniversary" },
@@ -240,9 +240,10 @@ export default function Home() {
             { title: "Premium Signature", sub: "For something extra special", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80", link: "/shop?category=Premium+Signature" },
             { title: "Dry & Tea Cakes", sub: "Perfect with your chai", img: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80", link: "/shop?category=Dry+%26+Tea+Cakes" },
             { title: "Festive Specials", sub: "Made for the season", img: "https://images.unsplash.com/photo-1602351447937-745cb720612f?auto=format&fit=crop&q=80", link: "/shop?category=Festive+Specials" },
+            { title: "Chocolate Cakes", sub: "Rich, indulgent favourites", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80", link: "/shop?category=Chocolate+Cakes" },
             { title: "Custom Cakes", sub: "Your idea. Your cake.", img: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80", link: "/custom-cake" }
           ].map((cat, index) => (
-            <a key={index} href={cat.link} className="group relative min-w-[260px] md:min-w-0 h-[300px] rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-100 snap-center">
+            <a key={index} href={cat.link} className="group relative min-w-[260px] md:min-w-0 h-[300px] rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block border border-stone-100 snap-center">
               <div className="absolute inset-0 bg-gradient-to-t from-[#2A1B18]/90 via-[#2A1B18]/20 to-transparent transition z-10"></div>
               <img src={cat.img} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt={cat.title} />
               <div className="absolute bottom-6 left-6 z-20 pr-4">
@@ -329,30 +330,35 @@ export default function Home() {
       </section>
 
       {/* ========================================================= */}
+      {/* ========================================================= */}
       {/* SECTION 5: CAKE DISCOVERY                                 */}
       {/* ========================================================= */}
-      <section className="py-18 md:py-20 bg-[#FAF9F6]">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
-          <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-4`}>Not Sure Which Cake to Choose?</h3>
-          <p className="text-stone-500 font-light text-base md:text-lg mb-12">Tell us what you're celebrating — we'll help you pick.</p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 md:gap-6">
+      <section className="py-18 md:py-20 bg-[#F4EDEA] border-y border-stone-200">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-pink-100 shadow-sm mb-5">
+            <span className="w-2 h-2 rounded-full bg-[#e70064]"></span>
+            <span className={`${montserrat.className} text-[9px] font-bold uppercase tracking-[0.22em] text-[#e70064]`}>Need a little help?</span>
+          </div>
+          <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-3`}>Not Sure Which Cake to Choose?</h3>
+          <p className="text-stone-600 font-light text-base md:text-lg mb-10">Tell us what you're celebrating — we'll help you pick.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
             {[
-              { label: "Birthday", icon: "🎂", link: "/shop?category=Birthday+Cakes" },
-              { label: "Anniversary", icon: "💍", link: "/shop?category=Wedding+%26+Anniversary" },
-              { label: "Kids", icon: "🎈", link: "/shop?category=Kids+Theme+Cakes" },
-              { label: "Just Because", icon: "❤️", link: "/shop" }
+              { label: "Birthday", hint: "Make the day sweeter", icon: "🎂", link: "/shop?category=Birthday+Cakes" },
+              { label: "Anniversary", hint: "Celebrate together", icon: "💍", link: "/shop?category=Wedding+%26+Anniversary" },
+              { label: "Kids", hint: "Big smiles guaranteed", icon: "🎈", link: "/shop?category=Kids+Theme+Cakes" },
+              { label: "Just Because", hint: "No reason needed", icon: "❤️", link: "/shop" }
             ].map((item, i) => (
-              <a key={i} href={item.link} className="flex flex-col items-center justify-center bg-white p-6 md:p-7 rounded-[1.5rem] border border-stone-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-                <span className="text-4xl md:text-5xl mb-4">{item.icon}</span>
+              <a key={i} href={item.link} className="group relative overflow-hidden flex flex-col items-center justify-center bg-white p-6 md:p-7 min-h-[170px] rounded-[1.5rem] border border-stone-200 shadow-[0_8px_25px_rgba(62,39,35,0.07)] hover:shadow-[0_16px_35px_rgba(62,39,35,0.13)] hover:-translate-y-1 transition-all duration-300">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-[#e70064] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                <span className="text-4xl md:text-5xl mb-3 group-hover:scale-110 transition-transform">{item.icon}</span>
                 <span className={`${montserrat.className} font-bold text-[#3E2723] text-[11px] uppercase tracking-widest`}>{item.label}</span>
+                <span className="text-stone-400 text-[10px] mt-2">{item.hint}</span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ========================================================= */}
       {/* SECTION 6: WHY CHOOSE CAKE BY RUPALI                      */}
       {/* ========================================================= */}
       <section id="about" className="premium-section py-18 md:py-20 bg-white">
@@ -398,21 +404,22 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6">
             {[
-              { step: "01", title: "Mix", img: "https://images.unsplash.com/photo-1556910103-1c02745a872e?auto=format&fit=crop&w=800&q=80" },
-              { step: "02", title: "Bake", img: "https://images.unsplash.com/photo-1587241321921-91a834d6d191?auto=format&fit=crop&w=800&q=80" },
-              { step: "03", title: "Decorate", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" },
-              { step: "04", title: "Pack", img: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=800&q=80" }
+              { step: "01", title: "Mix", desc: "Fresh ingredients, whisked into smooth batter.", img: "https://static.wixstatic.com/media/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg/v1/fit/w_1400%2Ch_900%2Cal_c/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg" },
+              { step: "02", title: "Bake", desc: "Baked at the right temperature for a soft crumb.", img: "https://cdn.jagonews24.com/media/imgAllNew/BG/2023March/oven-20260516085245.png" },
+              { step: "03", title: "Decorate", desc: "Finished by hand with careful detail.", img: "https://www.thepassionatebaker.in/images/story.jpg" },
+              { step: "04", title: "Pack", desc: "Packed securely, ready for your celebration.", img: "https://image.made-in-china.com/2f0j00HnwWUyoJwdgf/Custom-Printed-Bakery-Packaging-Box-Birthday-Cake-Box-with-Window-and-Handle-1975534572.webp" }
             ].map((process, i) => (
               <div key={i} className="flex flex-col items-center group">
                 {/* Replaced tiny circles with large, stunning vertical cards */}
-                <div className="w-full aspect-[4/5] rounded-[1.75rem] overflow-hidden mb-6 relative shadow-md">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
-                  <img src={process.img} alt={process.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                <div className="w-full aspect-[4/5] rounded-[1.75rem] overflow-hidden mb-5 relative shadow-[0_12px_30px_rgba(62,39,35,0.12)] border border-stone-200">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2A1B18]/35 via-transparent to-transparent group-hover:from-[#2A1B18]/15 transition-colors z-10"></div>
+                  <img src={process.img} alt={`${process.title} cake making process`} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
                   <div className="absolute bottom-4 right-4 z-20 bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg text-[#e70064] font-bold">
                     {process.step}
                   </div>
                 </div>
                 <h4 className={`${playfair.className} font-bold text-xl text-[#3E2723]`}>{process.title}</h4>
+                <p className="text-stone-500 text-xs leading-relaxed max-w-[220px] mt-1">{process.desc}</p>
               </div>
             ))}
           </div>
@@ -465,7 +472,7 @@ export default function Home() {
           </div>
           
           <div className="w-full md:w-1/2 relative">
-            <img src="https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80" alt="Custom Designer Cake" className="rounded-t-[45%] rounded-b-[3rem] shadow-2xl border-8 border-white w-full h-[440px] md:h-[600px] object-cover" />
+            <img src="https://static.wixstatic.com/media/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg/v1/fit/w_1400%2Ch_900%2Cal_c/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg" alt="Confident Indian woman baker preparing cake" className="rounded-t-[45%] rounded-b-[3rem] shadow-2xl border-8 border-white w-full h-[440px] md:h-[600px] object-cover" />
           </div>
         </div>
       </section>
@@ -478,54 +485,61 @@ export default function Home() {
       </div>
 
       {/* ========================================================= */}
+      {/* ========================================================= */}
       {/* SECTION 9: CAKE SIZE GUIDE                                */}
       {/* ========================================================= */}
-      <section className="py-18 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
-          <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-12`}>How Much Cake Do You Need?</h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 md:gap-6">
+      <section className="py-18 md:py-22 bg-[#FFF8FA] border-y border-pink-100">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 text-center">
+          <span className={`${montserrat.className} inline-block text-[#e70064] font-bold tracking-[0.25em] text-[9px] uppercase mb-3`}>The right size for every gathering</span>
+          <h3 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl font-bold text-[#3E2723] mb-3`}>How Much Cake Do You Need?</h3>
+          <p className="text-stone-500 font-light text-sm md:text-base mb-10">Choose your cake size based on the number of people you're serving.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
             {[
-              { size: "0.5 KG", people: "2–4 People" },
-              { size: "1.0 KG", people: "6–10 People" },
-              { size: "1.5 KG", people: "10–14 People" },
-              { size: "2.0 KG", people: "14–20 People" }
+              { size: "0.5 KG", people: "2–4 People", height: "h-8", tag: "Small" },
+              { size: "1.0 KG", people: "6–10 People", height: "h-11", tag: "Most Popular" },
+              { size: "1.5 KG", people: "10–14 People", height: "h-14", tag: "Celebration" },
+              { size: "2.0 KG", people: "14–20 People", height: "h-16", tag: "Big Gathering" }
             ].map((item, i) => (
-              <div key={i} className="bg-[#FAF9F6] border border-stone-100 p-8 rounded-3xl flex flex-col items-center justify-center hover:border-pink-200 transition-colors">
-                <span className={`${montserrat.className} text-3xl md:text-4xl font-extrabold text-[#3E2723] mb-2`}>{item.size}</span>
-                <div className="h-[1px] w-8 bg-[#e70064] mb-3"></div>
-                <span className="text-stone-500 text-sm font-medium">{item.people}</span>
+              <div key={i} className={`group relative bg-white border ${i === 1 ? 'border-[#e70064] shadow-[0_14px_35px_rgba(231,0,100,0.12)]' : 'border-stone-200 shadow-sm'} p-6 md:p-7 rounded-[1.5rem] flex flex-col items-center justify-end min-h-[215px] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 overflow-hidden`}>
+                {i === 1 && <span className={`${montserrat.className} absolute top-0 left-1/2 -translate-x-1/2 bg-[#e70064] text-white px-4 py-1.5 rounded-b-full text-[8px] font-bold uppercase tracking-widest`}>Most Popular</span>}
+                <div className="flex items-end justify-center h-20 mb-5">
+                  <div className={`w-24 ${item.height} bg-gradient-to-t from-[#3E2723] to-[#7B5148] rounded-t-lg shadow-md transition-all group-hover:scale-105`}></div>
+                </div>
+                <span className={`${montserrat.className} text-2xl md:text-3xl font-extrabold text-[#3E2723]`}>{item.size}</span>
+                <span className="text-stone-500 text-sm mt-1">{item.people}</span>
+                <span className={`${montserrat.className} text-[8px] uppercase tracking-[0.18em] font-bold text-[#e70064] mt-3`}>{item.tag}</span>
               </div>
             ))}
           </div>
-          <p className="text-stone-400 text-xs mt-8 font-light">* Serving sizes are approximate. Contact us for multi-tier or larger party sizes.</p>
+          <p className="text-stone-400 text-[10px] mt-7 font-light">* Serving sizes are approximate. Contact us for multi-tier or larger party sizes.</p>
         </div>
       </section>
 
       {/* ========================================================= */}
       {/* SECTION 10: CUSTOMER REVIEWS                              */}
       {/* ========================================================= */}
-      <section className="py-18 md:py-20 bg-[#FAF9F6] border-y border-stone-100">
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <div className="text-center mb-16">
-            <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-3`}>Virar Loves Our Cakes ❤️</h3>
-            <p className="text-stone-500 font-light text-base md:text-lg">Real celebrations. Real customers. Real cake love.</p>
+      <section className="py-20 md:py-24 bg-[#211513] border-y border-[#4A302B] relative overflow-hidden">
+        <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-[#e70064]/10 blur-3xl"></div>
+        <div className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full bg-[#dcb562]/10 blur-3xl"></div>
+        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+          <div className="text-center mb-12">
+            <span className={`${montserrat.className} inline-block text-[#F3C3D6] font-bold tracking-[0.25em] text-[9px] uppercase mb-3`}>Customer Love</span>
+            <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-white mb-3`}>Virar Loves Our Cakes ❤️</h3>
+            <p className="text-stone-400 font-light text-base md:text-lg">Real celebrations. Real customers. Real cake love.</p>
           </div>
-          
           <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-3 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
             {[
               { text: "The Black Forest cake was absolutely divine! The finishing was so professional, it looked like it came from a 5-star hotel. Highly recommended.", name: "Priya M.", cake: "Black Forest" },
               { text: "Ordered a custom Cocomelon theme cake for my son's 1st birthday. Rupali nailed the design perfectly and the eggless chocolate flavor was a hit!", name: "Rahul D.", cake: "Custom Theme Cake" },
               { text: "Best tea cakes in Virar! The mawa cake brings back so many memories. Ordering through WhatsApp was also super easy and convenient.", name: "Sneha S.", cake: "Mawa Tea Cake" }
             ].map((t, i) => (
-              <div key={i} className="min-w-[300px] md:min-w-0 bg-white p-7 md:p-9 rounded-[1.75rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col snap-center relative">
-                <div className="text-pink-100 text-6xl font-serif absolute top-6 right-8 leading-none">"</div>
+              <div key={i} className="min-w-[300px] md:min-w-0 bg-[#2B1C19] p-7 md:p-9 rounded-[1.75rem] shadow-[0_15px_35px_rgba(0,0,0,0.22)] hover:-translate-y-1 hover:bg-[#33211E] transition-all duration-300 border border-[#5A3B35] flex flex-col snap-center relative">
+                <div className="text-pink-200/20 text-6xl font-serif absolute top-6 right-8 leading-none">"</div>
                 <div className="flex text-yellow-400 mb-6 text-sm gap-1">★★★★★</div>
-                <p className="text-stone-600 mb-8 font-light text-sm leading-relaxed flex-grow italic relative z-10">"{t.text}"</p>
-                
-                <div className="mt-auto border-t border-stone-50 pt-6">
-                  <h5 className={`${montserrat.className} font-bold text-[#3E2723] text-xs tracking-widest uppercase mb-1`}>{t.name}</h5>
-                  <p className="text-stone-400 text-[10px] uppercase tracking-wider">Ordered: {t.cake}</p>
+                <p className="text-stone-200 mb-8 font-light text-sm leading-relaxed flex-grow italic relative z-10">"{t.text}"</p>
+                <div className="mt-auto border-t border-white/10 pt-6">
+                  <h5 className={`${montserrat.className} font-bold text-white text-xs tracking-widest uppercase mb-1`}>{t.name}</h5>
+                  <p className="text-stone-500 text-[10px] uppercase tracking-wider">Ordered: {t.cake}</p>
                 </div>
               </div>
             ))}
@@ -533,7 +547,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========================================================= */}
       {/* SECTION 11: CELEBRATION GALLERY                           */}
       {/* ========================================================= */}
       <section className="py-18 md:py-20 bg-white">
@@ -576,38 +589,43 @@ export default function Home() {
       </section>
 
       {/* ========================================================= */}
+      {/* ========================================================= */}
       {/* SECTION 13: ORDERING PROCESS                              */}
       {/* ========================================================= */}
-      <section className="py-18 md:py-20 bg-white text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-16`}>Ordering Your Cake is Easy</h3>
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-6 mb-16 relative">
-            {/* Connecting line desktop */}
-            <div className="hidden md:block absolute top-6 left-10 right-10 h-[1px] bg-pink-200 -z-10 border-dashed border-t border-pink-300"></div>
-            
+      <section className="py-20 md:py-24 bg-white text-center border-t border-stone-100">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <span className={`${montserrat.className} inline-block text-[#e70064] font-bold tracking-[0.25em] text-[9px] uppercase mb-3`}>Simple • Personal • WhatsApp</span>
+          <h3 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl font-bold text-[#3E2723] mb-3`}>Ordering Your Cake is Easy</h3>
+          <p className="text-stone-500 font-light text-sm md:text-base mb-12">Three simple steps from craving to celebration.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 relative mb-12">
             {[
-              { step: "01", title: "Choose Your Cake" },
-              { step: "02", title: "Message Us on WhatsApp" },
-              { step: "03", title: "Confirm & Celebrate" }
+              { step: "01", title: "Choose Your Cake", desc: "Pick from our fresh cakes or tell us what you're looking for.", icon: "🍰" },
+              { step: "02", title: "Message on WhatsApp", desc: "Share your date, flavour, size and any special requirements.", icon: "💬" },
+              { step: "03", title: "Confirm & Celebrate", desc: "We confirm the order and get your cake ready fresh for you.", icon: "🎉" }
             ].map((p, i) => (
-              <div key={i} className="flex flex-col items-center bg-white px-4">
-                <div className={`${montserrat.className} w-12 h-12 rounded-full bg-[#FFF0F5] text-[#e70064] flex items-center justify-center font-bold text-lg mb-4 shadow-sm`}>
-                  {p.step}
+              <div key={i} className="relative bg-[#FAF9F6] border border-stone-200 rounded-[1.75rem] p-7 md:p-8 text-left hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FFF0F5] flex items-center justify-center text-2xl">{p.icon}</div>
+                  <span className={`${montserrat.className} text-[#e70064] font-extrabold text-3xl leading-none`}>{p.step}</span>
                 </div>
-                <h4 className={`${montserrat.className} font-bold text-xs uppercase tracking-widest text-[#3E2723]`}>{p.title}</h4>
+                <h4 className={`${montserrat.className} font-bold text-sm uppercase tracking-wider text-[#3E2723] mb-2`}>{p.title}</h4>
+                <p className="text-stone-500 text-xs leading-relaxed">{p.desc}</p>
+                {i < 2 && <span className="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-pink-100 shadow-sm text-[#e70064] z-10 items-center justify-center text-lg">→</span>}
               </div>
             ))}
           </div>
-
-          <p className="text-stone-500 font-light text-sm mb-8">Need help choosing? Just message us — we'll help you find the right cake.</p>
-          <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-[#128C7E] transition-colors shadow-lg`}>
-            Chat on WhatsApp
-          </a>
+          <div className="bg-[#211513] rounded-[1.75rem] p-7 md:p-9 flex flex-col md:flex-row items-center justify-between gap-6 text-left shadow-xl">
+            <div>
+              <h4 className={`${playfair.className} text-2xl md:text-3xl font-bold text-white mb-1`}>Not sure what to order?</h4>
+              <p className="text-stone-400 text-sm">Send us a message. We'll help you choose the right cake.</p>
+            </div>
+            <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} shrink-0 inline-flex items-center gap-2 bg-[#25D366] text-white px-7 py-3.5 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-[#128C7E] transition-colors shadow-lg`}>
+              Chat on WhatsApp <span className="text-base">→</span>
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* ========================================================= */}
       {/* SECTION 14: FINAL CTA (Blush Pink)                        */}
       {/* ========================================================= */}
       <section className="py-0 bg-white">
