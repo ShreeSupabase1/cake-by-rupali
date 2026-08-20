@@ -58,6 +58,30 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen bg-[#FAF9F6] text-[#3E2723] scroll-smooth ${poppins.className}`} id="home">
+      <style jsx>{`
+        .premium-section {
+          position: relative;
+        }
+        .premium-section::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 72px;
+          height: 2px;
+          transform: translateX(-50%);
+          background: #e70064;
+          opacity: .35;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+
       
       {/* ========================================================= */}
       {/* 1. EXACT EXISTING HEADER (UNTOUCHED AS REQUESTED)         */}
@@ -69,7 +93,7 @@ export default function Home() {
             Cake By Rupali
           </h1>
           
-          <nav className={`hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide uppercase ${montserrat.className} ${scrolled ? "text-stone-700" : "text-white"}`}>
+          <nav className={`hidden md:flex items-center gap-5 md:gap-6 text-sm font-semibold tracking-wide uppercase ${montserrat.className} ${scrolled ? "text-stone-700" : "text-white"}`}>
             <a href="#home" className="hover:text-[#e70064] transition-colors">Home</a>
             
             <div className="group relative py-4">
@@ -105,7 +129,7 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 1: DARK FULL-WIDTH HERO (REVERTED TO PREVIOUS)    */}
       {/* ========================================================= */}
-      <section className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-start bg-[#0d0907]">
+      <section className="relative h-screen min-h-[680px] w-full overflow-hidden flex items-center justify-start bg-[#0d0907]">
         
         {/* Background Image Slider */}
         <div className="absolute inset-0 z-0">
@@ -114,24 +138,24 @@ export default function Home() {
               key={index} 
               src={img} 
               alt="Fresh Cake" 
-              className={`absolute inset-0 w-full h-full object-cover object-[75%_center] transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+              className={`absolute inset-0 w-full h-full object-cover object-[72%_center] transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
             />
           ))}
         </div>
 
         {/* Elegant Gradient Overlays for Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0907]/95 via-[#0d0907]/60 to-transparent z-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0907]/90 via-transparent to-transparent z-10 md:hidden"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0907]/90 via-[#0d0907]/48 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0907]/75 via-transparent to-transparent z-10 md:hidden"></div>
 
         {/* Left-Aligned Text Content */}
-        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-8 md:mt-16">
+        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-6 md:mt-10">
           
           <div className="flex items-center gap-2 mb-4">
-            <span className={`${montserrat.className} text-[#dcb562] text-sm md:text-base italic tracking-wide`}>Made Fresh. Made Happy.</span>
+            <span className={`${montserrat.className} text-[#dcb562] text-xs md:text-sm italic tracking-[0.08em]`}>Made Fresh. Made Happy.</span>
             <svg className="w-5 h-5 text-[#e70064]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
           </div>
           
-          <h2 className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-6 drop-shadow-2xl text-left tracking-tight`}>
+          <h2 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.08] mb-5 drop-shadow-2xl text-left tracking-tight`}>
             Fresh Cakes,<br/> Baked with Love<br/> in <span className="text-[#e70064]">Virar.</span>
           </h2>
 
@@ -141,15 +165,15 @@ export default function Home() {
             <div className="h-[1px] bg-[#e70064] w-12"></div>
           </div>
           
-          <p className="text-base md:text-lg text-white/90 font-light max-w-md mb-10 drop-shadow-md text-left leading-relaxed">
+          <p className="text-sm md:text-base text-white/90 font-light max-w-lg mb-8 drop-shadow-md text-left leading-relaxed">
             Birthday ho, anniversary ho, ya bas kuch meetha khane ka mann ho — we bake fresh cakes for every special moment.
           </p>
           
           <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4`}>
-            <a href="/shop" className="bg-[#e70064] text-white px-8 py-3.5 font-bold text-xs tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm shadow-lg text-center">
+            <a href="/shop" className="bg-[#e70064] text-white px-7 py-3 font-bold text-[11px] tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm shadow-lg text-center">
               Shop Now
             </a>
-            <a href="/custom-cake" className="bg-transparent text-white border border-white/50 px-8 py-3.5 font-bold text-xs tracking-wider uppercase hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm text-center">
+            <a href="/custom-cake" className="bg-white/5 text-white border border-white/45 px-7 py-3 font-bold text-[11px] tracking-wider uppercase hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm text-center">
               Custom Order
             </a>
           </div>
@@ -165,7 +189,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="absolute bottom-16 md:bottom-24 w-full flex justify-center gap-3 z-20">
+        <div className="absolute bottom-14 md:bottom-20 w-full flex justify-center gap-3 z-20">
           {heroImages.map((_, idx) => (
             <button key={idx} onClick={() => setCurrentSlide(idx)} className={`w-2 h-2 transition-all duration-500 rounded-full ${idx === currentSlide ? "bg-[#e70064]" : "bg-white/70 hover:bg-white"}`}></button>
           ))}
@@ -183,8 +207,8 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 2: QUICK TRUST STRIP                              */}
       {/* ========================================================= */}
-      <section className="relative z-30 max-w-6xl mx-auto px-6 mb-24 mt-4 md:mt-8">
-        <div className="bg-white rounded-md p-6 md:p-10 shadow-lg border border-stone-100 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x divide-stone-100">
+      <section className="relative z-30 max-w-6xl mx-auto px-6 mb-20 mt-0 md:mt-2">
+        <div className="bg-white/95 backdrop-blur-sm rounded-[1.5rem] p-5 md:p-7 shadow-xl border border-stone-100/80 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 divide-x divide-stone-100">
           {[ 
             { icon: "✨", title: "100% Fresh & Pure" }, 
             { icon: "🌿", title: "Eggless Options" }, 
@@ -192,7 +216,7 @@ export default function Home() {
             { icon: "🛵", title: "Safe Local Delivery" } 
           ].map((item, i) => (
             <div key={i} className={`group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 cursor-default ${i === 0 || i === 2 ? 'pl-0' : ''}`}>
-              <div className="text-[#e70064] text-2xl mb-3 transform transition-transform duration-300 group-hover:-translate-y-1">{item.icon}</div>
+              <div className="text-[#e70064] text-xl mb-2 transform transition-transform duration-300 group-hover:-translate-y-1">{item.icon}</div>
               <h4 className={`${montserrat.className} font-bold text-stone-800 text-xs tracking-wider uppercase`}>{item.title}</h4>
             </div>
           ))}
@@ -202,10 +226,10 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 3: SHOP BY CATEGORY (Fixed images)                */}
       {/* ========================================================= */}
-      <section id="categories" className="py-16 max-w-7xl mx-auto px-6 scroll-mt-28">
+      <section id="categories" className="premium-section py-14 md:py-18 max-w-7xl mx-auto px-6 scroll-mt-28">
         <div className="flex flex-col items-center mb-12 text-center">
-          <h3 className={`${playfair.className} text-4xl md:text-5xl font-bold text-[#3E2723] mb-4`}>Find a Cake for Every Celebration</h3>
-          <p className="text-stone-500 font-light text-lg">Har celebration ke liye kuch special.</p>
+          <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-3`}>Find a Cake for Every Celebration</h3>
+          <p className="text-stone-500 font-light text-base md:text-lg">Har celebration ke liye kuch special.</p>
         </div>
         
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
@@ -218,7 +242,7 @@ export default function Home() {
             { title: "Festive Specials", sub: "Made for the season", img: "https://images.unsplash.com/photo-1602351447937-745cb720612f?auto=format&fit=crop&q=80", link: "/shop?category=Festive+Specials" },
             { title: "Custom Cakes", sub: "Your idea. Your cake.", img: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80", link: "/custom-cake" }
           ].map((cat, index) => (
-            <a key={index} href={cat.link} className="group relative min-w-[260px] md:min-w-0 h-[320px] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-100 snap-center">
+            <a key={index} href={cat.link} className="group relative min-w-[260px] md:min-w-0 h-[300px] rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all block border border-stone-100 snap-center">
               <div className="absolute inset-0 bg-gradient-to-t from-[#2A1B18]/90 via-[#2A1B18]/20 to-transparent transition z-10"></div>
               <img src={cat.img} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt={cat.title} />
               <div className="absolute bottom-6 left-6 z-20 pr-4">
@@ -243,23 +267,23 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 4: BEST SELLERS                                   */}
       {/* ========================================================= */}
-      <section id="bestsellers" className="py-24 bg-white border-b border-stone-100">
+      <section id="bestsellers" className="premium-section py-18 md:py-20 bg-white border-b border-stone-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-5">
             <div>
-              <h3 className={`${playfair.className} text-4xl md:text-5xl font-bold text-[#3E2723] mb-3`}>Our Best Sellers</h3>
-              <p className="text-stone-500 font-light text-lg">Virar's favourites, freshly baked and loved by our customers.</p>
+              <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-2`}>Our Best Sellers</h3>
+              <p className="text-stone-500 font-light text-base md:text-lg">Virar's favourites, freshly baked and loved by our customers.</p>
             </div>
             <a href="/shop" className={`${montserrat.className} text-[10px] font-bold uppercase tracking-[0.2em] text-[#e70064] hover:text-[#3E2723] transition pb-1`}>
               View Entire Menu →
             </a>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5 md:gap-6">
             {cakes.length > 0 ? (
               cakes.slice(0, 4).map((cake: any) => (
-                <a href={`/shop/${cake.id}`} key={cake.id} className="group flex flex-col bg-white border border-stone-100 p-4 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-full aspect-square bg-[#FAF9F6] overflow-hidden mb-5 relative rounded-3xl">
+                <a href={`/shop/${cake.id}`} key={cake.id} className="group flex flex-col bg-white border border-stone-100 p-3.5 rounded-[1.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-full aspect-square bg-[#FAF9F6] overflow-hidden mb-4 relative rounded-[1.35rem]">
                     {cake.image_url ? (
                       <img src={cake.image_url} alt={cake.name} className="object-cover w-full h-full group-hover:scale-105 transition duration-700 ease-out" />
                     ) : (
@@ -278,7 +302,7 @@ export default function Home() {
                   </div>
                   
                   <div className="flex-grow flex flex-col px-2">
-                    <h4 className={`${playfair.className} text-xl font-bold text-[#3E2723] mb-2 leading-tight line-clamp-1`}>{cake.name}</h4>
+                    <h4 className={`${playfair.className} text-lg font-bold text-[#3E2723] mb-1.5 leading-tight line-clamp-1`}>{cake.name}</h4>
                     <p className="text-stone-500 text-xs mb-5 line-clamp-2 font-light min-h-[32px] leading-relaxed">{cake.description}</p>
                     
                     <div className="flex justify-between items-center mt-auto">
@@ -307,19 +331,19 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 5: CAKE DISCOVERY                                 */}
       {/* ========================================================= */}
-      <section className="py-24 bg-[#FAF9F6]">
+      <section className="py-18 md:py-20 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
           <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-4`}>Not Sure Which Cake to Choose?</h3>
-          <p className="text-stone-500 font-light text-lg mb-12">Tell us what you're celebrating — we'll help you pick.</p>
+          <p className="text-stone-500 font-light text-base md:text-lg mb-12">Tell us what you're celebrating — we'll help you pick.</p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 md:gap-6">
             {[
               { label: "Birthday", icon: "🎂", link: "/shop?category=Birthday+Cakes" },
               { label: "Anniversary", icon: "💍", link: "/shop?category=Wedding+%26+Anniversary" },
               { label: "Kids", icon: "🎈", link: "/shop?category=Kids+Theme+Cakes" },
               { label: "Just Because", icon: "❤️", link: "/shop" }
             ].map((item, i) => (
-              <a key={i} href={item.link} className="flex flex-col items-center justify-center bg-white p-8 rounded-[2rem] border border-stone-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <a key={i} href={item.link} className="flex flex-col items-center justify-center bg-white p-6 md:p-7 rounded-[1.5rem] border border-stone-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
                 <span className="text-4xl md:text-5xl mb-4">{item.icon}</span>
                 <span className={`${montserrat.className} font-bold text-[#3E2723] text-[11px] uppercase tracking-widest`}>{item.label}</span>
               </a>
@@ -331,17 +355,17 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 6: WHY CHOOSE CAKE BY RUPALI                      */}
       {/* ========================================================= */}
-      <section id="about" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row gap-16 items-center">
+      <section id="about" className="premium-section py-18 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row gap-12 lg:gap-16 items-center">
           <div className="w-full md:w-1/2">
-            <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80" alt="Baking Process" className="rounded-[3rem] shadow-xl w-full h-[500px] md:h-[650px] object-cover" />
+            <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80" alt="Baking Process" className="rounded-[2.25rem] shadow-xl w-full h-[440px] md:h-[590px] object-cover" />
           </div>
           <div className="w-full md:w-1/2 space-y-8">
             <span className={`${montserrat.className} text-[#e70064] font-bold tracking-[0.2em] text-[10px] uppercase block`}>WHY CHOOSE US</span>
-            <h3 className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#3E2723] leading-tight`}>
+            <h3 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#3E2723] leading-tight`}>
               Homemade<br/>Tastes Different.
             </h3>
-            <p className="text-stone-600 leading-relaxed font-light text-lg">
+            <p className="text-stone-600 leading-relaxed font-light text-base md:text-lg">
               We are based right here in Virar (East). Hum sirf cake nahi banate, memories banate hain. Every cake is prepared in small batches with attention to flavour, freshness and detail.
             </p>
             <div className="space-y-6 mt-8 pt-8">
@@ -367,12 +391,12 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 7: FROM OUR KITCHEN (Fixed large photography)     */}
       {/* ========================================================= */}
-      <section className="py-24 bg-[#FAF9F6] border-t border-stone-100">
+      <section className="py-18 md:py-20 bg-[#FAF9F6] border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
           <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-4`}>Made Fresh in Our Kitchen</h3>
-          <p className="text-stone-500 font-light text-lg mb-16 max-w-2xl mx-auto">Every cake starts with fresh ingredients, careful preparation and a lot of attention to detail.</p>
+          <p className="text-stone-500 font-light text-base md:text-lg mb-12 max-w-2xl mx-auto">Every cake starts with fresh ingredients, careful preparation and a lot of attention to detail.</p>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6">
             {[
               { step: "01", title: "Mix", img: "https://images.unsplash.com/photo-1556910103-1c02745a872e?auto=format&fit=crop&w=800&q=80" },
               { step: "02", title: "Bake", img: "https://images.unsplash.com/photo-1587241321921-91a834d6d191?auto=format&fit=crop&w=800&q=80" },
@@ -381,14 +405,14 @@ export default function Home() {
             ].map((process, i) => (
               <div key={i} className="flex flex-col items-center group">
                 {/* Replaced tiny circles with large, stunning vertical cards */}
-                <div className="w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 relative shadow-md">
+                <div className="w-full aspect-[4/5] rounded-[1.75rem] overflow-hidden mb-6 relative shadow-md">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
                   <img src={process.img} alt={process.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
                   <div className="absolute bottom-4 right-4 z-20 bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg text-[#e70064] font-bold">
                     {process.step}
                   </div>
                 </div>
-                <h4 className={`${playfair.className} font-bold text-2xl text-[#3E2723]`}>{process.title}</h4>
+                <h4 className={`${playfair.className} font-bold text-xl text-[#3E2723]`}>{process.title}</h4>
               </div>
             ))}
           </div>
@@ -405,15 +429,15 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 8: CUSTOM CAKES                                   */}
       {/* ========================================================= */}
-      <section className="py-24 bg-[#FFF0F5] relative overflow-hidden">
+      <section className="py-18 md:py-20 bg-[#FFF0F5] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/40 rounded-full blur-3xl -z-10 -translate-y-1/2 translate-x-1/3"></div>
         
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row gap-12 lg:gap-16 items-center">
           <div className="w-full md:w-1/2 space-y-8 z-10 text-center md:text-left">
-            <h3 className={`${playfair.className} text-5xl md:text-6xl font-extrabold text-[#3E2723] leading-[1.1]`}>
+            <h3 className={`${playfair.className} text-4xl md:text-5xl font-extrabold text-[#3E2723] leading-[1.1]`}>
               You Imagine It.<br/>We Bake It.
             </h3>
-            <p className="text-[#3E2723]/80 leading-relaxed font-light text-lg">
+            <p className="text-[#3E2723]/80 leading-relaxed font-light text-base md:text-lg">
               Birthday, anniversary, baby shower or a special surprise — share your idea and let us create a cake around your celebration.
             </p>
             
@@ -441,7 +465,7 @@ export default function Home() {
           </div>
           
           <div className="w-full md:w-1/2 relative">
-            <img src="https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80" alt="Custom Designer Cake" className="rounded-t-full rounded-b-[4rem] shadow-2xl border-8 border-white w-full h-[500px] md:h-[700px] object-cover" />
+            <img src="https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80" alt="Custom Designer Cake" className="rounded-t-[45%] rounded-b-[3rem] shadow-2xl border-8 border-white w-full h-[440px] md:h-[600px] object-cover" />
           </div>
         </div>
       </section>
@@ -456,11 +480,11 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 9: CAKE SIZE GUIDE                                */}
       {/* ========================================================= */}
-      <section className="py-24 bg-white">
+      <section className="py-18 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
           <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-12`}>How Much Cake Do You Need?</h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 md:gap-6">
             {[
               { size: "0.5 KG", people: "2–4 People" },
               { size: "1.0 KG", people: "6–10 People" },
@@ -481,11 +505,11 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 10: CUSTOMER REVIEWS                              */}
       {/* ========================================================= */}
-      <section className="py-24 bg-[#FAF9F6] border-y border-stone-100">
+      <section className="py-18 md:py-20 bg-[#FAF9F6] border-y border-stone-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="text-center mb-16">
-            <h3 className={`${playfair.className} text-4xl md:text-5xl font-bold text-[#3E2723] mb-4`}>Virar Loves Our Cakes ❤️</h3>
-            <p className="text-stone-500 font-light text-lg">Real celebrations. Real customers. Real cake love.</p>
+            <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-3`}>Virar Loves Our Cakes ❤️</h3>
+            <p className="text-stone-500 font-light text-base md:text-lg">Real celebrations. Real customers. Real cake love.</p>
           </div>
           
           <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-3 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
@@ -494,7 +518,7 @@ export default function Home() {
               { text: "Ordered a custom Cocomelon theme cake for my son's 1st birthday. Rupali nailed the design perfectly and the eggless chocolate flavor was a hit!", name: "Rahul D.", cake: "Custom Theme Cake" },
               { text: "Best tea cakes in Virar! The mawa cake brings back so many memories. Ordering through WhatsApp was also super easy and convenient.", name: "Sneha S.", cake: "Mawa Tea Cake" }
             ].map((t, i) => (
-              <div key={i} className="min-w-[300px] md:min-w-0 bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col snap-center relative">
+              <div key={i} className="min-w-[300px] md:min-w-0 bg-white p-7 md:p-9 rounded-[1.75rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col snap-center relative">
                 <div className="text-pink-100 text-6xl font-serif absolute top-6 right-8 leading-none">"</div>
                 <div className="flex text-yellow-400 mb-6 text-sm gap-1">★★★★★</div>
                 <p className="text-stone-600 mb-8 font-light text-sm leading-relaxed flex-grow italic relative z-10">"{t.text}"</p>
@@ -512,7 +536,7 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 11: CELEBRATION GALLERY                           */}
       {/* ========================================================= */}
-      <section className="py-24 bg-white">
+      <section className="py-18 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
           <h3 className={`${playfair.className} text-4xl font-bold text-[#3E2723] mb-12`}>Made for Moments Like These</h3>
           
@@ -530,7 +554,7 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 12: INSTAGRAM                                     */}
       {/* ========================================================= */}
-      <section className="py-24 bg-[#FAF9F6]">
+      <section className="py-18 md:py-20 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 gap-4 text-center md:text-left">
             <div>
@@ -554,11 +578,11 @@ export default function Home() {
       {/* ========================================================= */}
       {/* SECTION 13: ORDERING PROCESS                              */}
       {/* ========================================================= */}
-      <section className="py-24 bg-white text-center">
+      <section className="py-18 md:py-20 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
           <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-16`}>Ordering Your Cake is Easy</h3>
           
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16 relative">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-6 mb-16 relative">
             {/* Connecting line desktop */}
             <div className="hidden md:block absolute top-6 left-10 right-10 h-[1px] bg-pink-200 -z-10 border-dashed border-t border-pink-300"></div>
             
@@ -587,12 +611,12 @@ export default function Home() {
       {/* SECTION 14: FINAL CTA (Blush Pink)                        */}
       {/* ========================================================= */}
       <section className="py-0 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-20">
           <div className="bg-[#FFF0F5] rounded-[3rem] overflow-hidden flex flex-col md:flex-row items-center shadow-sm">
             <div className="w-full md:w-1/2 h-[300px] md:h-[450px]">
               <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80" alt="Celebration" className="w-full h-full object-cover" />
             </div>
-            <div className="w-full md:w-1/2 p-12 md:p-16 text-center md:text-left">
+            <div className="w-full md:w-1/2 p-9 md:p-12 text-center md:text-left">
               <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-[#3E2723] mb-6 leading-tight`}>Koi Special Celebration<br/>Aane Wala Hai?</h2>
               <p className="text-[#3E2723]/80 text-lg mb-10 font-light">Chhota sa birthday ho ya grand celebration, let's make it extra sweet.</p>
               <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4 justify-center md:justify-start`}>
