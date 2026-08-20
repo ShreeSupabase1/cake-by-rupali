@@ -368,12 +368,12 @@ export default function AdminPortal() {
     if (!profile) {
       return (
         <div className="flex flex-col items-center justify-center py-20 px-6">
-          <div className="bg-white p-10 rounded-sm shadow-md border border-stone-200 max-w-md w-full">
+          <div className="bg-white p-8 md:p-10 rounded-3xl shadow-[0_18px_60px_rgba(61,39,35,0.09)] border border-stone-200/80 max-w-md w-full">
             <h2 className={`${montserrat.className} text-xl font-bold mb-6 text-stone-900 uppercase tracking-widest text-center`}>Complete Setup</h2>
             <div className="space-y-6">
-              <input type="text" className="w-full border-b border-stone-300 py-3 focus:outline-none focus:border-[#e70064] text-sm bg-transparent" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Full Name" />
-              <input type="text" className="w-full border-b border-stone-300 py-3 focus:outline-none focus:border-[#e70064] text-sm bg-transparent" value={mobile} onChange={e => setMobile(e.target.value)} placeholder="Mobile Number" />
-              <button onClick={saveProfile} className={`${montserrat.className} w-full bg-stone-900 text-white p-4 rounded-sm font-bold tracking-widest uppercase hover:bg-[#e70064] transition-colors`}>Submit Details</button>
+              <input type="text" className="w-full border border-stone-200 py-3.5 px-4 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 text-sm bg-white transition-all" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Full Name" />
+              <input type="text" className="w-full border border-stone-200 py-3.5 px-4 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 text-sm bg-white transition-all" value={mobile} onChange={e => setMobile(e.target.value)} placeholder="Mobile Number" />
+              <button onClick={saveProfile} className={`${montserrat.className} w-full bg-[#3d2723] text-white p-4 rounded-xl font-bold tracking-widest uppercase hover:bg-[#e70064] transition-all shadow-md`}>Submit Details</button>
             </div>
           </div>
         </div>
@@ -383,7 +383,7 @@ export default function AdminPortal() {
     if (!profile.is_admin) {
       return (
         <div className="flex flex-col items-center justify-center py-32 px-6">
-          <div className="bg-white p-12 rounded-sm shadow-md text-center border border-stone-200 max-w-md">
+          <div className="bg-white p-10 md:p-12 rounded-3xl shadow-[0_18px_60px_rgba(61,39,35,0.09)] text-center border border-stone-200/80 max-w-md">
             <h2 className={`${montserrat.className} text-xl font-bold mb-4 uppercase tracking-widest`}>Welcome, {profile.full_name}</h2>
             <p className="text-stone-500 mb-8 font-light text-sm">Your account is currently pending Admin verification. Contact Rupali for approval.</p>
             <button onClick={logout} className={`${montserrat.className} text-xs font-bold tracking-widest uppercase text-[#e70064] border-b border-[#e70064] pb-1 hover:text-stone-900 hover:border-stone-900 transition-colors`}>Sign out securely</button>
@@ -393,12 +393,33 @@ export default function AdminPortal() {
     }
 
     return (
-      <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row gap-10">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="mb-7 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <p className={`${montserrat.className} text-[10px] font-bold uppercase tracking-[0.24em] text-[#e70064]`}>
+              Cake By Rupali • Admin
+            </p>
+            <h1 className={`${montserrat.className} mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[#3d2723]`}>
+              Manage your cake business.
+            </h1>
+            <p className="mt-2 text-sm text-stone-500">
+              Publish cakes, manage pricing, update your catalog and keep customer reviews organised.
+            </p>
+          </div>
+          <div className="inline-flex items-center gap-2 self-start sm:self-auto rounded-full bg-white border border-stone-200 px-4 py-2.5 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span className={`${montserrat.className} text-[9px] font-bold uppercase tracking-[0.16em] text-stone-500`}>
+              Admin access active
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-8">
+
         {/* SIDEBAR TABS */}
-        <aside className="w-full md:w-1/4 shrink-0">
-          <div className="bg-white p-6 rounded-sm shadow-sm border border-stone-200 sticky top-32">
-            <h3 className={`${montserrat.className} text-xs font-bold uppercase tracking-[0.2em] text-stone-400 mb-6 block border-b border-stone-100 pb-4`}>Dashboard Menu</h3>
+        <aside className="w-full md:w-[250px] lg:w-[270px] shrink-0">
+          <div className="bg-white p-5 md:p-6 rounded-3xl shadow-[0_12px_40px_rgba(61,39,35,0.07)] border border-stone-200/80 sticky top-32">
+            <h3 className={`${montserrat.className} text-[10px] font-bold uppercase tracking-[0.22em] text-stone-400 mb-5 block border-b border-stone-100 pb-4`}>Dashboard Menu</h3>
             <ul className="space-y-2">
               {[
                 { id: "upload", label: editingId ? "✏️ Edit Product" : "+ Add Product" },
@@ -409,7 +430,7 @@ export default function AdminPortal() {
                 <li key={tab.id}>
                   <button 
                     onClick={() => setActiveTab(tab.id)}
-                    className={`${montserrat.className} text-xs font-bold uppercase tracking-widest w-full text-left px-4 py-3 rounded-sm transition-colors ${activeTab === tab.id ? 'bg-[#e70064] text-white shadow-sm' : 'text-stone-500 hover:bg-stone-50 hover:text-stone-900'}`}
+                    className={`${montserrat.className} text-[11px] font-bold uppercase tracking-[0.12em] w-full text-left px-4 py-3.5 rounded-xl transition-all duration-200 ${activeTab === tab.id ? 'bg-[#3d2723] text-white shadow-[0_8px_20px_rgba(61,39,35,0.16)]' : 'text-stone-500 hover:bg-[#fff7f9] hover:text-[#3d2723]'}`}
                   >
                     {tab.label}
                   </button>
@@ -425,11 +446,11 @@ export default function AdminPortal() {
         </aside>
 
         {/* MAIN DASHBOARD CONTENT */}
-        <div className="w-full md:w-3/4">
+        <div className="w-full md:flex-1 min-w-0">
           
           {/* TAB 1: UPLOAD / EDIT */}
           {activeTab === "upload" && (
-            <div className="bg-white p-8 md:p-12 rounded-sm border border-stone-200 shadow-sm">
+            <div className="bg-white p-6 sm:p-8 md:p-10 rounded-[2rem] border border-stone-200/80 shadow-[0_16px_55px_rgba(61,39,35,0.07)]">
               <div className="flex justify-between items-center mb-8 border-b border-stone-100 pb-4">
                 <h2 className={`${montserrat.className} text-2xl font-bold text-stone-900`}>{editingId ? "Edit Cake Details" : "Upload New Cake"}</h2>
                 {editingId && (
@@ -442,11 +463,11 @@ export default function AdminPortal() {
                 {/* CAKE NAME */}
                 <div className="mb-6">
                   <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-3`}>Cake Name *</label>
-                  <input type="text" required value={cakeName} onChange={e => setCakeName(e.target.value)} className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-stone-50 text-sm" placeholder="e.g. Classic Black Forest" />
+                  <input type="text" required value={cakeName} onChange={e => setCakeName(e.target.value)} className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all" placeholder="e.g. Classic Black Forest" />
                 </div>
 
                 {/* DYNAMIC MULTI-WEIGHT PRICING SECTION */}
-                <div className="bg-stone-50 p-6 rounded-sm border border-stone-200 space-y-4">
+                <div className="bg-[#fcfaf9] p-5 sm:p-6 rounded-2xl border border-stone-200/80 space-y-4">
                   <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 border-b border-stone-200 pb-2`}>Weight & Pricing *</label>
                   
                   {pricingOptions.map((option, index) => (
@@ -455,7 +476,7 @@ export default function AdminPortal() {
                         <select 
                           value={option.weight} 
                           onChange={e => handlePricingChange(index, "weight", e.target.value)} 
-                          className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-white text-sm"
+                          className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all"
                         >
                           <option value="0.5 KG">0.5 KG</option>
                           <option value="1 KG">1 KG</option>
@@ -475,7 +496,7 @@ export default function AdminPortal() {
                           required 
                           value={option.price} 
                           onChange={e => handlePricingChange(index, "price", e.target.value)} 
-                          className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] text-sm" 
+                          className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 text-sm transition-all" 
                         />
                       </div>
                       <div className="w-full sm:w-1/6 text-right">
@@ -493,10 +514,10 @@ export default function AdminPortal() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-stone-50 p-6 rounded-sm border border-stone-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-[#fcfaf9] p-5 sm:p-6 rounded-2xl border border-stone-200/80">
                   <div>
                     <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-3`}>Category *</label>
-                    <select value={cakeCategory} onChange={e => setCakeCategory(e.target.value)} className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-white text-sm font-medium">
+                    <select value={cakeCategory} onChange={e => setCakeCategory(e.target.value)} className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all font-medium">
                       <option value="Birthday Cakes">Birthday Cakes</option>
                       <option value="Wedding & Anniversary">Wedding & Anniversary</option>
                       <option value="Kids Theme Cakes">Kids Theme Cakes</option>
@@ -518,11 +539,11 @@ export default function AdminPortal() {
 
                 <div>
                   <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-3`}>Description</label>
-                  <textarea value={cakeDesc} onChange={e => setCakeDesc(e.target.value)} className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-stone-50 text-sm" placeholder="e.g. 1kg sponge with fresh cherries..." rows={3}></textarea>
+                  <textarea value={cakeDesc} onChange={e => setCakeDesc(e.target.value)} className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all" placeholder="e.g. 1kg sponge with fresh cherries..." rows={3}></textarea>
                 </div>
 
                 {/* MULTIPLE IMAGE UPLOAD & GALLERY PREVIEW */}
-                <div className="bg-stone-50 p-6 rounded-sm border border-stone-200 space-y-4">
+                <div className="bg-[#fcfaf9] p-5 sm:p-6 rounded-2xl border border-stone-200/80 space-y-4">
                   <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 border-b border-stone-200 pb-2`}>Upload Cake Photos *</label>
                   <input 
                     type="file" 
@@ -530,14 +551,14 @@ export default function AdminPortal() {
                     accept="image/*" 
                     multiple 
                     onChange={handleImageUploadSelect} 
-                    className={`${montserrat.className} w-full border border-stone-200 p-3 rounded-sm file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-[10px] file:font-bold file:tracking-widest file:uppercase file:bg-stone-900 file:text-white hover:file:bg-[#e70064] cursor-pointer bg-white text-sm`} 
+                    className={`${montserrat.className} w-full border border-stone-200 p-3 rounded-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:tracking-widest file:uppercase file:bg-stone-900 file:text-white hover:file:bg-[#e70064] cursor-pointer bg-white text-sm`} 
                   />
                   
                   {cakeImages.length > 0 && (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-stone-200">
                       {cakeImages.map((img, index) => (
-                        <div key={index} className={`relative p-2 border rounded-sm flex flex-col items-center ${mainImageIndex === index ? 'border-[#e70064] bg-pink-50' : 'border-stone-200 bg-white'}`}>
-                          <img src={img.url} alt={`preview ${index}`} className="w-full aspect-square object-cover rounded-sm mb-2" />
+                        <div key={index} className={`relative p-2 border rounded-2xl flex flex-col items-center overflow-hidden ${mainImageIndex === index ? 'border-[#e70064] bg-pink-50' : 'border-stone-200 bg-white'}`}>
+                          <img src={img.url} alt={`preview ${index}`} className="w-full aspect-square object-cover rounded-xl mb-2" />
                           <div className="flex justify-between items-center w-full mt-auto">
                             <label className="flex items-center gap-1 cursor-pointer">
                               <input 
@@ -563,7 +584,7 @@ export default function AdminPortal() {
                   )}
                 </div>
 
-                <button type="submit" disabled={isUploading} className={`${montserrat.className} w-full bg-stone-900 text-white p-4 rounded-sm font-bold tracking-[0.2em] uppercase hover:bg-[#e70064] transition-colors disabled:bg-stone-300 shadow-md`}>
+                <button type="submit" disabled={isUploading} className={`${montserrat.className} w-full bg-[#3d2723] text-white p-4 rounded-xl font-bold tracking-[0.18em] uppercase hover:bg-[#e70064] transition-all duration-300 disabled:bg-stone-300 shadow-[0_10px_25px_rgba(61,39,35,0.16)]`}>
                   {isUploading ? "Syncing Database..." : editingId ? "Save Changes" : "Publish to Website"}
                 </button>
               </form>
@@ -572,7 +593,7 @@ export default function AdminPortal() {
 
           {/* TAB 2: MANAGE CATALOG */}
           {activeTab === "manage" && (
-            <div className="bg-white p-8 md:p-12 rounded-sm border border-stone-200 shadow-sm">
+            <div className="bg-white p-6 sm:p-8 md:p-10 rounded-[2rem] border border-stone-200/80 shadow-[0_16px_55px_rgba(61,39,35,0.07)]">
               <div className="flex justify-between items-center mb-8 border-b border-stone-100 pb-4">
                 <h2 className={`${montserrat.className} text-2xl font-bold text-stone-900`}>Manage Catalog</h2>
                 <span className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest text-stone-400`}>{allProducts.length} Items Live</span>
@@ -580,15 +601,15 @@ export default function AdminPortal() {
               
               <div className="space-y-4">
                 {allProducts.map(cake => (
-                  <div key={cake.id} className="flex flex-col sm:flex-row items-center gap-6 p-4 border border-stone-100 bg-stone-50 rounded-sm hover:border-[#e70064] transition-colors">
-                    <img src={cake.image_url || ''} className="w-20 h-20 object-cover rounded-sm border border-stone-200" alt="Cake" />
+                  <div key={cake.id} className="flex flex-col sm:flex-row items-center gap-5 p-4 border border-stone-200/80 bg-[#fcfaf9] rounded-2xl hover:border-[#ef9fba] hover:bg-white hover:shadow-md transition-all duration-200">
+                    <img src={cake.image_url || ''} className="w-20 h-20 object-cover rounded-2xl border border-stone-200" alt="Cake" />
                     <div className="flex-grow text-center sm:text-left">
                       <h4 className={`${montserrat.className} font-bold text-stone-900 text-sm mb-1`}>{cake.name}</h4>
                       <p className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest text-stone-500`}>{cake.category} | Starts at ₹{cake.price}</p>
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => startEditing(cake)} className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest border border-stone-300 px-4 py-2 rounded-sm hover:bg-stone-900 hover:text-white transition-colors`}>Edit</button>
-                      <button onClick={() => deleteProduct(cake.id)} className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest border border-[#e70064] text-[#e70064] px-4 py-2 rounded-sm hover:bg-[#e70064] hover:text-white transition-colors`}>Delete</button>
+                      <button onClick={() => startEditing(cake)} className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest border border-stone-300 px-4 py-2.5 rounded-full hover:bg-[#3d2723] hover:text-white transition-all`}>Edit</button>
+                      <button onClick={() => deleteProduct(cake.id)} className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest border border-[#e70064] text-[#e70064] px-4 py-2.5 rounded-full hover:bg-[#e70064] hover:text-white transition-all`}>Delete</button>
                     </div>
                   </div>
                 ))}
@@ -598,7 +619,7 @@ export default function AdminPortal() {
 
           {/* TAB 3: IMPORT / EXPORT */}
           {activeTab === "import" && (
-            <div className="bg-white p-8 md:p-12 rounded-sm border border-stone-200 shadow-sm">
+            <div className="bg-white p-6 sm:p-8 md:p-10 rounded-[2rem] border border-stone-200/80 shadow-[0_16px_55px_rgba(61,39,35,0.07)]">
               <div className="mb-8 border-b border-stone-100 pb-4">
                 <h2 className={`${montserrat.className} text-2xl font-bold text-stone-900`}>Database Tools</h2>
                 <p className="text-stone-500 font-light text-sm mt-2">Download your catalog to Excel (CSV) or bulk upload new products.</p>
@@ -606,23 +627,23 @@ export default function AdminPortal() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Export Card */}
-                <div className="border border-stone-200 bg-stone-50 p-8 rounded-sm text-center flex flex-col items-center justify-center">
+                <div className="border border-stone-200/80 bg-[#fcfaf9] p-8 rounded-3xl text-center flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all">
                   <div className="text-4xl mb-4">📥</div>
                   <h3 className={`${montserrat.className} font-bold uppercase tracking-widest text-stone-900 text-xs mb-4`}>Export Catalog</h3>
                   <p className="text-xs font-light text-stone-500 mb-6">Download your entire website catalog as a CSV spreadsheet.</p>
-                  <button onClick={exportToCSV} className={`${montserrat.className} w-full bg-stone-900 text-white py-3 rounded-sm font-bold text-[10px] tracking-widest uppercase hover:bg-[#e70064] transition-colors`}>
+                  <button onClick={exportToCSV} className={`${montserrat.className} w-full bg-[#3d2723] text-white py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase hover:bg-[#e70064] transition-all`}>
                     Download CSV
                   </button>
                 </div>
 
                 {/* Import Card */}
-                <div className="border border-stone-200 bg-stone-50 p-8 rounded-sm text-center flex flex-col items-center justify-center">
+                <div className="border border-stone-200/80 bg-[#fcfaf9] p-8 rounded-3xl text-center flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all">
                   <div className="text-4xl mb-4">📤</div>
                   <h3 className={`${montserrat.className} font-bold uppercase tracking-widest text-stone-900 text-xs mb-4`}>Bulk Import</h3>
                   <p className="text-xs font-light text-stone-500 mb-6">Upload a CSV to instantly add multiple products to the website.</p>
                   <div className="relative w-full">
                     <input type="file" accept=".csv" onChange={handleImportCSV} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                    <button className={`${montserrat.className} w-full bg-white border border-stone-900 text-stone-900 py-3 rounded-sm font-bold text-[10px] tracking-widest uppercase pointer-events-none`}>
+                    <button className={`${montserrat.className} w-full bg-white border border-stone-300 text-stone-900 py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase pointer-events-none`}>
                       {isUploading ? "Uploading..." : "Select CSV File"}
                     </button>
                   </div>
@@ -633,7 +654,7 @@ export default function AdminPortal() {
 
           {/* TAB 4: TESTIMONIALS */}
           {activeTab === "testimonials" && (
-            <div className="bg-white p-8 md:p-12 rounded-sm border border-stone-200 shadow-sm">
+            <div className="bg-white p-6 sm:p-8 md:p-10 rounded-[2rem] border border-stone-200/80 shadow-[0_16px_55px_rgba(61,39,35,0.07)]">
               <div className="mb-8 border-b border-stone-100 pb-4">
                 <h2 className={`${montserrat.className} text-2xl font-bold text-stone-900`}>Add Testimonial</h2>
                 <p className="text-[#e70064] font-medium text-xs mt-2 uppercase tracking-widest">Note: Ensure a 'testimonials' table exists in Supabase.</p>
@@ -643,11 +664,11 @@ export default function AdminPortal() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-3`}>Customer Name *</label>
-                    <input type="text" required value={testAuthor} onChange={e => setTestAuthor(e.target.value)} className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-stone-50 text-sm" placeholder="e.g. Priya M." />
+                    <input type="text" required value={testAuthor} onChange={e => setTestAuthor(e.target.value)} className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all" placeholder="e.g. Priya M." />
                   </div>
                   <div>
                     <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-3`}>Star Rating (1-5) *</label>
-                    <select value={testRating} onChange={e => setTestRating(e.target.value)} className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-stone-50 text-sm font-medium">
+                    <select value={testRating} onChange={e => setTestRating(e.target.value)} className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all font-medium">
                       <option value="5">5 Stars</option>
                       <option value="4">4 Stars</option>
                       <option value="3">3 Stars</option>
@@ -657,16 +678,17 @@ export default function AdminPortal() {
 
                 <div>
                   <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-3`}>Review Text *</label>
-                  <textarea required value={testText} onChange={e => setTestText(e.target.value)} className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] bg-stone-50 text-sm" placeholder="The cake was amazing..." rows={4}></textarea>
+                  <textarea required value={testText} onChange={e => setTestText(e.target.value)} className="w-full border border-stone-200/90 p-3.5 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-sm transition-all" placeholder="The cake was amazing..." rows={4}></textarea>
                 </div>
 
-                <button type="submit" disabled={isUploading} className={`${montserrat.className} w-full bg-stone-900 text-white p-4 rounded-sm font-bold tracking-[0.2em] uppercase hover:bg-[#e70064] transition-colors disabled:bg-stone-300 shadow-md`}>
+                <button type="submit" disabled={isUploading} className={`${montserrat.className} w-full bg-[#3d2723] text-white p-4 rounded-xl font-bold tracking-[0.18em] uppercase hover:bg-[#e70064] transition-all duration-300 disabled:bg-stone-300 shadow-[0_10px_25px_rgba(61,39,35,0.16)]`}>
                   {isUploading ? "Publishing..." : "Publish Testimonial"}
                 </button>
               </form>
             </div>
           )}
 
+        </div>
         </div>
       </div>
     );
@@ -676,7 +698,7 @@ export default function AdminPortal() {
   // RENDER THE FULL PAGE WRAPPED IN UNIFIED HEADER/FOOTER
   // ==========================================
   return (
-    <div className={`min-h-screen bg-[#FAF9F6] text-stone-800 flex flex-col ${poppins.className}`}>
+    <div className={`min-h-screen bg-[#f8f6f3] text-stone-800 flex flex-col ${poppins.className}`}>
       
       {/* --- UNIFIED GLOBAL HEADER START --- */}
       <header className="sticky top-0 w-full z-50 bg-white shadow-sm border-b border-stone-200">
@@ -696,17 +718,21 @@ export default function AdminPortal() {
               <button className="hover:text-[#e70064] transition flex items-center gap-1 outline-none uppercase tracking-wide font-semibold">
                 Shop <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
-              <div className="absolute left-0 top-full pt-4 w-60 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col transform group-hover:translate-y-1">
-                <div className="bg-white border border-stone-200 shadow-xl flex flex-col py-2">
-                  <a href="/shop" className="hover:text-[#e70064] transition text-xs font-bold uppercase tracking-widest border-b border-stone-100 pb-2 px-6 py-3">All Cakes</a>
-                  <a href="/shop?category=Birthday+Cakes" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Birthday Cakes</a>
-                  <a href="/shop?category=Wedding+%26+Anniversary" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Wedding & Anniversary</a>
-                  <a href="/shop?category=Kids+Theme+Cakes" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Kids & Theme Cakes</a>
-                  <a href="/shop?category=Premium+Signature" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Premium Signature</a>
-                  <a href="/shop?category=Dry+%26+Tea+Cakes" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Dry & Tea Cakes</a>
+              <div className="absolute left-0 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col transform group-hover:translate-y-1">
+                <div className="bg-white border border-stone-200/80 shadow-[0_18px_45px_rgba(61,39,35,0.12)] flex flex-col py-2 rounded-2xl overflow-hidden">
+                  <a href="/shop" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-[11px] font-bold uppercase tracking-widest border-b border-stone-100 pb-3 px-6 py-4">All Cakes</a>
+                  <a href="/shop?category=Birthday+Cakes" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Birthday Cakes</a>
+                  <a href="/shop?category=Wedding+%26+Anniversary" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Wedding & Anniversary</a>
+                  <a href="/shop?category=Kids+Theme+Cakes" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Kids & Theme Cakes</a>
+                  <a href="/shop?category=Premium+Signature" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Premium Signature</a>
+                  <a href="/shop?category=Chocolate+Cakes" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Chocolate Cakes</a>
+                  <a href="/shop?category=Fresh+Fruit+Cakes" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Fresh Fruit Cakes</a>
+                  <a href="/shop?category=Red+Velvet+Cakes" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Red Velvet Cakes</a>
+                  <a href="/shop?category=Dry+%26+Tea+Cakes" className="hover:text-[#e70064] hover:bg-[#fff7f9] transition text-sm px-6 py-3">Dry & Tea Cakes</a>
                 </div>
-                <div className="bg-stone-50 p-4 border-t border-stone-100">
-                  <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-semibold text-sm hover:text-pink-800 transition capitalize block">🎉 Festive Specials</a>
+                <div className="bg-[#fff7f9] p-4 border-t border-pink-100 flex items-center justify-between">
+                  <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-semibold text-sm hover:text-[#3d2723] transition block">🎉 Festive Specials</a>
+                  <a href="/shop" className="text-[9px] font-bold uppercase tracking-widest text-stone-400 hover:text-[#3d2723] transition">View All →</a>
                 </div>
               </div>
             </div>
@@ -717,7 +743,7 @@ export default function AdminPortal() {
 
           <div className="flex items-center gap-6">
             <a href="/admin" className={`${montserrat.className} hidden md:block text-xs font-bold tracking-widest uppercase text-[#e70064] transition`}>Admin</a>
-            <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} bg-stone-900 text-white px-6 py-3 text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#e70064] transition-colors duration-300 rounded-sm`}>
+            <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} bg-[#3d2723] text-white px-6 py-3 text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#e70064] transition-all duration-300 rounded-full shadow-sm`}>
               Order on WhatsApp
             </a>
           </div>
