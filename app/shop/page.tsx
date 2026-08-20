@@ -2,24 +2,13 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { Montserrat, Poppins, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import { useSearchParams } from "next/navigation";
 
-// Premium editorial fonts — visual only, no functional changes.
-const montserrat = Montserrat({
+// Crisp, professional commerce typography — visual only.
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
 });
 
 // Connect to Supabase — unchanged.
@@ -32,7 +21,7 @@ export default function Shop() {
     <Suspense
       fallback={
         <div
-          className={`min-h-screen flex items-center justify-center bg-[#FAF9F6] text-stone-500 tracking-widest text-sm uppercase ${montserrat.className}`}
+          className={`min-h-screen flex items-center justify-center bg-[#FAF9F6] text-stone-500 tracking-widest text-sm uppercase ${inter.className}`}
         >
           Loading Catalog...
         </div>
@@ -170,14 +159,14 @@ function ShopContent() {
 
   return (
     <div
-      className={`min-h-screen bg-[#FAF9F6] text-[#3E2723] ${poppins.className}`}
+      className={`min-h-screen bg-[#FAF9F6] text-[#3E2723] ${inter.className}`}
     >
       {/* =========================================================
           GLOBAL HEADER — navigation/functionality preserved
          ========================================================= */}
       <header className="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgba(62,39,35,0.06)] border-b border-stone-100">
         <div
-          className={`bg-[#3E2723] text-white text-[9px] md:text-[10px] font-semibold tracking-[0.22em] uppercase text-center py-2.5 ${montserrat.className}`}
+          className={`bg-[#3E2723] text-white text-[9px] md:text-[10px] font-semibold tracking-[0.22em] uppercase text-center py-2.5 ${inter.className}`}
         >
           <span className="text-[#ffd8e7]">✦</span> Delivering Premium
           Freshness Across Virar & Mumbai <span className="text-[#ffd8e7]">✦</span>
@@ -186,13 +175,13 @@ function ShopContent() {
         <div className="max-w-7xl mx-auto px-5 md:px-10 flex justify-between items-center py-4">
           <a
             href="/"
-            className={`${montserrat.className} text-xl md:text-2xl font-bold tracking-tight text-[#3E2723]`}
+            className={`${inter.className} text-xl md:text-2xl font-bold tracking-tight text-[#3E2723]`}
           >
             Cake By Rupali<span className="text-[#e70064]">.</span>
           </a>
 
           <nav
-            className={`hidden md:flex items-center gap-8 lg:gap-10 text-[11px] font-semibold tracking-[0.12em] uppercase ${montserrat.className} text-stone-700`}
+            className={`hidden md:flex items-center gap-8 lg:gap-10 text-[11px] font-semibold tracking-[0.12em] uppercase ${inter.className} text-stone-700`}
           >
             <a
               href="/"
@@ -283,7 +272,7 @@ function ShopContent() {
           <div className="flex items-center gap-3 md:gap-5">
             <a
               href="/admin"
-              className={`${montserrat.className} hidden md:block text-[10px] font-bold tracking-[0.18em] uppercase text-stone-400 hover:text-[#3E2723] transition`}
+              className={`${inter.className} hidden md:block text-[10px] font-bold tracking-[0.18em] uppercase text-stone-400 hover:text-[#3E2723] transition`}
             >
               Admin
             </a>
@@ -292,7 +281,7 @@ function ShopContent() {
               href="https://wa.me/917666660036"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${montserrat.className} bg-[#3E2723] text-white px-4 md:px-6 py-3 text-[9px] md:text-[10px] font-bold tracking-[0.14em] uppercase hover:bg-[#e70064] transition-colors duration-300 rounded-full shadow-sm`}
+              className={`${inter.className} bg-[#3E2723] text-white px-4 md:px-6 py-3 text-[9px] md:text-[10px] font-bold tracking-[0.14em] uppercase hover:bg-[#e70064] transition-colors duration-300 rounded-full shadow-sm`}
             >
               Order on WhatsApp
             </a>
@@ -303,13 +292,13 @@ function ShopContent() {
       {/* =========================================================
           SHOP HERO
          ========================================================= */}
-      <section className="relative overflow-hidden bg-[#FFF0F5] border-b border-pink-100">
+      <section className="relative overflow-hidden bg-[#fff5f8] border-b border-[#eadfe2]">
         <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-white/70 blur-3xl" />
         <div className="absolute -bottom-32 -right-20 w-96 h-96 rounded-full bg-[#f8c6d9]/40 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
           <div
-            className={`${montserrat.className} inline-flex items-center gap-3 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] text-[#e70064] mb-5`}
+            className={`${inter.className} inline-flex items-center gap-3 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] text-[#e70064] mb-5`}
           >
             <span className="w-8 h-px bg-[#e70064]" />
             Freshly Baked Collection
@@ -317,12 +306,12 @@ function ShopContent() {
           </div>
 
           <h1
-            className={`${playfair.className} text-4xl md:text-6xl font-bold text-[#3E2723] leading-tight mb-4`}
+            className={`${inter.className} text-4xl md:text-6xl font-extrabold tracking-[-0.04em] text-[#2f211d] leading-[1.05] mb-4`}
           >
             Find Your Perfect Cake
           </h1>
 
-          <p className="text-stone-600 max-w-2xl mx-auto font-light text-sm md:text-base leading-relaxed">
+          <p className="text-[#625650] max-w-2xl mx-auto font-normal text-[13px] md:text-[14px] leading-relaxed">
             Freshly baked, handcrafted cakes for birthdays, anniversaries,
             little celebrations and everything in between.
           </p>
@@ -332,10 +321,10 @@ function ShopContent() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`${montserrat.className} px-4 py-2.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-wider border transition-all ${
+                className={`${inter.className} min-h-10 px-4 md:px-5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-[0.06em] border-2 transition-all duration-200 ${
                   activeCategory === cat
-                    ? "bg-[#e70064] text-white border-[#e70064] shadow-md"
-                    : "bg-white/80 text-[#3E2723] border-pink-100 hover:border-[#e70064] hover:text-[#e70064]"
+                    ? "bg-[#e70064] text-white border-[#e70064] shadow-[0_6px_18px_rgba(231,0,100,0.22)]"
+                    : "bg-white text-[#3E2723] border-[#ead9df] shadow-sm hover:border-[#3E2723] hover:bg-[#3E2723] hover:text-white"
                 }`}
               >
                 {cat}
@@ -348,42 +337,43 @@ function ShopContent() {
       {/* =========================================================
           CATALOG
          ========================================================= */}
-      <main className="max-w-7xl mx-auto px-5 md:px-10 py-12 md:py-16">
+      <main className="max-w-7xl mx-auto px-5 md:px-10 py-10 md:py-14">
         <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
           {/* =====================================================
-              FILTER PANEL — same functionality, redesigned UI
+              FILTER PANEL — generic e-commerce filter UI
              ===================================================== */}
           <aside className="w-full md:w-[260px] lg:w-[285px] shrink-0">
             <div className="md:sticky md:top-32">
-              <div className="bg-white rounded-[2rem] border border-stone-100 shadow-[0_12px_40px_rgba(62,39,35,0.07)] overflow-hidden">
-                <div className="p-6 md:p-7 border-b border-stone-100">
-                  <div className="flex items-center justify-between mb-2">
-                    <h2
-                      className={`${playfair.className} text-2xl font-bold text-[#3E2723]`}
-                    >
-                      Find a Cake
+              <div className="bg-white rounded-2xl border border-[#e7e2df] shadow-[0_10px_35px_rgba(62,39,35,0.07)] overflow-hidden">
+                <div className="px-5 py-4 border-b border-[#eee9e6] flex items-center justify-between">
+                  <div>
+                    <h2 className={`${inter.className} text-base font-extrabold tracking-tight text-[#2f211d]`}>
+                      Filters
                     </h2>
-                    <span className="w-9 h-9 rounded-full bg-[#FFF0F5] flex items-center justify-center text-[#e70064]">
-                      ♡
-                    </span>
+                    <p className="text-[11px] text-stone-400 mt-0.5">
+                      Refine your results
+                    </p>
                   </div>
-                  <p className="text-xs text-stone-400">
-                    Refine the collection to match your celebration.
-                  </p>
+
+                  <button
+                    onClick={clearFilters}
+                    className={`${inter.className} text-[10px] font-bold uppercase tracking-[0.08em] text-[#e70064] hover:text-[#3E2723] transition`}
+                  >
+                    Clear
+                  </button>
                 </div>
 
-                <div className="p-6 md:p-7 space-y-8">
-                  {/* Search */}
-                  <div>
+                <div className="p-4">
+                  <div className="mb-3">
                     <label
-                      className={`${montserrat.className} text-[9px] font-bold uppercase tracking-[0.22em] text-stone-400 mb-3 block`}
+                      className={`${inter.className} text-[10px] font-bold uppercase tracking-[0.12em] text-[#6f625d] mb-2 block`}
                     >
-                      Search Cakes
+                      Search
                     </label>
 
                     <div className="relative">
                       <svg
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
+                        className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8f837d]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -391,141 +381,182 @@ function ShopContent() {
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          strokeWidth="1.7"
+                          strokeWidth="1.8"
                           d="m21 21-4.35-4.35m2.1-5.15a7.25 7.25 0 1 1-14.5 0 7.25 7.25 0 0 1 14.5 0Z"
                         />
                       </svg>
 
                       <input
                         type="text"
-                        placeholder="Chocolate, red velvet..."
+                        placeholder="Search cakes..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full rounded-full border border-stone-200 bg-[#FAF9F6] pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 text-xs transition placeholder:text-stone-400"
+                        className="w-full h-11 rounded-xl border border-[#ded7d2] bg-white pl-10 pr-3 text-[12px] text-[#2f211d] focus:outline-none focus:border-[#3E2723] focus:ring-2 focus:ring-[#3E2723]/10 transition placeholder:text-[#a79d97]"
                       />
                     </div>
                   </div>
 
-                  {/* Categories */}
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <label
-                        className={`${montserrat.className} text-[9px] font-bold uppercase tracking-[0.22em] text-stone-400`}
-                      >
-                        Collections
-                      </label>
-                      <span className="text-[#e70064] text-xs">✦</span>
-                    </div>
+                  <details open className="group border-t border-[#eee9e6]">
+                    <summary className="list-none cursor-pointer py-4 flex items-center justify-between select-none">
+                      <span className={`${inter.className} text-[11px] font-bold uppercase tracking-[0.1em] text-[#3E2723]`}>
+                        Category
+                      </span>
 
-                    <div className="space-y-1.5">
+                      <span className="flex items-center gap-2">
+                        <span className={`${inter.className} max-w-[130px] truncate text-[10px] font-semibold text-[#e70064]`}>
+                          {activeCategory}
+                        </span>
+                        <svg
+                          className="w-4 h-4 text-[#766a64] transition-transform group-open:rotate-180"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="1.8"
+                            d="m6 9 6 6 6-6"
+                          />
+                        </svg>
+                      </span>
+                    </summary>
+
+                    <div className="pb-3 space-y-1">
                       {categories.map((cat) => (
                         <button
                           key={cat}
                           onClick={() => setActiveCategory(cat)}
-                          className={`${montserrat.className} group w-full flex items-center justify-between text-left px-3.5 py-2.5 rounded-xl text-[11px] tracking-wide transition-all ${
+                          className={`${inter.className} w-full min-h-10 px-3 rounded-lg flex items-center justify-between text-left text-[11px] font-medium transition ${
                             activeCategory === cat
-                              ? "bg-[#FFF0F5] text-[#e70064] font-bold"
-                              : "text-stone-500 hover:bg-[#FAF9F6] hover:text-[#3E2723] font-medium"
+                              ? "bg-[#3E2723] text-white font-bold"
+                              : "text-[#655954] hover:bg-[#f7f3f1] hover:text-[#3E2723]"
                           }`}
                         >
                           <span>{cat}</span>
-                          <span
-                            className={`transition-transform ${
-                              activeCategory === cat
-                                ? "translate-x-0 opacity-100"
-                                : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
-                            }`}
-                          >
-                            →
-                          </span>
+                          {activeCategory === cat && (
+                            <span className="text-[#ffd0df]">✓</span>
+                          )}
                         </button>
                       ))}
                     </div>
-                  </div>
+                  </details>
 
-                  {/* Dietary */}
-                  <div className="pt-2">
-                    <label
-                      className={`${montserrat.className} text-[9px] font-bold uppercase tracking-[0.22em] text-stone-400 mb-4 block`}
-                    >
-                      Dietary
-                    </label>
+                  <details className="group border-t border-[#eee9e6]">
+                    <summary className="list-none cursor-pointer py-4 flex items-center justify-between select-none">
+                      <span className={`${inter.className} text-[11px] font-bold uppercase tracking-[0.1em] text-[#3E2723]`}>
+                        Dietary
+                      </span>
 
-                    <label className="flex items-center gap-3 cursor-pointer group">
-                      <div
-                        className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all ${
-                          isEggless
-                            ? "bg-[#e70064] border-[#e70064] shadow-sm"
-                            : "border-stone-300 group-hover:border-[#e70064]"
-                        }`}
-                      >
-                        {isEggless && (
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="3"
-                              d="m5 13 4 4L19 7"
-                            />
-                          </svg>
-                        )}
-                      </div>
+                      <span className="flex items-center gap-2">
+                        <span className={`${inter.className} text-[10px] font-semibold ${isEggless ? "text-[#e70064]" : "text-[#958a84]"}`}>
+                          {isEggless ? "Eggless" : "All"}
+                        </span>
+                        <svg
+                          className="w-4 h-4 text-[#766a64] transition-transform group-open:rotate-180"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="1.8"
+                            d="m6 9 6 6 6-6"
+                          />
+                        </svg>
+                      </span>
+                    </summary>
 
+                    <div className="pb-4">
+                      <label className="flex items-center gap-3 cursor-pointer rounded-lg px-3 py-3 bg-[#faf8f7] hover:bg-[#f5f0ed] transition">
+                        <input
+                          type="checkbox"
+                          checked={isEggless}
+                          onChange={() => setIsEggless(!isEggless)}
+                          className="sr-only"
+                        />
+
+                        <span
+                          className={`w-5 h-5 rounded-md border flex items-center justify-center transition ${
+                            isEggless
+                              ? "bg-[#e70064] border-[#e70064]"
+                              : "bg-white border-[#cfc6c1]"
+                          }`}
+                        >
+                          {isEggless && (
+                            <svg
+                              className="w-3.5 h-3.5 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="3"
+                                d="m5 13 4 4L19 7"
+                              />
+                            </svg>
+                          )}
+                        </span>
+
+                        <span className={`${inter.className} text-[11px] font-semibold text-[#4e433e]`}>
+                          100% Eggless Only
+                        </span>
+                      </label>
+                    </div>
+                  </details>
+
+                  <details className="group border-t border-[#eee9e6]">
+                    <summary className="list-none cursor-pointer py-4 flex items-center justify-between select-none">
+                      <span className={`${inter.className} text-[11px] font-bold uppercase tracking-[0.1em] text-[#3E2723]`}>
+                        Price
+                      </span>
+
+                      <span className="flex items-center gap-2">
+                        <span className={`${inter.className} text-[10px] font-bold text-[#e70064]`}>
+                          Up to ₹{maxPrice.toLocaleString("en-IN")}
+                        </span>
+                        <svg
+                          className="w-4 h-4 text-[#766a64] transition-transform group-open:rotate-180"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="1.8"
+                            d="m6 9 6 6 6-6"
+                          />
+                        </svg>
+                      </span>
+                    </summary>
+
+                    <div className="pb-4 px-1">
                       <input
-                        type="checkbox"
-                        className="hidden"
-                        checked={isEggless}
-                        onChange={() => setIsEggless(!isEggless)}
+                        type="range"
+                        min="300"
+                        max="5000"
+                        step="100"
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(Number(e.target.value))}
+                        className="w-full accent-[#e70064] h-1.5 bg-[#e4deda] rounded-full appearance-none cursor-pointer"
                       />
 
-                      <span
-                        className={`${montserrat.className} text-[11px] font-semibold text-stone-600 tracking-wide group-hover:text-[#3E2723] transition`}
-                      >
-                        100% Eggless Only
-                      </span>
-                    </label>
-                  </div>
-
-                  {/* Price */}
-                  <div>
-                    <label
-                      className={`${montserrat.className} text-[9px] font-bold uppercase tracking-[0.22em] text-stone-400 mb-4 flex justify-between items-center`}
-                    >
-                      <span>Maximum Price</span>
-                      <span className="text-[#e70064] font-bold text-xs">
-                        ₹{maxPrice.toLocaleString("en-IN")}
-                      </span>
-                    </label>
-
-                    <input
-                      type="range"
-                      min="300"
-                      max="5000"
-                      step="100"
-                      value={maxPrice}
-                      onChange={(e) => setMaxPrice(Number(e.target.value))}
-                      className="w-full accent-[#e70064] h-1.5 bg-stone-200 rounded-full appearance-none cursor-pointer"
-                    />
-
-                    <div
-                      className={`${montserrat.className} flex justify-between mt-2 text-[9px] font-semibold text-stone-400`}
-                    >
-                      <span>₹300</span>
-                      <span>₹5,000+</span>
+                      <div className={`${inter.className} flex justify-between mt-2 text-[10px] font-semibold text-[#938780]`}>
+                        <span>₹300</span>
+                        <span>₹5,000+</span>
+                      </div>
                     </div>
-                  </div>
+                  </details>
 
-                  {/* Clear */}
                   <button
                     onClick={clearFilters}
-                    className={`${montserrat.className} w-full py-3.5 text-[9px] font-bold tracking-[0.2em] uppercase text-stone-500 border border-stone-200 rounded-full hover:bg-[#3E2723] hover:text-white hover:border-[#3E2723] transition-all`}
+                    className={`${inter.className} mt-2 w-full h-11 rounded-xl bg-[#3E2723] text-white text-[10px] font-bold uppercase tracking-[0.12em] hover:bg-[#e70064] transition-colors shadow-sm`}
                   >
-                    Clear All Filters
+                    Reset Filters
                   </button>
                 </div>
               </div>
@@ -539,20 +570,20 @@ function ShopContent() {
             <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-7 pb-5 border-b border-stone-200">
               <div>
                 <div
-                  className={`${montserrat.className} text-[9px] font-bold tracking-[0.22em] uppercase text-[#e70064] mb-2`}
+                  className={`${inter.className} text-[9px] font-bold tracking-[0.22em] uppercase text-[#e70064] mb-2`}
                 >
                   Our Collection
                 </div>
 
                 <h2
-                  className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723]`}
+                  className={`${inter.className} text-3xl md:text-4xl font-extrabold tracking-[-0.03em] text-[#2f211d]`}
                 >
                   {activeCategory}
                 </h2>
               </div>
 
               <div
-                className={`${montserrat.className} inline-flex self-start sm:self-auto items-center gap-2 bg-white border border-stone-100 rounded-full px-4 py-2.5 text-[9px] text-stone-500 tracking-[0.14em] uppercase font-bold shadow-sm`}
+                className={`${inter.className} inline-flex self-start sm:self-auto items-center gap-2 bg-[#3E2723] text-white rounded-full px-4 py-2.5 text-[10px] tracking-[0.08em] uppercase font-bold shadow-sm`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#e70064]" />
                 {filteredCakes.length}{" "}
@@ -602,7 +633,7 @@ function ShopContent() {
                           />
                         ) : (
                           <div
-                            className={`${montserrat.className} w-full h-full flex flex-col items-center justify-center text-stone-300`}
+                            className={`${inter.className} w-full h-full flex flex-col items-center justify-center text-stone-300`}
                           >
                             <span className="text-4xl mb-3">🍰</span>
                             <span className="font-semibold text-[9px] tracking-widest uppercase">
@@ -615,14 +646,14 @@ function ShopContent() {
 
                         {cake.is_eggless && (
                           <div
-                            className={`${montserrat.className} absolute top-3 right-3 bg-white/95 backdrop-blur-md text-[#e70064] text-[8px] uppercase tracking-[0.14em] font-bold px-3 py-2 rounded-full shadow-sm`}
+                            className={`${inter.className} absolute top-3 right-3 bg-white/95 backdrop-blur-md text-[#e70064] text-[8px] uppercase tracking-[0.14em] font-bold px-3 py-2 rounded-full shadow-sm`}
                           >
                             ✓ Eggless
                           </div>
                         )}
 
                         <div
-                          className={`${montserrat.className} absolute bottom-3 left-3 bg-white/95 backdrop-blur-md text-[#3E2723] text-[8px] uppercase tracking-[0.14em] font-bold px-3 py-2 rounded-full shadow-sm`}
+                          className={`${inter.className} absolute bottom-3 left-3 bg-white/95 backdrop-blur-md text-[#3E2723] text-[8px] uppercase tracking-[0.14em] font-bold px-3 py-2 rounded-full shadow-sm`}
                         >
                           Freshly Baked
                         </div>
@@ -630,12 +661,12 @@ function ShopContent() {
 
                       <div className="px-1 flex-grow flex flex-col">
                         <h4
-                          className={`${playfair.className} text-xl font-bold text-[#3E2723] mb-2 leading-tight`}
+                          className={`${inter.className} text-[17px] font-bold text-[#2f211d] mb-2 leading-tight tracking-[-0.01em]`}
                         >
                           {cake.name}
                         </h4>
 
-                        <p className="text-stone-500 text-xs mb-5 flex-grow line-clamp-2 leading-relaxed font-light">
+                        <p className="text-[#766a64] text-[11px] mb-5 flex-grow line-clamp-2 leading-[1.55] font-normal">
                           {cake.description}
                         </p>
 
@@ -643,14 +674,14 @@ function ShopContent() {
                           <div className="flex flex-col">
                             {hasMultiplePrices && (
                               <span
-                                className={`${montserrat.className} text-[8px] font-bold text-stone-400 uppercase tracking-[0.16em] mb-0.5`}
+                                className={`${inter.className} text-[8px] font-bold text-stone-400 uppercase tracking-[0.16em] mb-0.5`}
                               >
                                 Starts at
                               </span>
                             )}
 
                             <span
-                              className={`${montserrat.className} font-extrabold text-lg text-[#3E2723]`}
+                              className={`${inter.className} font-extrabold text-lg text-[#3E2723]`}
                             >
                               ₹{cake.price}
                             </span>
@@ -658,7 +689,7 @@ function ShopContent() {
 
                           <a
                             href={`/shop/${cake.id}`}
-                            className={`${montserrat.className} inline-flex items-center gap-2 bg-[#FFF0F5] text-[#e70064] px-4 py-2.5 rounded-full font-bold text-[9px] tracking-[0.13em] uppercase hover:bg-[#e70064] hover:text-white transition-all duration-300`}
+                            className={`${inter.className} inline-flex items-center justify-center gap-2 bg-[#3E2723] text-white px-4 py-3 rounded-full font-bold text-[10px] tracking-[0.08em] uppercase shadow-sm hover:bg-[#e70064] hover:shadow-md transition-all duration-300`}
                           >
                             View Cake
                             <span className="text-sm leading-none">→</span>
@@ -676,7 +707,7 @@ function ShopContent() {
                 </div>
 
                 <p
-                  className={`${playfair.className} text-2xl font-bold text-[#3E2723] mb-2`}
+                  className={`${inter.className} text-2xl font-bold text-[#3E2723] mb-2`}
                 >
                   No cakes found
                 </p>
@@ -687,7 +718,7 @@ function ShopContent() {
 
                 <button
                   onClick={clearFilters}
-                  className={`${montserrat.className} text-[9px] font-bold tracking-[0.18em] uppercase text-[#e70064] border-b border-[#e70064] pb-1 hover:text-[#3E2723] hover:border-[#3E2723] transition-colors`}
+                  className={`${inter.className} text-[9px] font-bold tracking-[0.18em] uppercase text-[#e70064] border-b border-[#e70064] pb-1 hover:text-[#3E2723] hover:border-[#3E2723] transition-colors`}
                 >
                   View All Cakes
                 </button>
@@ -708,13 +739,13 @@ function ShopContent() {
           <div className="relative px-7 md:px-14 py-12 md:py-14 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <div
-                className={`${montserrat.className} text-[9px] font-bold tracking-[0.25em] uppercase text-[#ffb6d0] mb-3`}
+                className={`${inter.className} text-[9px] font-bold tracking-[0.25em] uppercase text-[#ffb6d0] mb-3`}
               >
                 Can't find what you imagined?
               </div>
 
               <h2
-                className={`${playfair.className} text-3xl md:text-4xl font-bold mb-3`}
+                className={`${inter.className} text-3xl md:text-4xl font-bold mb-3`}
               >
                 You Imagine It. We Bake It.
               </h2>
@@ -727,7 +758,7 @@ function ShopContent() {
 
             <a
               href="/custom-cake"
-              className={`${montserrat.className} shrink-0 bg-[#e70064] text-white px-7 py-4 rounded-full font-bold text-[9px] tracking-[0.16em] uppercase hover:bg-white hover:text-[#3E2723] transition-all shadow-lg`}
+              className={`${inter.className} shrink-0 bg-[#e70064] text-white px-7 py-4 rounded-full font-bold text-[9px] tracking-[0.16em] uppercase hover:bg-white hover:text-[#3E2723] transition-all shadow-lg`}
             >
               Create Custom Cake →
             </a>
@@ -742,7 +773,7 @@ function ShopContent() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
           <div className="md:col-span-4">
             <h2
-              className={`${montserrat.className} text-2xl font-bold tracking-tight mb-4`}
+              className={`${inter.className} text-2xl font-bold tracking-tight mb-4`}
             >
               Cake By Rupali<span className="text-[#e70064]">.</span>
             </h2>
@@ -756,13 +787,13 @@ function ShopContent() {
             <div className="flex gap-3">
               <a
                 href="#"
-                className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center text-[10px] font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors text-stone-300 hover:text-white`}
+                className={`${inter.className} w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center text-[10px] font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors text-stone-300 hover:text-white`}
               >
                 IG
               </a>
               <a
                 href="#"
-                className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center text-[10px] font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors text-stone-300 hover:text-white`}
+                className={`${inter.className} w-10 h-10 border border-stone-700 rounded-full flex items-center justify-center text-[10px] font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors text-stone-300 hover:text-white`}
               >
                 FB
               </a>
@@ -771,7 +802,7 @@ function ShopContent() {
 
           <div className="md:col-span-2 md:col-start-7">
             <h4
-              className={`${montserrat.className} font-bold text-[10px] uppercase tracking-widest mb-6 text-stone-100`}
+              className={`${inter.className} font-bold text-[10px] uppercase tracking-widest mb-6 text-stone-100`}
             >
               Quick Links
             </h4>
@@ -805,7 +836,7 @@ function ShopContent() {
 
           <div className="md:col-span-4">
             <h4
-              className={`${montserrat.className} font-bold text-[10px] uppercase tracking-widest mb-6 text-stone-100`}
+              className={`${inter.className} font-bold text-[10px] uppercase tracking-widest mb-6 text-stone-100`}
             >
               Contact Us
             </h4>
@@ -823,7 +854,7 @@ function ShopContent() {
 
             <div className="mt-8 p-4 bg-stone-800/40 rounded-2xl border border-stone-800">
               <p
-                className={`${montserrat.className} text-[9px] text-stone-500 mb-1 uppercase tracking-widest font-semibold`}
+                className={`${inter.className} text-[9px] text-stone-500 mb-1 uppercase tracking-widest font-semibold`}
               >
                 FSSAI Registration
               </p>
