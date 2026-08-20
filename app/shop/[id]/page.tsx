@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from '@supabase/supabase-js';
-import { Montserrat, Poppins } from 'next/font/google';
-import { useParams } from 'next/navigation';
+import { createClient } from "@supabase/supabase-js";
+import { Inter } from "next/font/google";
+import { useParams } from "next/navigation";
 
-// Professional E-commerce Fonts
-const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
-const poppins = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
-// Connect to Supabase
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -19,56 +19,61 @@ export default function ProductDetail() {
   const id = params?.id as string;
 
   const [cake, setCake] = useState<any>(null);
-  const [recommendedCakes, setRecommendedCakes] = useState<any[]>([]); 
+  const [recommendedCakes, setRecommendedCakes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // Selection states
+
+  // Existing selection states — functionality unchanged.
   const [selectedWeight, setSelectedWeight] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(0);
   const [cakeMessage, setCakeMessage] = useState("");
   const [pincode, setPincode] = useState("");
-  const [address, setAddress] = useState(""); 
-  const [deliveryStatus, setDeliveryStatus] = useState<string | null>(null); 
-
-  // NEW: Interactive Image Gallery State
+  const [address, setAddress] = useState("");
+  const [deliveryStatus, setDeliveryStatus] = useState<string | null>(null);
   const [activeImage, setActiveImage] = useState<string>("");
 
   useEffect(() => {
     if (!id) return;
 
     const fetchProduct = async () => {
-      const { data } = await supabase.from('products').select('*').eq('id', id).single();
-      
+      const { data } = await supabase.from("products").select("*").eq("id", id).single();
+
       if (data) {
         setCake(data);
-        
-        // Ensure the main image loads on first fetch
         setActiveImage(data.image_url || "");
-        
-        // Initialize default weight & price seamlessly for backward compatibility
+
         if (data.pricing && Array.isArray(data.pricing) && data.pricing.length > 0) {
           setSelectedWeight(data.pricing[0].weight);
           setSelectedPrice(data.pricing[0].price);
         } else {
-          // Legacy product fallback
           setSelectedWeight("1.0 KG");
           setSelectedPrice(data.price);
         }
 
-        // --- FETCH RECOMMENDED CAKES LOGIC ---
+        // Existing recommendation logic — unchanged.
         let recs: any[] = [];
         if (data.category) {
-          const { data: catData } = await supabase.from('products')
-            .select('*').eq('category', data.category).neq('id', id).limit(4);
+          const { data: catData } = await supabase
+            .from("products")
+            .select("*")
+            .eq("category", data.category)
+            .neq("id", id)
+            .limit(4);
           if (catData) recs = [...catData];
         }
+
         if (recs.length < 4) {
-          const { data: extraData } = await supabase.from('products')
-            .select('*').neq('category', data.category || '').neq('id', id).limit(4 - recs.length);
+          const { data: extraData } = await supabase
+            .from("products")
+            .select("*")
+            .neq("category", data.category || "")
+            .neq("id", id)
+            .limit(4 - recs.length);
           if (extraData) recs = [...recs, ...extraData];
         }
+
         setRecommendedCakes(recs);
       }
+
       setLoading(false);
     };
 
@@ -80,7 +85,7 @@ export default function ProductDetail() {
     setSelectedPrice(weightObj.price);
   };
 
-  // STRICT PINCODE VALIDATION LOGIC
+  // Existing pincode validation — unchanged.
   const handleCheckPincode = () => {
     const trimmedPin = pincode.trim();
     const pinNumber = parseInt(trimmedPin, 10);
@@ -92,24 +97,23 @@ export default function ProductDetail() {
 
     let isDeliverable = false;
 
-    // 1. Mumbai City and Suburban Area
     if (
-      (pinNumber >= 400001 && pinNumber <= 400099) || 
-      (pinNumber >= 400601 && pinNumber <= 400615) || 
+      (pinNumber >= 400001 && pinNumber <= 400099) ||
+      (pinNumber >= 400601 && pinNumber <= 400615) ||
       (pinNumber >= 400701 && pinNumber <= 400708)
     ) {
       isDeliverable = true;
-    }
-    // 2. Thane, Palghar, and Vasai-Virar 
-    else if ((pinNumber >= 401101 && pinNumber <= 401107) || (pinNumber >= 401201 && pinNumber <= 401503)) {
+    } else if (
+      (pinNumber >= 401101 && pinNumber <= 401107) ||
+      (pinNumber >= 401201 && pinNumber <= 401503)
+    ) {
       isDeliverable = true;
-    }
-    // 3. Raigad and Extended Metro Outskirts 
-    else if ((pinNumber >= 410201 && pinNumber <= 410221) || (pinNumber >= 410301 && pinNumber <= 410501)) {
+    } else if (
+      (pinNumber >= 410201 && pinNumber <= 410221) ||
+      (pinNumber >= 410301 && pinNumber <= 410501)
+    ) {
       isDeliverable = true;
-    }
-    // 4. Kalyan, Dombivli, and Bhiwandi Belt 
-    else if (pinNumber >= 421001 && pinNumber <= 421605) {
+    } else if (pinNumber >= 421001 && pinNumber <= 421605) {
       isDeliverable = true;
     }
 
@@ -127,12 +131,12 @@ export default function ProductDetail() {
     }
 
     const message = `Hi Rupali! I would like to order:%0A%0A*${cake.name}*%0A- Weight: ${selectedWeight}%0A- Price: ₹${selectedPrice}%0A- Cake Message: ${cakeMessage || "None"}%0A- Delivery Pincode: ${pincode || "Not specified"}%0A- Complete Address: ${address}%0A%0AIs this available?`;
-    window.open(`https://wa.me/917666660036?text=${message}`, '_blank');
+    window.open(`https://wa.me/917666660036?text=${message}`, "_blank");
   };
 
   if (loading) {
     return (
-      <div className={`min-h-screen bg-[#FAF9F6] flex items-center justify-center tracking-widest text-sm uppercase text-stone-500 font-bold ${montserrat.className}`}>
+      <div className={`min-h-screen flex items-center justify-center bg-[#FAF9F6] text-stone-500 text-xs font-semibold uppercase tracking-[0.2em] ${inter.className}`}>
         Loading Product...
       </div>
     );
@@ -140,262 +144,366 @@ export default function ProductDetail() {
 
   if (!cake) {
     return (
-      <div className={`min-h-screen bg-[#FAF9F6] flex items-center justify-center tracking-widest text-sm uppercase text-stone-500 font-bold ${montserrat.className}`}>
+      <div className={`min-h-screen flex items-center justify-center bg-[#FAF9F6] text-stone-500 text-xs font-semibold uppercase tracking-[0.2em] ${inter.className}`}>
         Product Not Found.
       </div>
     );
   }
 
-  // NEW: Construct the gallery array. Safely fallback to single image if multiple aren't available.
-  const gallery = cake.gallery_images && Array.isArray(cake.gallery_images) && cake.gallery_images.length > 0 
-    ? cake.gallery_images 
-    : (cake.image_url ? [cake.image_url] : []);
+  const gallery =
+    cake.gallery_images && Array.isArray(cake.gallery_images) && cake.gallery_images.length > 0
+      ? cake.gallery_images
+      : cake.image_url
+        ? [cake.image_url]
+        : [];
+
+  const hasMultiplePrices = cake.pricing && Array.isArray(cake.pricing) && cake.pricing.length > 1;
 
   return (
-    <div className={`min-h-screen bg-[#FAF9F6] text-stone-800 flex flex-col ${poppins.className}`}>
-      
-      {/* --- UNIFIED GLOBAL HEADER START --- */}
-      <header className="sticky top-0 w-full z-50 bg-white shadow-sm border-b border-stone-200">
-        <div className={`bg-stone-900 text-white text-[10px] md:text-xs font-light tracking-[0.2em] uppercase text-center py-2.5 ${montserrat.className}`}>
-          Delivering Premium Freshness Across Virar & Mumbai
+    <div className={`min-h-screen bg-[#FAF9F6] text-[#3E2723] ${inter.className}`}>
+      {/* GLOBAL HEADER — navigation and links preserved */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-stone-100 shadow-[0_8px_30px_rgba(62,39,35,0.06)]">
+        <div className="bg-[#3E2723] text-white text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-center py-2.5">
+          <span className="text-[#ffd1e2]">✦</span> Delivering Premium Freshness Across Virar & Mumbai <span className="text-[#ffd1e2]">✦</span>
         </div>
-        
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center py-4">
-          <a href="/" className={`${montserrat.className} text-2xl font-bold tracking-tight text-stone-900`}>
-            Cake By Rupali.
+
+        <div className="max-w-7xl mx-auto px-5 md:px-10 flex justify-between items-center py-4">
+          <a href="/" className="text-xl md:text-2xl font-extrabold tracking-tight text-[#3E2723]">
+            Cake By Rupali<span className="text-[#e70064]">.</span>
           </a>
-          
-          <nav className={`hidden md:flex items-center gap-10 text-xs font-semibold tracking-wide uppercase ${montserrat.className} text-stone-700`}>
+
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-[10px] font-bold tracking-[0.13em] uppercase text-stone-700">
             <a href="/" className="hover:text-[#e70064] transition-colors">Home</a>
-            
+
             <div className="group relative py-2">
-              <button className="text-[#e70064] transition flex items-center gap-1 outline-none uppercase tracking-wide font-bold">
-                Shop <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              <button className="text-[#e70064] flex items-center gap-1.5 outline-none uppercase tracking-[0.13em] font-bold">
+                Shop
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
-              <div className="absolute left-0 top-full pt-4 w-60 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col transform group-hover:translate-y-1">
-                <div className="bg-white border border-stone-200 shadow-xl flex flex-col py-2">
-                  <a href="/shop" className="text-[#e70064] transition text-xs font-bold uppercase tracking-widest border-b border-stone-100 pb-2 px-6 py-3">All Cakes</a>
-                  <a href="/shop?category=Birthday+Cakes" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Birthday Cakes</a>
-                  <a href="/shop?category=Wedding+%26+Anniversary" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Wedding & Anniversary</a>
-                  <a href="/shop?category=Kids+Theme+Cakes" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Kids & Theme Cakes</a>
-                  <a href="/shop?category=Premium+Signature" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Premium Signature</a>
-                  <a href="/shop?category=Dry+%26+Tea+Cakes" className="hover:text-[#e70064] transition text-sm capitalize px-6 py-3">Dry & Tea Cakes</a>
-                </div>
-                <div className="bg-stone-50 p-4 border-t border-stone-100">
-                  <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-semibold text-sm hover:text-pink-800 transition capitalize block">🎉 Festive Specials</a>
+
+              <div className="absolute left-0 top-full pt-3 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 group-hover:translate-y-1">
+                <div className="bg-white rounded-2xl border border-stone-100 shadow-2xl overflow-hidden py-2">
+                  <a href="/shop" className="block text-[#e70064] text-[10px] font-bold uppercase tracking-widest px-6 py-3.5 border-b border-stone-100">All Cakes</a>
+                  <a href="/shop?category=Birthday+Cakes" className="block hover:text-[#e70064] transition text-sm px-6 py-3">Birthday Cakes</a>
+                  <a href="/shop?category=Wedding+%26+Anniversary" className="block hover:text-[#e70064] transition text-sm px-6 py-3">Wedding & Anniversary</a>
+                  <a href="/shop?category=Kids+Theme+Cakes" className="block hover:text-[#e70064] transition text-sm px-6 py-3">Kids & Theme Cakes</a>
+                  <a href="/shop?category=Premium+Signature" className="block hover:text-[#e70064] transition text-sm px-6 py-3">Premium Signature</a>
+                  <a href="/shop?category=Dry+%26+Tea+Cakes" className="block hover:text-[#e70064] transition text-sm px-6 py-3">Dry & Tea Cakes</a>
+                  <div className="bg-[#FFF0F5] p-4 border-t border-pink-100">
+                    <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-bold text-sm hover:text-[#3E2723] transition block">🎉 Festive Specials</a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <a href="/custom-cake" className="hover:text-[#e70064] transition uppercase tracking-wide font-semibold">Custom Cake</a>
-            <a href="/about" className="hover:text-[#e70064] transition uppercase tracking-wide font-semibold">About Us</a>
+            <a href="/custom-cake" className="hover:text-[#e70064] transition">Custom Cake</a>
+            <a href="/about" className="hover:text-[#e70064] transition">About Us</a>
           </nav>
 
-          <div className="flex items-center gap-6">
-            <a href="/admin" className={`${montserrat.className} hidden md:block text-xs font-bold tracking-widest uppercase text-stone-400 hover:text-[#e70064] transition`}>Admin</a>
-            <a href="https://wa.me/917666660036" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} bg-stone-900 text-white px-6 py-3 text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#e70064] transition-colors duration-300 rounded-sm`}>
+          <div className="flex items-center gap-3 md:gap-5">
+            <a href="/admin" className="hidden md:block text-[9px] font-bold tracking-[0.18em] uppercase text-stone-400 hover:text-[#3E2723] transition">Admin</a>
+            <a
+              href="https://wa.me/917666660036"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#3E2723] text-white px-4 md:px-6 py-3 rounded-full text-[9px] md:text-[10px] font-bold tracking-[0.13em] uppercase hover:bg-[#e70064] transition-colors shadow-sm"
+            >
               Order on WhatsApp
             </a>
           </div>
         </div>
       </header>
-      {/* --- UNIFIED GLOBAL HEADER END --- */}
 
-      {/* PRODUCT BREADCRUMB */}
-      <div className="max-w-6xl mx-auto w-full px-6 pt-10 pb-4">
-        <p className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest text-stone-400`}>
-          <a href="/shop" className="hover:text-stone-900 transition-colors">Shop</a> 
-          <span className="mx-2">/</span> 
-          <span className="text-stone-900">{cake.name}</span>
-        </p>
+      {/* BREADCRUMB */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pt-7 md:pt-9">
+        <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-stone-400">
+          <a href="/shop" className="hover:text-[#e70064] transition">Shop</a>
+          <span>/</span>
+          <span className="text-stone-700 truncate max-w-[220px]">{cake.name}</span>
+        </div>
       </div>
 
-      <main className="max-w-6xl mx-auto px-6 py-6 flex-grow flex flex-col">
-        
-        <div className="flex flex-col md:flex-row gap-12 items-start">
-          {/* LEFT: IMAGE GALLERY (Perfect Full Square) */}
-          <div className="w-full md:w-1/2 flex flex-col-reverse md:flex-row gap-4">
-            
-            {/* THUMBNAIL STRIP */}
-            <div className="flex md:flex-col gap-4 overflow-x-auto md:w-24 shrink-0 no-scrollbar">
-               {gallery.map((imgUrl: string, idx: number) => (
-                 <img 
-                   key={idx} 
-                   src={imgUrl} 
-                   onClick={() => setActiveImage(imgUrl)}
-                   className={`w-20 h-20 md:w-full md:h-24 object-cover rounded-sm cursor-pointer transition-all duration-200 border-2 ${activeImage === imgUrl ? 'border-[#e70064] opacity-100' : 'border-transparent opacity-60 hover:opacity-100'}`} 
-                   alt={`${cake.name} view ${idx + 1}`} 
-                 />
-               ))}
-            </div>
+      <main className="max-w-7xl mx-auto px-5 md:px-10 pt-6 md:pt-8 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 xl:gap-14 items-start">
+          {/* PRODUCT GALLERY */}
+          <section className="lg:sticky lg:top-32">
+            <div className="grid grid-cols-[72px_1fr] md:grid-cols-[92px_1fr] gap-4 md:gap-5">
+              <div className="flex flex-col gap-3">
+                {gallery.map((imgUrl: string, idx: number) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImage(imgUrl)}
+                    className={`relative aspect-square rounded-xl overflow-hidden bg-white border-2 transition-all ${activeImage === imgUrl ? "border-[#e70064] shadow-sm" : "border-stone-100 hover:border-stone-300"}`}
+                    aria-label={`View ${cake.name} image ${idx + 1}`}
+                  >
+                    <img src={imgUrl} alt={`${cake.name} view ${idx + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
 
-            {/* MAIN IMAGE BOX */}
-            <div className="w-full aspect-square bg-stone-100 rounded-sm relative border border-stone-200 overflow-hidden shadow-sm">
-               {activeImage ? (
-                 <img src={activeImage} alt={cake.name} className="object-cover w-full h-full absolute inset-0 transition-opacity duration-500" />
-               ) : (
-                 <div className={`${montserrat.className} w-full h-full flex items-center justify-center text-stone-300 font-semibold text-xs tracking-widest uppercase`}>Image Pending</div>
-               )}
-               
-               {cake.is_eggless && (
-                  <div className={`${montserrat.className} absolute top-4 left-4 bg-white/95 backdrop-blur border border-stone-200 text-stone-900 text-[10px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-sm shadow-sm`}>
-                    100% Eggless
+              <div className="relative aspect-square rounded-[1.75rem] overflow-hidden bg-white border border-stone-100 shadow-[0_16px_45px_rgba(62,39,35,0.08)]">
+                {activeImage ? (
+                  <img src={activeImage} alt={cake.name} className="absolute inset-0 w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-stone-300 text-xs font-semibold uppercase tracking-widest">Image Pending</div>
+                )}
+
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#3E2723]/25 to-transparent pointer-events-none" />
+
+                {cake.is_eggless && (
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur border border-stone-100 text-[#e70064] text-[9px] uppercase tracking-[0.12em] font-bold px-3 py-2 rounded-full shadow-sm">
+                    ✓ 100% Eggless
                   </div>
                 )}
-            </div>
-          </div>
 
-          {/* RIGHT: DETAILS & ORDERING */}
-          <div className="w-full md:w-1/2 space-y-8">
-            
-            <div className="border-b border-stone-200 pb-6">
-              <h1 className={`${montserrat.className} text-3xl md:text-4xl font-bold text-stone-900 mb-2 leading-tight`}>{cake.name}</h1>
-              <div className="flex items-center gap-4 mb-4">
-                 <span className={`${montserrat.className} text-2xl font-bold text-[#e70064]`}>₹{selectedPrice}</span>
-                 <span className={`${montserrat.className} text-[10px] font-bold text-stone-500 uppercase tracking-widest border border-stone-200 bg-stone-50 px-2 py-1 rounded-sm`}>Incl. GST</span>
+                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur border border-white text-[#3E2723] text-[9px] uppercase tracking-[0.12em] font-bold px-3 py-2 rounded-full shadow-sm">
+                  Freshly Baked
+                </div>
               </div>
-              <p className="text-stone-500 font-light text-sm leading-relaxed whitespace-pre-wrap">{cake.description}</p>
             </div>
 
-            {/* DYNAMIC WEIGHT SELECTION */}
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-900`}>Select Weight</label>
+            <div className="grid grid-cols-3 gap-2.5 mt-4">
+              <div className="rounded-xl bg-white border border-stone-100 px-3 py-3 text-center">
+                <div className="text-sm mb-1">✦</div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-stone-500">Freshly Made</div>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="rounded-xl bg-white border border-stone-100 px-3 py-3 text-center">
+                <div className="text-sm mb-1">♡</div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-stone-500">Handcrafted</div>
+              </div>
+              <div className="rounded-xl bg-white border border-stone-100 px-3 py-3 text-center">
+                <div className="text-sm mb-1">⌁</div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-stone-500">Local Delivery</div>
+              </div>
+            </div>
+          </section>
+
+          {/* PRODUCT INFORMATION + ORDERING */}
+          <section className="bg-white rounded-[1.75rem] border border-stone-100 shadow-[0_12px_40px_rgba(62,39,35,0.06)] p-6 md:p-8 lg:p-9">
+            <div className="pb-6 border-b border-stone-100">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-7 h-px bg-[#e70064]" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#e70064]">Freshly Baked Collection</span>
+              </div>
+
+              <h1 className="text-3xl md:text-[2.7rem] font-extrabold tracking-tight leading-[1.08] text-[#3E2723]">
+                {cake.name}
+              </h1>
+
+              <div className="flex flex-wrap items-end gap-3 mt-5">
+                <span className="text-3xl font-extrabold tracking-tight text-[#3E2723]">₹{selectedPrice}</span>
+                {hasMultiplePrices && <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-stone-400 mb-1">Selected size</span>}
+                <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-stone-500 bg-[#FAF9F6] border border-stone-100 px-2.5 py-1.5 rounded-full mb-1">Incl. GST</span>
+              </div>
+
+              <p className="text-sm text-stone-500 leading-6 mt-4 whitespace-pre-wrap">{cake.description}</p>
+            </div>
+
+            {/* WEIGHT */}
+            <div className="py-6 border-b border-stone-100">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Choose Your Size</label>
+                <span className="text-[9px] font-medium text-stone-400">Select one</span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                 {cake.pricing && Array.isArray(cake.pricing) && cake.pricing.length > 0 ? (
                   cake.pricing.map((opt: any, idx: number) => (
-                    <button 
-                      key={idx} 
+                    <button
+                      key={idx}
                       onClick={() => handleWeightSelect(opt)}
-                      className={`${montserrat.className} text-xs font-bold tracking-widest uppercase px-5 py-3 rounded-sm border transition-all duration-200 ${selectedWeight === opt.weight ? 'border-stone-900 bg-stone-900 text-white shadow-md' : 'border-stone-200 text-stone-500 hover:border-stone-900 hover:text-stone-900 bg-white'}`}
+                      className={`text-left px-4 py-3.5 rounded-xl border transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#FFF0F5] text-[#e70064] shadow-sm" : "border-stone-200 bg-white text-stone-600 hover:border-[#e70064] hover:text-[#e70064]"}`}
                     >
-                      {opt.weight}
+                      <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">{opt.weight}</span>
+                      <span className="block mt-1 text-xs font-semibold text-[#3E2723]">₹{opt.price}</span>
                     </button>
                   ))
                 ) : (
-                   <button className={`${montserrat.className} text-xs font-bold tracking-widest uppercase px-5 py-3 rounded-sm border border-stone-900 bg-stone-900 text-white shadow-md`}>
-                      1.0 KG
-                   </button>
+                  <button className="text-left px-4 py-3.5 rounded-xl border border-[#e70064] bg-[#FFF0F5] text-[#e70064]">
+                    <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">1.0 KG</span>
+                    <span className="block mt-1 text-xs font-semibold text-[#3E2723]">₹{selectedPrice}</span>
+                  </button>
                 )}
               </div>
             </div>
 
-            {/* CUSTOM MESSAGE INPUT */}
-            <div className="space-y-4">
-               <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-900 flex justify-between`}>
-                 <span>Cake Message (Optional)</span>
-                 <span className="text-stone-400 font-normal">{cakeMessage.length}/25</span>
-               </label>
-               <input 
-                 type="text" 
-                 maxLength={25} 
-                 value={cakeMessage} 
-                 onChange={(e) => setCakeMessage(e.target.value)} 
-                 placeholder="Write a sweet wish!" 
-                 className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] text-sm bg-white transition-colors" 
-               />
+            {/* MESSAGE */}
+            <div className="py-6 border-b border-stone-100">
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Cake Message <span className="text-stone-400 font-medium normal-case tracking-normal">(Optional)</span></label>
+                <span className="text-[9px] font-semibold text-stone-400">{cakeMessage.length}/25</span>
+              </div>
+              <input
+                type="text"
+                maxLength={25}
+                value={cakeMessage}
+                onChange={(e) => setCakeMessage(e.target.value)}
+                placeholder="e.g. Happy Birthday Riya!"
+                className="w-full border border-stone-200 bg-[#FAF9F6] rounded-xl px-4 py-3.5 text-sm text-[#3E2723] placeholder:text-stone-400 focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition"
+              />
             </div>
 
-            {/* DELIVERY PINCODE & ADDRESS INPUT */}
-            <div className="space-y-4">
-               <label className={`${montserrat.className} block text-[10px] font-bold uppercase tracking-[0.2em] text-stone-900`}>Delivery Details</label>
-               
-               {/* Pincode Row */}
-               <div className="flex flex-col gap-2">
-                 <div className="flex gap-2">
-                    <input 
-                      type="text" 
-                      value={pincode} 
-                      onChange={(e) => setPincode(e.target.value)} 
-                      placeholder="Area or Pincode" 
-                      className="flex-grow border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] text-sm bg-white transition-colors" 
+            {/* DELIVERY */}
+            <div className="py-6">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Delivery Details</label>
+                <span className="text-[9px] font-semibold text-stone-400">Virar & nearby areas</span>
+              </div>
+
+              <div className="rounded-2xl border border-stone-100 bg-[#FAF9F6] p-4">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <div className="relative flex-1">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm">⌖</span>
+                    <input
+                      type="text"
+                      value={pincode}
+                      onChange={(e) => setPincode(e.target.value)}
+                      placeholder="Enter 6-digit pincode"
+                      className="w-full border border-stone-200 bg-white rounded-xl pl-10 pr-4 py-3.5 text-sm focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition"
                     />
-                    <button onClick={handleCheckPincode} className={`${montserrat.className} bg-stone-100 border border-stone-200 text-stone-900 px-6 py-3.5 rounded-sm font-bold text-[10px] tracking-widest uppercase hover:bg-stone-200 transition-colors`}>
-                      Check
-                    </button>
-                 </div>
-                 {deliveryStatus && (
-                   <p className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest ${deliveryStatus.includes("✅") ? "text-green-600" : "text-[#e70064]"}`}>
-                     {deliveryStatus}
-                   </p>
-                 )}
-               </div>
+                  </div>
+                  <button
+                    onClick={handleCheckPincode}
+                    className="shrink-0 px-6 py-3.5 rounded-xl bg-[#3E2723] text-white text-[9px] font-bold uppercase tracking-[0.14em] hover:bg-[#e70064] transition-colors"
+                  >
+                    Check Delivery
+                  </button>
+                </div>
 
-               {/* Complete Address Textarea */}
-               <textarea 
-                 rows={3}
-                 value={address}
-                 onChange={(e) => setAddress(e.target.value)}
-                 placeholder="Complete Delivery Address (Mandatory) *"
-                 className="w-full border border-stone-200 p-3.5 rounded-sm focus:outline-none focus:border-[#e70064] text-sm bg-white transition-colors placeholder:text-stone-400 mt-2"
-               ></textarea>
+                {deliveryStatus && (
+                  <p className={`mt-3 text-[10px] font-bold uppercase tracking-[0.08em] ${deliveryStatus.includes("✅") ? "text-green-600" : "text-[#e70064]"}`}>
+                    {deliveryStatus}
+                  </p>
+                )}
+
+                <textarea
+                  rows={3}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Complete delivery address *"
+                  className="w-full mt-3 border border-stone-200 bg-white rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition resize-none placeholder:text-stone-400"
+                />
+              </div>
             </div>
 
-            {/* BIG BOLD BUY NOW BUTTON */}
-            <button 
-              onClick={handleCheckout} 
-              className={`${montserrat.className} w-full bg-stone-900 text-white py-5 px-4 rounded-sm font-bold text-base tracking-widest uppercase hover:bg-stone-800 transition-colors duration-300 shadow-xl flex items-center justify-center gap-3 mt-6`}
-            >
-               Order Now | ₹{selectedPrice}
-            </button>
-          </div>
+            {/* ORDER CTA */}
+            <div className="pt-1">
+              <button
+                onClick={handleCheckout}
+                className="w-full bg-[#e70064] text-white py-4 px-5 rounded-xl font-extrabold text-[11px] tracking-[0.16em] uppercase hover:bg-[#c90057] transition-all shadow-[0_10px_25px_rgba(231,0,100,0.22)] flex items-center justify-center gap-3"
+              >
+                Order on WhatsApp
+                <span className="text-base leading-none">→</span>
+              </button>
+
+              <div className="flex items-center justify-center gap-2 mt-3 text-[9px] font-semibold uppercase tracking-[0.12em] text-stone-400">
+                <span>✓ Freshly prepared</span>
+                <span>•</span>
+                <span>✓ Confirmed on WhatsApp</span>
+              </div>
+            </div>
+          </section>
         </div>
 
-        {/* --- YOU MAY ALSO LIKE SECTION --- */}
+        {/* PRODUCT TRUST STRIP */}
+        <section className="mt-12 md:mt-16 rounded-[1.5rem] bg-[#3E2723] text-white px-6 md:px-10 py-7">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+            <div className="text-center md:text-left md:border-r md:border-white/10 md:pr-6">
+              <div className="text-[#ffb3cb] text-lg mb-2">✦</div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Fresh Ingredients</p>
+              <p className="text-[10px] text-white/55 mt-1">Prepared fresh for your order</p>
+            </div>
+            <div className="text-center md:text-left md:border-r md:border-white/10 md:pr-6">
+              <div className="text-[#ffb3cb] text-lg mb-2">♡</div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Handcrafted</p>
+              <p className="text-[10px] text-white/55 mt-1">Made with attention to detail</p>
+            </div>
+            <div className="text-center md:text-left md:border-r md:border-white/10 md:pr-6">
+              <div className="text-[#ffb3cb] text-lg mb-2">✓</div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Eggless Options</p>
+              <p className="text-[10px] text-white/55 mt-1">Available where specified</p>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-[#ffb3cb] text-lg mb-2">⌁</div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Local Delivery</p>
+              <p className="text-[10px] text-white/55 mt-1">Virar & selected nearby areas</p>
+            </div>
+          </div>
+        </section>
+
+        {/* YOU MAY ALSO LIKE */}
         {recommendedCakes && recommendedCakes.length > 0 && (
-          <div className="mt-24 pt-16 border-t border-stone-200 w-full">
-            <h3 className={`${montserrat.className} text-2xl font-bold text-stone-900 mb-8`}>
-              You May Also Like
-            </h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <section className="mt-16 md:mt-20">
+            <div className="flex items-end justify-between gap-4 mb-7">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-7 h-px bg-[#e70064]" />
+                  <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#e70064]">More to Explore</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#3E2723]">You May Also Like</h2>
+              </div>
+              <a href="/shop" className="hidden sm:inline-flex text-[9px] font-bold uppercase tracking-[0.15em] text-[#e70064] hover:text-[#3E2723] transition">View All Cakes →</a>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {recommendedCakes.map((rec: any) => (
-                <a href={`/shop/${rec.id}`} key={rec.id} className="group flex flex-col bg-white border border-stone-200 p-3 rounded-sm shadow-sm hover:shadow-md transition-all duration-300">
-                  <div className="w-full aspect-square bg-stone-50 overflow-hidden mb-4 relative rounded-sm">
+                <a
+                  href={`/shop/${rec.id}`}
+                  key={rec.id}
+                  className="group bg-white rounded-[1.25rem] border border-stone-100 p-3.5 shadow-[0_8px_25px_rgba(62,39,35,0.04)] hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(62,39,35,0.1)] transition-all duration-300"
+                >
+                  <div className="relative aspect-square rounded-xl overflow-hidden bg-[#FAF9F6]">
                     {rec.image_url ? (
-                      <img src={rec.image_url} alt={rec.name} className="object-cover w-full h-full group-hover:scale-105 transition duration-700 ease-out" />
+                      <img src={rec.image_url} alt={rec.name} className="w-full h-full object-cover group-hover:scale-[1.04] transition duration-500" />
                     ) : (
-                      <div className={`${montserrat.className} w-full h-full flex items-center justify-center text-stone-300 font-semibold text-[10px] tracking-widest uppercase`}>Image Pending</div>
+                      <div className="w-full h-full flex items-center justify-center text-stone-300 text-[9px] font-bold uppercase tracking-widest">Image Pending</div>
                     )}
                     {rec.is_eggless && (
-                      <div className={`${montserrat.className} absolute top-2 right-2 bg-white/95 backdrop-blur border border-stone-200 text-[#e70064] text-[8px] uppercase tracking-widest font-bold px-2 py-1 rounded-sm shadow-sm`}>
-                        Eggless
-                      </div>
+                      <span className="absolute top-2.5 left-2.5 bg-white/95 text-[#e70064] text-[8px] uppercase tracking-[0.1em] font-bold px-2.5 py-1.5 rounded-full shadow-sm">Eggless</span>
                     )}
                   </div>
-                  <div className="flex-grow flex flex-col">
-                    <h4 className={`${montserrat.className} text-sm font-bold text-stone-900 mb-1 leading-tight line-clamp-1`}>{rec.name}</h4>
-                    <div className="mt-auto pt-2">
-                      <span className={`${montserrat.className} font-bold text-sm text-stone-900`}>₹{rec.price}</span>
+                  <div className="px-1 pt-4">
+                    <h3 className="text-sm font-bold text-[#3E2723] leading-tight line-clamp-1">{rec.name}</h3>
+                    <div className="flex items-center justify-between gap-2 mt-2">
+                      <span className="text-sm font-extrabold text-[#3E2723]">₹{rec.price}</span>
+                      <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-[#e70064]">View →</span>
                     </div>
                   </div>
                 </a>
               ))}
             </div>
-          </div>
+          </section>
         )}
 
+        {/* CUSTOM CAKE CTA */}
+        <section className="mt-16 md:mt-20">
+          <div className="relative overflow-hidden rounded-[1.75rem] bg-[#FFF0F5] border border-pink-100 px-7 md:px-12 py-9 md:py-11 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="absolute -right-20 -top-24 w-64 h-64 rounded-full bg-pink-200/30 blur-3xl" />
+            <div className="relative text-center md:text-left">
+              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#e70064] mb-2">Can't find exactly what you want?</p>
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#3E2723]">Need a custom cake?</h2>
+              <p className="text-sm text-stone-500 mt-2">Share your idea and let Rupali create something special.</p>
+            </div>
+            <a href="/custom-cake" className="relative shrink-0 bg-[#3E2723] text-white px-7 py-3.5 rounded-full text-[9px] font-bold uppercase tracking-[0.14em] hover:bg-[#e70064] transition-colors shadow-md">
+              Create Custom Cake →
+            </a>
+          </div>
+        </section>
       </main>
 
-      {/* --- UNIFIED GLOBAL FOOTER START --- */}
-      <footer className="bg-stone-900 text-white pt-20 pb-8 mt-12 border-t border-stone-800">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-          
+      {/* FOOTER */}
+      <footer className="bg-[#251714] text-white pt-16 pb-8 mt-8">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
           <div className="md:col-span-4">
-            <h2 className={`${montserrat.className} text-2xl font-bold tracking-tight mb-4`}>Cake By Rupali.</h2>
-            <p className="text-stone-400 text-sm font-light leading-relaxed mb-8 max-w-sm">
-              Premium handcrafted cakes designed with professional perfection in Virar. Elevating everyday celebrations into unforgettable memories.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-sm flex items-center justify-center text-xs font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors cursor-pointer text-stone-300 hover:text-white`}>IG</a>
-              <a href="#" className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-sm flex items-center justify-center text-xs font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors cursor-pointer text-stone-300 hover:text-white`}>FB</a>
-            </div>
+            <h2 className="text-2xl font-extrabold tracking-tight mb-4">Cake By Rupali<span className="text-[#e70064]">.</span></h2>
+            <p className="text-stone-400 text-sm leading-relaxed max-w-sm">Premium handcrafted cakes designed with professional perfection in Virar. Elevating everyday celebrations into unforgettable memories.</p>
           </div>
 
           <div className="md:col-span-2 md:col-start-7">
-            <h4 className={`${montserrat.className} font-bold text-xs uppercase tracking-widest mb-6 text-stone-100`}>Quick Links</h4>
-            <ul className="space-y-4 text-sm font-light text-stone-400">
+            <h4 className="font-bold text-[10px] uppercase tracking-widest mb-5 text-stone-100">Quick Links</h4>
+            <ul className="space-y-3 text-sm text-stone-400">
               <li><a href="/shop" className="hover:text-white transition">Shop Cakes</a></li>
               <li><a href="/custom-cake" className="hover:text-white transition">Custom Orders</a></li>
               <li><a href="/about" className="hover:text-white transition">Our Story</a></li>
@@ -404,20 +512,19 @@ export default function ProductDetail() {
           </div>
 
           <div className="md:col-span-4">
-            <h4 className={`${montserrat.className} font-bold text-xs uppercase tracking-widest mb-6 text-stone-100`}>Contact Us</h4>
-            <ul className="space-y-4 text-sm font-light text-stone-400">
-              <li className="flex gap-3 items-center"><span className="text-[#e70064]">📍</span> Virar (East), Maharashtra</li>
-              <li className="flex gap-3 items-center"><span className="text-[#e70064]">📞</span> +91 76666 60036</li>
+            <h4 className="font-bold text-[10px] uppercase tracking-widest mb-5 text-stone-100">Contact Us</h4>
+            <ul className="space-y-3 text-sm text-stone-400">
+              <li>📍 Virar (East), Maharashtra</li>
+              <li>📞 +91 76666 60036</li>
             </ul>
-            <div className="mt-8 p-4 bg-stone-800/50 rounded-sm border border-stone-800">
-              <p className={`${montserrat.className} text-[10px] text-stone-500 mb-1 uppercase tracking-widest font-semibold`}>FSSAI Registration</p>
-              <p className="text-sm text-stone-300 font-light">(Update in Admin)</p>
+            <div className="mt-6 p-4 bg-stone-800/40 rounded-xl border border-stone-800">
+              <p className="text-[9px] text-stone-500 mb-1 uppercase tracking-widest font-semibold">FSSAI Registration</p>
+              <p className="text-sm text-stone-300">(Update in Admin)</p>
             </div>
           </div>
-
         </div>
-        
-        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-stone-500 tracking-wide">
+
+        <div className="max-w-7xl mx-auto px-6 pt-7 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-stone-500">
           <p>&copy; {new Date().getFullYear()} Cake By Rupali. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="/admin" className="hover:text-white transition">Admin Portal</a>
@@ -425,8 +532,6 @@ export default function ProductDetail() {
           </div>
         </div>
       </footer>
-      {/* --- UNIFIED GLOBAL FOOTER END --- */}
-
     </div>
   );
 }
