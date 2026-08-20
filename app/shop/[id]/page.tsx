@@ -278,18 +278,33 @@ export default function ProductDetail() {
               </h1>
 
               <div className="flex items-end gap-3 mt-5">
-                <span className="text-4xl md:text-[2.75rem] font-extrabold tracking-tight text-[#3E2723]">₹{selectedPrice}</span>
+                <span className="text-4xl md:text-[2.9rem] font-extrabold tracking-tight text-[#3E2723]">₹{selectedPrice}</span>
                 <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-400 mb-1.5">{selectedWeight} selected</span>
                 <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-stone-500 bg-stone-50 border border-stone-100 px-2.5 py-1.5 rounded-full mb-1.5">Incl. GST</span>
               </div>
 
               <p className="text-sm text-stone-500 leading-6 mt-4 whitespace-pre-wrap">{cake.description}</p>
+
+              {/* TRUST FACTORS — visual reassurance only; no functionality changed */}
+              <div className="grid grid-cols-3 gap-2.5 mt-6 pt-5 border-t border-stone-100">
+                {[
+                  { icon: "✦", title: "Freshly Made", desc: "Prepared fresh" },
+                  { icon: "♡", title: "Handcrafted", desc: "Made with care" },
+                  { icon: "⌁", title: "Local Delivery", desc: "Virar & nearby" },
+                ].map((item, idx) => (
+                  <div key={idx} className="rounded-xl border border-stone-200 bg-[#FAF9F6] px-3 py-3.5 text-center transition-colors hover:border-pink-200 hover:bg-[#FFF7FA]">
+                    <div className="text-[#e70064] text-sm font-bold mb-1.5">{item.icon}</div>
+                    <p className="text-[8px] md:text-[9px] font-extrabold uppercase tracking-[0.11em] text-[#3E2723] leading-tight">{item.title}</p>
+                    <p className="hidden md:block text-[8px] text-stone-400 mt-1">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* WEIGHT */}
             <div className="py-6 border-b border-stone-200">
               <div className="flex items-center justify-between mb-4">
-                <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Choose Your Size</label>
+                <label className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#3E2723]">Choose Your Size</label>
                 <span className="text-[9px] font-medium text-stone-400">Select one</span>
               </div>
 
@@ -299,14 +314,14 @@ export default function ProductDetail() {
                     <button
                       key={idx}
                       onClick={() => handleWeightSelect(opt)}
-                      className={`text-center shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-4 rounded-xl border-2 transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#FFF0F5] text-[#e70064] shadow-[0_6px_18px_rgba(231,0,100,0.10)]" : "border-stone-200 bg-white text-[#3E2723] hover:border-[#e70064] hover:text-[#e70064]"}`}
+                      className={`text-center shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-4 rounded-xl border-2 transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#e70064] text-white shadow-[0_8px_22px_rgba(231,0,100,0.22)]" : "border-stone-200 bg-white text-[#3E2723] hover:border-[#e70064] hover:text-[#e70064]"}`}
                     >
-                      <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">{opt.weight}</span>
+                      <span className="block text-[13px] font-extrabold uppercase tracking-[0.06em]">{opt.weight}</span>
                     </button>
                   ))
                 ) : (
-                  <button className="text-center shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-4 rounded-xl border-2 border-[#e70064] bg-[#FFF0F5] text-[#e70064]">
-                    <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">1.0 KG</span>
+                  <button className="text-center shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-4 rounded-xl border-2 border-[#e70064] bg-[#e70064] text-white shadow-[0_8px_22px_rgba(231,0,100,0.22)]">
+                    <span className="block text-[13px] font-extrabold uppercase tracking-[0.06em]">1.0 KG</span>
                   </button>
                 )}
               </div>
@@ -331,11 +346,11 @@ export default function ProductDetail() {
             {/* DELIVERY */}
             <div className="py-6 border-b border-stone-200">
               <div className="flex items-center justify-between mb-4">
-                <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Delivery Details</label>
+                <label className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#3E2723]">Delivery Details</label>
                 <span className="text-[9px] font-semibold text-stone-400">Virar & nearby areas</span>
               </div>
 
-              <div className="rounded-2xl border border-stone-200 bg-stone-50/60 p-4">
+              <div className="rounded-2xl border-2 border-[#3E2723]/15 bg-[#FAF7F5] p-4 shadow-[0_8px_24px_rgba(62,39,35,0.06)]">
                 <div className="flex flex-col sm:flex-row gap-2">
                   <div className="relative flex-1">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm">⌖</span>
@@ -375,10 +390,10 @@ export default function ProductDetail() {
             <div className="pt-5">
               <button
                 onClick={handleCheckout}
-                className="w-full bg-[#e70064] text-white py-4 px-5 rounded-xl font-extrabold text-[11px] tracking-[0.16em] uppercase hover:bg-[#c90057] transition-all shadow-[0_10px_25px_rgba(231,0,100,0.22)] flex items-center justify-center gap-3"
+                className="w-full bg-[#e70064] text-white py-[17px] px-5 rounded-xl font-extrabold text-sm tracking-[0.13em] uppercase hover:bg-[#c90057] transition-all shadow-[0_12px_28px_rgba(231,0,100,0.24)] flex items-center justify-center gap-3"
               >
                 Order on WhatsApp · ₹{selectedPrice}
-                <span className="text-base leading-none">→</span>
+                <span className="text-lg leading-none">→</span>
               </button>
 
               <div className="flex items-center justify-center gap-2 mt-3 text-[9px] font-semibold uppercase tracking-[0.12em] text-stone-400">
