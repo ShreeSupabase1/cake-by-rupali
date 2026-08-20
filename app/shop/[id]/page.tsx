@@ -265,24 +265,24 @@ export default function ProductDetail() {
             </div>
 
             <div className="grid grid-cols-3 gap-2.5 mt-4">
-              <div className="rounded-xl bg-white border border-stone-100 px-3 py-3 text-center">
-                <div className="text-sm mb-1">✦</div>
-                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-stone-500">Freshly Made</div>
+              <div className="rounded-xl bg-[#3E2723] border border-[#3E2723] px-3 py-3 text-center">
+                <div className="text-[#ffb3cb] text-sm mb-1">✦</div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-white">Freshly Made</div>
               </div>
-              <div className="rounded-xl bg-white border border-stone-100 px-3 py-3 text-center">
-                <div className="text-sm mb-1">♡</div>
-                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-stone-500">Handcrafted</div>
+              <div className="rounded-xl bg-[#3E2723] border border-[#3E2723] px-3 py-3 text-center">
+                <div className="text-[#ffb3cb] text-sm mb-1">♡</div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-white">Handcrafted</div>
               </div>
-              <div className="rounded-xl bg-white border border-stone-100 px-3 py-3 text-center">
-                <div className="text-sm mb-1">⌁</div>
-                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-stone-500">Local Delivery</div>
+              <div className="rounded-xl bg-[#3E2723] border border-[#3E2723] px-3 py-3 text-center">
+                <div className="text-[#ffb3cb] text-sm mb-1">⌁</div>
+                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-white">Local Delivery</div>
               </div>
             </div>
           </section>
 
           {/* PRODUCT INFORMATION + ORDERING */}
-          <section className="bg-white rounded-[1.75rem] border border-stone-100 shadow-[0_12px_40px_rgba(62,39,35,0.06)] p-6 md:p-8 lg:p-9">
-            <div className="pb-6 border-b border-stone-100">
+          <section className="lg:pl-2 lg:pt-2">
+            <div className="pb-7 border-b border-stone-200">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-7 h-px bg-[#e70064]" />
                 <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#e70064]">Freshly Baked Collection</span>
@@ -302,26 +302,26 @@ export default function ProductDetail() {
             </div>
 
             {/* WEIGHT */}
-            <div className="py-6 border-b border-stone-100">
+            <div className="py-6 border-b border-stone-200">
               <div className="flex items-center justify-between mb-4">
                 <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Choose Your Size</label>
                 <span className="text-[9px] font-medium text-stone-400">Select one</span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <div className="flex flex-nowrap gap-2.5 overflow-x-auto pb-1 no-scrollbar">
                 {cake.pricing && Array.isArray(cake.pricing) && cake.pricing.length > 0 ? (
                   cake.pricing.map((opt: any, idx: number) => (
                     <button
                       key={idx}
                       onClick={() => handleWeightSelect(opt)}
-                      className={`text-left px-4 py-3.5 rounded-xl border transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#FFF0F5] text-[#e70064] shadow-sm" : "border-stone-200 bg-white text-stone-600 hover:border-[#e70064] hover:text-[#e70064]"}`}
+                      className={`text-left shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-3.5 rounded-xl border-2 transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#FFF0F5] text-[#e70064] shadow-sm" : "border-stone-200 bg-white text-stone-600 hover:border-[#e70064] hover:text-[#e70064]"}`}
                     >
                       <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">{opt.weight}</span>
                       <span className="block mt-1 text-xs font-semibold text-[#3E2723]">₹{opt.price}</span>
                     </button>
                   ))
                 ) : (
-                  <button className="text-left px-4 py-3.5 rounded-xl border border-[#e70064] bg-[#FFF0F5] text-[#e70064]">
+                  <button className="text-left shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-3.5 rounded-xl border-2 border-[#e70064] bg-[#FFF0F5] text-[#e70064]">
                     <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">1.0 KG</span>
                     <span className="block mt-1 text-xs font-semibold text-[#3E2723]">₹{selectedPrice}</span>
                   </button>
@@ -330,7 +330,7 @@ export default function ProductDetail() {
             </div>
 
             {/* MESSAGE */}
-            <div className="py-6 border-b border-stone-100">
+            <div className="py-6 border-b border-stone-200">
               <div className="flex items-center justify-between mb-3">
                 <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Cake Message <span className="text-stone-400 font-medium normal-case tracking-normal">(Optional)</span></label>
                 <span className="text-[9px] font-semibold text-stone-400">{cakeMessage.length}/25</span>
@@ -341,18 +341,18 @@ export default function ProductDetail() {
                 value={cakeMessage}
                 onChange={(e) => setCakeMessage(e.target.value)}
                 placeholder="e.g. Happy Birthday Riya!"
-                className="w-full border border-stone-200 bg-[#FAF9F6] rounded-xl px-4 py-3.5 text-sm text-[#3E2723] placeholder:text-stone-400 focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition"
+                className="w-full border-2 border-stone-200 bg-white rounded-xl px-4 py-3.5 text-sm text-[#3E2723] font-medium placeholder:text-stone-400 focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition"
               />
             </div>
 
             {/* DELIVERY */}
-            <div className="py-6">
+            <div className="py-6 border-b border-stone-200">
               <div className="flex items-center justify-between mb-4">
                 <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3E2723]">Delivery Details</label>
                 <span className="text-[9px] font-semibold text-stone-400">Virar & nearby areas</span>
               </div>
 
-              <div className="rounded-2xl border border-stone-100 bg-[#FAF9F6] p-4">
+              <div className="rounded-2xl border-2 border-stone-200 bg-white p-4 shadow-sm">
                 <div className="flex flex-col sm:flex-row gap-2">
                   <div className="relative flex-1">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm">⌖</span>
@@ -361,12 +361,12 @@ export default function ProductDetail() {
                       value={pincode}
                       onChange={(e) => setPincode(e.target.value)}
                       placeholder="Enter 6-digit pincode"
-                      className="w-full border border-stone-200 bg-white rounded-xl pl-10 pr-4 py-3.5 text-sm focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition"
+                      className="w-full border-2 border-stone-200 bg-white rounded-xl pl-10 pr-4 py-3.5 text-sm text-[#3E2723] font-medium focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition"
                     />
                   </div>
                   <button
                     onClick={handleCheckPincode}
-                    className="shrink-0 px-6 py-3.5 rounded-xl bg-[#3E2723] text-white text-[9px] font-bold uppercase tracking-[0.14em] hover:bg-[#e70064] transition-colors"
+                    className="shrink-0 px-6 py-3.5 rounded-xl bg-[#3E2723] border-2 border-[#3E2723] text-white text-[9px] font-bold uppercase tracking-[0.14em] hover:bg-[#e70064] hover:border-[#e70064] transition-colors"
                   >
                     Check Delivery
                   </button>
@@ -382,14 +382,14 @@ export default function ProductDetail() {
                   rows={3}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Complete delivery address *"
-                  className="w-full mt-3 border border-stone-200 bg-white rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition resize-none placeholder:text-stone-400"
+                  placeholder="Complete delivery address * (Required to order)"
+                  className="w-full mt-3 border-2 border-stone-200 bg-white rounded-xl px-4 py-3.5 text-sm text-[#3E2723] font-medium focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50 transition resize-none placeholder:text-stone-400"
                 />
               </div>
             </div>
 
             {/* ORDER CTA */}
-            <div className="pt-1">
+            <div className="pt-5">
               <button
                 onClick={handleCheckout}
                 className="w-full bg-[#e70064] text-white py-4 px-5 rounded-xl font-extrabold text-[11px] tracking-[0.16em] uppercase hover:bg-[#c90057] transition-all shadow-[0_10px_25px_rgba(231,0,100,0.22)] flex items-center justify-center gap-3"
