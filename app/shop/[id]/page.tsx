@@ -136,7 +136,7 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center bg-[#FAF9F6] text-stone-500 text-xs font-semibold uppercase tracking-[0.2em] ${inter.className}`}>
+      <div className={`min-h-screen flex items-center justify-center bg-white text-stone-500 text-xs font-semibold uppercase tracking-[0.2em] ${inter.className}`}>
         Loading Product...
       </div>
     );
@@ -144,7 +144,7 @@ export default function ProductDetail() {
 
   if (!cake) {
     return (
-      <div className={`min-h-screen flex items-center justify-center bg-[#FAF9F6] text-stone-500 text-xs font-semibold uppercase tracking-[0.2em] ${inter.className}`}>
+      <div className={`min-h-screen flex items-center justify-center bg-white text-stone-500 text-xs font-semibold uppercase tracking-[0.2em] ${inter.className}`}>
         Product Not Found.
       </div>
     );
@@ -160,7 +160,7 @@ export default function ProductDetail() {
   const hasMultiplePrices = cake.pricing && Array.isArray(cake.pricing) && cake.pricing.length > 1;
 
   return (
-    <div className={`min-h-screen bg-[#FAF9F6] text-[#3E2723] ${inter.className}`}>
+    <div className={`min-h-screen bg-white text-[#3E2723] ${inter.className}`}>
       {/* GLOBAL HEADER — navigation and links preserved */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-stone-100 shadow-[0_8px_30px_rgba(62,39,35,0.06)]">
         <div className="bg-[#3E2723] text-white text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-center py-2.5">
@@ -263,25 +263,10 @@ export default function ProductDetail() {
                 </div>
               </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-2.5 mt-4">
-              <div className="rounded-xl bg-[#3E2723] border border-[#3E2723] px-3 py-3 text-center">
-                <div className="text-[#ffb3cb] text-sm mb-1">✦</div>
-                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-white">Freshly Made</div>
-              </div>
-              <div className="rounded-xl bg-[#3E2723] border border-[#3E2723] px-3 py-3 text-center">
-                <div className="text-[#ffb3cb] text-sm mb-1">♡</div>
-                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-white">Handcrafted</div>
-              </div>
-              <div className="rounded-xl bg-[#3E2723] border border-[#3E2723] px-3 py-3 text-center">
-                <div className="text-[#ffb3cb] text-sm mb-1">⌁</div>
-                <div className="text-[8px] font-bold uppercase tracking-[0.12em] text-white">Local Delivery</div>
-              </div>
-            </div>
           </section>
 
           {/* PRODUCT INFORMATION + ORDERING */}
-          <section className="lg:pl-2 lg:pt-2">
+          <section className="lg:pl-4 lg:pt-1">
             <div className="pb-7 border-b border-stone-200">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-7 h-px bg-[#e70064]" />
@@ -292,10 +277,10 @@ export default function ProductDetail() {
                 {cake.name}
               </h1>
 
-              <div className="flex flex-wrap items-end gap-3 mt-5">
-                <span className="text-3xl font-extrabold tracking-tight text-[#3E2723]">₹{selectedPrice}</span>
-                {hasMultiplePrices && <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-stone-400 mb-1">Selected size</span>}
-                <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-stone-500 bg-[#FAF9F6] border border-stone-100 px-2.5 py-1.5 rounded-full mb-1">Incl. GST</span>
+              <div className="flex items-end gap-3 mt-5">
+                <span className="text-4xl md:text-[2.75rem] font-extrabold tracking-tight text-[#3E2723]">₹{selectedPrice}</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-400 mb-1.5">{selectedWeight} selected</span>
+                <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-stone-500 bg-stone-50 border border-stone-100 px-2.5 py-1.5 rounded-full mb-1.5">Incl. GST</span>
               </div>
 
               <p className="text-sm text-stone-500 leading-6 mt-4 whitespace-pre-wrap">{cake.description}</p>
@@ -314,16 +299,14 @@ export default function ProductDetail() {
                     <button
                       key={idx}
                       onClick={() => handleWeightSelect(opt)}
-                      className={`text-left shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-3.5 rounded-xl border-2 transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#FFF0F5] text-[#e70064] shadow-sm" : "border-stone-200 bg-white text-stone-600 hover:border-[#e70064] hover:text-[#e70064]"}`}
+                      className={`text-center shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-4 rounded-xl border-2 transition-all ${selectedWeight === opt.weight ? "border-[#e70064] bg-[#FFF0F5] text-[#e70064] shadow-[0_6px_18px_rgba(231,0,100,0.10)]" : "border-stone-200 bg-white text-[#3E2723] hover:border-[#e70064] hover:text-[#e70064]"}`}
                     >
                       <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">{opt.weight}</span>
-                      <span className="block mt-1 text-xs font-semibold text-[#3E2723]">₹{opt.price}</span>
                     </button>
                   ))
                 ) : (
-                  <button className="text-left shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-3.5 rounded-xl border-2 border-[#e70064] bg-[#FFF0F5] text-[#e70064]">
+                  <button className="text-center shrink-0 w-[135px] lg:flex-1 lg:min-w-0 px-4 py-4 rounded-xl border-2 border-[#e70064] bg-[#FFF0F5] text-[#e70064]">
                     <span className="block text-[11px] font-bold uppercase tracking-[0.08em]">1.0 KG</span>
-                    <span className="block mt-1 text-xs font-semibold text-[#3E2723]">₹{selectedPrice}</span>
                   </button>
                 )}
               </div>
@@ -352,7 +335,7 @@ export default function ProductDetail() {
                 <span className="text-[9px] font-semibold text-stone-400">Virar & nearby areas</span>
               </div>
 
-              <div className="rounded-2xl border-2 border-stone-200 bg-white p-4 shadow-sm">
+              <div className="rounded-2xl border border-stone-200 bg-stone-50/60 p-4">
                 <div className="flex flex-col sm:flex-row gap-2">
                   <div className="relative flex-1">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm">⌖</span>
@@ -394,7 +377,7 @@ export default function ProductDetail() {
                 onClick={handleCheckout}
                 className="w-full bg-[#e70064] text-white py-4 px-5 rounded-xl font-extrabold text-[11px] tracking-[0.16em] uppercase hover:bg-[#c90057] transition-all shadow-[0_10px_25px_rgba(231,0,100,0.22)] flex items-center justify-center gap-3"
               >
-                Order on WhatsApp
+                Order on WhatsApp · ₹{selectedPrice}
                 <span className="text-base leading-none">→</span>
               </button>
 
@@ -406,32 +389,6 @@ export default function ProductDetail() {
             </div>
           </section>
         </div>
-
-        {/* PRODUCT TRUST STRIP */}
-        <section className="mt-12 md:mt-16 rounded-[1.5rem] bg-[#3E2723] text-white px-6 md:px-10 py-7">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
-            <div className="text-center md:text-left md:border-r md:border-white/10 md:pr-6">
-              <div className="text-[#ffb3cb] text-lg mb-2">✦</div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Fresh Ingredients</p>
-              <p className="text-[10px] text-white/55 mt-1">Prepared fresh for your order</p>
-            </div>
-            <div className="text-center md:text-left md:border-r md:border-white/10 md:pr-6">
-              <div className="text-[#ffb3cb] text-lg mb-2">♡</div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Handcrafted</p>
-              <p className="text-[10px] text-white/55 mt-1">Made with attention to detail</p>
-            </div>
-            <div className="text-center md:text-left md:border-r md:border-white/10 md:pr-6">
-              <div className="text-[#ffb3cb] text-lg mb-2">✓</div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Eggless Options</p>
-              <p className="text-[10px] text-white/55 mt-1">Available where specified</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-[#ffb3cb] text-lg mb-2">⌁</div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em]">Local Delivery</p>
-              <p className="text-[10px] text-white/55 mt-1">Virar & selected nearby areas</p>
-            </div>
-          </div>
-        </section>
 
         {/* YOU MAY ALSO LIKE */}
         {recommendedCakes && recommendedCakes.length > 0 && (
