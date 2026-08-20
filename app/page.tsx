@@ -103,124 +103,116 @@ export default function Home() {
       </header>
 
       {/* ========================================================= */}
-      {/* SECTION 1: PREMIUM ASYMMETRIC HERO                        */}
+      {/* SECTION 1: DARK FULL-WIDTH HERO (REVERTED TO PREVIOUS)    */}
       {/* ========================================================= */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-[#FAF9F6]">
-        {/* Subtle dark gradient ensures the white header text is visible on this light ivory background before scrolling */}
-        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-stone-900/60 to-transparent z-10 pointer-events-none"></div>
+      <section className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-start bg-[#0d0907]">
         
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-16 relative z-20">
+        {/* Background Image Slider */}
+        <div className="absolute inset-0 z-0">
+          {heroImages.map((img, index) => (
+            <img 
+              key={index} 
+              src={img} 
+              alt="Fresh Cake" 
+              className={`absolute inset-0 w-full h-full object-cover object-[75%_center] transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+            />
+          ))}
+        </div>
+
+        {/* Elegant Gradient Overlays for Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0907]/95 via-[#0d0907]/60 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0907]/90 via-transparent to-transparent z-10 md:hidden"></div>
+
+        {/* Left-Aligned Text Content */}
+        <div className="relative z-20 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col items-start mt-8 md:mt-16">
           
-          {/* LEFT: Content */}
-          <div className="w-full md:w-1/2 flex flex-col items-start mt-8 md:mt-0 text-left">
-            <span className={`${montserrat.className} text-[#e70064] font-bold tracking-[0.2em] text-xs uppercase mb-6 flex items-center gap-2`}>
-              HOME-BAKED WITH LOVE ♡
-            </span>
-            
-            <h2 className={`${playfair.className} text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#3E2723] leading-[1.1] mb-6 tracking-tight`}>
-              Fresh Cakes,<br />
-              Baked for Your<br />
-              <span className="text-[#e70064] italic font-medium">Special Moments.</span>
-            </h2>
-            
-            <p className="text-base md:text-lg text-stone-600 font-light max-w-md mb-10 leading-relaxed">
-              Birthday ho, anniversary ho, ya bas kuch meetha khane ka mann ho — we bake fresh cakes for every special moment.
-            </p>
-            
-            <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4 w-full sm:w-auto`}>
-              <a href="/shop" className="bg-[#e70064] text-white px-8 py-4 font-bold text-xs tracking-wider uppercase hover:bg-[#3E2723] transition-colors rounded-sm shadow-xl shadow-pink-500/20 text-center">
-                Shop Cakes →
-              </a>
-              <a href="/custom-cake" className="bg-transparent text-[#3E2723] border border-[#3E2723] px-8 py-4 font-bold text-xs tracking-wider uppercase hover:bg-[#FFF0F5] hover:border-[#FFF0F5] transition-colors rounded-sm text-center">
-                Custom Cake
-              </a>
-            </div>
+          <div className="flex items-center gap-2 mb-4">
+            <span className={`${montserrat.className} text-[#dcb562] text-sm md:text-base italic tracking-wide`}>Made Fresh. Made Happy.</span>
+            <svg className="w-5 h-5 text-[#e70064]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
           </div>
+          
+          <h2 className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-6 drop-shadow-2xl text-left tracking-tight`}>
+            Fresh Cakes,<br/> Baked with Love<br/> in <span className="text-[#e70064]">Virar.</span>
+          </h2>
 
-          {/* RIGHT: Organic Image Slider */}
-          <div className="w-full md:w-1/2 relative h-[450px] md:h-[600px] w-full">
-            {/* Soft decorative background shape */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-[#FFF0F5] rounded-full blur-3xl -z-10 opacity-70"></div>
-            
-            <div className="absolute inset-0 rounded-t-[3rem] rounded-bl-[6rem] rounded-br-[2rem] overflow-hidden shadow-2xl border-4 border-white">
-              {heroImages.map((img, index) => (
-                <img 
-                  key={index} 
-                  src={img} 
-                  alt="Premium Fresh Cake" 
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
-                />
-              ))}
-              
-              {/* Slider Dots inside the image */}
-              <div className="absolute bottom-6 left-0 w-full flex justify-center gap-2 z-20">
-                {heroImages.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentSlide(idx)} className={`h-2 transition-all duration-300 rounded-full ${idx === currentSlide ? "bg-white w-6" : "bg-white/50 w-2 hover:bg-white"}`}></button>
-                ))}
-              </div>
-            </div>
-
-            {/* Floating Badge */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-5 rounded-full shadow-2xl flex flex-col items-center justify-center w-32 h-32 border border-pink-50 z-30">
-              <span className={`${montserrat.className} text-center font-bold text-[10px] tracking-widest text-[#3E2723] leading-tight`}>
-                FRESHLY<br/>BAKED<br/>
-                <span className="text-[#e70064]">WITH LOVE</span>
-              </span>
-            </div>
-            
-            {/* Tiny Decorative Dots */}
-            <div className="absolute top-10 -right-6 grid grid-cols-3 gap-2 opacity-30 pointer-events-none">
-              {[...Array(9)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#e70064]"></div>)}
-            </div>
+          <div className="flex items-center gap-4 mb-6 opacity-80">
+            <div className="h-[1px] bg-[#e70064] w-12"></div>
+            <svg className="w-3 h-3 text-[#e70064]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+            <div className="h-[1px] bg-[#e70064] w-12"></div>
           </div>
+          
+          <p className="text-base md:text-lg text-white/90 font-light max-w-md mb-10 drop-shadow-md text-left leading-relaxed">
+            Birthday ho, anniversary ho, ya bas kuch meetha khane ka mann ho — we bake fresh cakes for every special moment.
+          </p>
+          
+          <div className={`${montserrat.className} flex flex-col sm:flex-row gap-4`}>
+            <a href="/shop" className="bg-[#e70064] text-white px-8 py-3.5 font-bold text-xs tracking-wider uppercase hover:bg-white hover:text-stone-900 transition-all rounded-sm shadow-lg text-center">
+              Shop Now
+            </a>
+            <a href="/custom-cake" className="bg-transparent text-white border border-white/50 px-8 py-3.5 font-bold text-xs tracking-wider uppercase hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm text-center">
+              Custom Order
+            </a>
+          </div>
+        </div>
 
+        {/* Slider Controls */}
+        <div className="absolute inset-0 flex items-center justify-between px-4 md:px-8 z-20 pointer-events-none">
+          <button onClick={handlePrev} className="pointer-events-auto w-10 h-10 flex items-center justify-center rounded-full border border-white/30 bg-black/20 text-white hover:bg-[#e70064] hover:border-[#e70064] transition-all backdrop-blur-sm hidden md:flex">
+            <svg className="w-5 h-5 pr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+          </button>
+          <button onClick={handleNext} className="pointer-events-auto w-10 h-10 flex items-center justify-center rounded-full border border-white/30 bg-black/20 text-white hover:bg-[#e70064] hover:border-[#e70064] transition-all backdrop-blur-sm hidden md:flex">
+            <svg className="w-5 h-5 pl-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+
+        <div className="absolute bottom-16 md:bottom-24 w-full flex justify-center gap-3 z-20">
+          {heroImages.map((_, idx) => (
+            <button key={idx} onClick={() => setCurrentSlide(idx)} className={`w-2 h-2 transition-all duration-500 rounded-full ${idx === currentSlide ? "bg-[#e70064]" : "bg-white/70 hover:bg-white"}`}></button>
+          ))}
+        </div>
+
+        {/* Premium Multi-Layer Wave Transition */}
+        <div className="absolute bottom-0 left-0 w-full z-20 overflow-hidden leading-none pointer-events-none transform translate-y-[1px]">
+          <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="w-full h-[80px] md:h-[160px] block">
+            <path fill="#FAF9F6" fillOpacity="0.4" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            <path fill="#FAF9F6" fillOpacity="1" d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,192C672,213,768,235,864,218.7C960,203,1056,149,1152,133.3C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
         </div>
       </section>
-
-      {/* ORGANIC WAVE TRANSITION 1 */}
-      <div className="w-full -mt-1 z-20 relative pointer-events-none">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-[40px] md:h-[80px] block text-[#FFF0F5]">
-          <path fill="currentColor" d="M0,64L80,58.7C160,53,320,43,480,48C640,53,800,75,960,74.7C1120,75,1280,53,1360,42.7L1440,32L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
-        </svg>
-      </div>
 
       {/* ========================================================= */}
       {/* SECTION 2: QUICK TRUST STRIP                              */}
       {/* ========================================================= */}
-      <section className="bg-[#FFF0F5] py-8 border-b border-pink-100 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-wrap justify-between items-center gap-6 md:gap-4">
-          {[
-            { title: "100% Fresh", sub: "Baked to Order", icon: "✨" },
-            { title: "Eggless Options", sub: "Available", icon: "🌿" },
-            { title: "Custom Designs", sub: "Made for You", icon: "🎨" },
-            { title: "Local Delivery", sub: "Virar & Nearby", icon: "🛵" }
+      <section className="relative z-30 max-w-6xl mx-auto px-6 mb-24 mt-4 md:mt-8">
+        <div className="bg-white rounded-md p-6 md:p-10 shadow-lg border border-stone-100 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x divide-stone-100">
+          {[ 
+            { icon: "✨", title: "100% Fresh & Pure" }, 
+            { icon: "🌿", title: "Eggless Options" }, 
+            { icon: "🎨", title: "Perfect Finishing" }, 
+            { icon: "🛵", title: "Safe Local Delivery" } 
           ].map((item, i) => (
-            <div key={i} className="flex items-center gap-4 min-w-[140px]">
-              <div className="text-2xl opacity-80">{item.icon}</div>
-              <div>
-                <p className={`${montserrat.className} font-bold text-[#3E2723] text-[11px] tracking-widest uppercase`}>{item.title}</p>
-                <p className="text-stone-500 text-[10px] uppercase tracking-wider">{item.sub}</p>
-              </div>
+            <div key={i} className={`group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 cursor-default ${i === 0 || i === 2 ? 'pl-0' : ''}`}>
+              <div className="text-[#e70064] text-2xl mb-3 transform transition-transform duration-300 group-hover:-translate-y-1">{item.icon}</div>
+              <h4 className={`${montserrat.className} font-bold text-stone-800 text-xs tracking-wider uppercase`}>{item.title}</h4>
             </div>
           ))}
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* SECTION 3: SHOP BY CATEGORY                               */}
+      {/* SECTION 3: SHOP BY CATEGORY (Fixed images)                */}
       {/* ========================================================= */}
-      <section id="categories" className="py-24 max-w-7xl mx-auto px-6 md:px-10">
-        <div className="flex flex-col items-center mb-16 text-center">
+      <section id="categories" className="py-16 max-w-7xl mx-auto px-6 scroll-mt-28">
+        <div className="flex flex-col items-center mb-12 text-center">
           <h3 className={`${playfair.className} text-4xl md:text-5xl font-bold text-[#3E2723] mb-4`}>Find a Cake for Every Celebration</h3>
           <p className="text-stone-500 font-light text-lg">Har celebration ke liye kuch special.</p>
         </div>
         
-        {/* Mobile Horizontal Swipe, Desktop Grid */}
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
           {[
             { title: "Birthday Cakes", sub: "For the special day", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80", link: "/shop?category=Birthday+Cakes" },
             { title: "Wedding & Anniversary", sub: "For your forever moments", img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80", link: "/shop?category=Wedding+%26+Anniversary" },
-            { title: "Kids & Theme Cakes", sub: "Made for little smiles", img: "https://images.unsplash.com/photo-1519340241574-2cebc5f606df?auto=format&fit=crop&q=80", link: "/shop?category=Kids+Theme+Cakes" },
+            { title: "Kids & Theme Cakes", sub: "Made for little smiles", img: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80", link: "/shop?category=Kids+Theme+Cakes" },
             { title: "Premium Signature", sub: "For something extra special", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80", link: "/shop?category=Premium+Signature" },
             { title: "Dry & Tea Cakes", sub: "Perfect with your chai", img: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80", link: "/shop?category=Dry+%26+Tea+Cakes" },
             { title: "Festive Specials", sub: "Made for the season", img: "https://images.unsplash.com/photo-1602351447937-745cb720612f?auto=format&fit=crop&q=80", link: "/shop?category=Festive+Specials" },
@@ -273,7 +265,6 @@ export default function Home() {
                     ) : (
                       <div className={`${montserrat.className} w-full h-full flex items-center justify-center text-stone-300 font-semibold text-[10px] tracking-widest uppercase`}>No Image</div>
                     )}
-                    {/* Badges */}
                     <div className="absolute top-3 left-3 flex flex-col gap-2">
                       <div className={`${montserrat.className} bg-white/95 backdrop-blur text-[#3E2723] text-[9px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-full shadow-sm`}>
                         Bestseller
@@ -374,30 +365,30 @@ export default function Home() {
       </section>
 
       {/* ========================================================= */}
-      {/* SECTION 7: FROM OUR KITCHEN                               */}
+      {/* SECTION 7: FROM OUR KITCHEN (Fixed large photography)     */}
       {/* ========================================================= */}
       <section className="py-24 bg-[#FAF9F6] border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
           <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-4`}>Made Fresh in Our Kitchen</h3>
           <p className="text-stone-500 font-light text-lg mb-16 max-w-2xl mx-auto">Every cake starts with fresh ingredients, careful preparation and a lot of attention to detail.</p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
-            {/* Desktop connecting line */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-stone-200 -z-10 -translate-y-1/2 border-dashed border-t border-stone-300"></div>
-            
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { step: "01", title: "Mix", img: "https://images.unsplash.com/photo-1556910103-1c02745a872e?auto=format&fit=crop&w=400&q=80" },
-              { step: "02", title: "Bake", img: "https://images.unsplash.com/photo-1587241321921-91a834d6d191?auto=format&fit=crop&w=400&q=80" },
-              { step: "03", title: "Decorate", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" },
-              { step: "04", title: "Pack", img: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=400&q=80" }
+              { step: "01", title: "Mix", img: "https://images.unsplash.com/photo-1556910103-1c02745a872e?auto=format&fit=crop&w=800&q=80" },
+              { step: "02", title: "Bake", img: "https://images.unsplash.com/photo-1587241321921-91a834d6d191?auto=format&fit=crop&w=800&q=80" },
+              { step: "03", title: "Decorate", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" },
+              { step: "04", title: "Pack", img: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=800&q=80" }
             ].map((process, i) => (
-              <div key={i} className="flex flex-col items-center bg-[#FAF9F6]">
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-md overflow-hidden mb-6 relative">
-                  <div className="absolute inset-0 bg-black/10 z-10"></div>
-                  <img src={process.img} alt={process.title} className="w-full h-full object-cover" />
+              <div key={i} className="flex flex-col items-center group">
+                {/* Replaced tiny circles with large, stunning vertical cards */}
+                <div className="w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 relative shadow-md">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+                  <img src={process.img} alt={process.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                  <div className="absolute bottom-4 right-4 z-20 bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg text-[#e70064] font-bold">
+                    {process.step}
+                  </div>
                 </div>
-                <span className={`${montserrat.className} text-[#e70064] font-bold text-xs mb-1`}>{process.step}</span>
-                <h4 className={`${playfair.className} font-bold text-xl text-[#3E2723]`}>{process.title}</h4>
+                <h4 className={`${playfair.className} font-bold text-2xl text-[#3E2723]`}>{process.title}</h4>
               </div>
             ))}
           </div>
@@ -415,7 +406,6 @@ export default function Home() {
       {/* SECTION 8: CUSTOM CAKES                                   */}
       {/* ========================================================= */}
       <section className="py-24 bg-[#FFF0F5] relative overflow-hidden">
-        {/* Soft decorative elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/40 rounded-full blur-3xl -z-10 -translate-y-1/2 translate-x-1/3"></div>
         
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row gap-16 items-center">
