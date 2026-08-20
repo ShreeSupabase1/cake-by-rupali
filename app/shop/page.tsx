@@ -48,13 +48,16 @@ function ShopContent() {
   const [isEggless, setIsEggless] = useState(false);
   const [maxPrice, setMaxPrice] = useState(5000);
 
-  // Existing categories — unchanged.
+  // Product categories — visual expansion only; existing category values are preserved.
   const categories = [
     "All Cakes",
     "Birthday Cakes",
     "Wedding & Anniversary",
     "Kids Theme Cakes",
     "Premium Signature",
+    "Chocolate Cakes",
+    "Fresh Fruit Cakes",
+    "Red Velvet Cakes",
     "Dry & Tea Cakes",
     "Festive Specials",
   ];
@@ -136,6 +139,12 @@ function ShopContent() {
           );
         if (activeCategory === "Festive Specials")
           return text.includes("festive") || text.includes("hamper");
+        if (activeCategory === "Chocolate Cakes")
+          return text.includes("chocolate") || text.includes("oreo") || text.includes("truffle") || text.includes("black forest");
+        if (activeCategory === "Fresh Fruit Cakes")
+          return text.includes("fruit") || text.includes("pineapple") || text.includes("strawberry") || text.includes("mango") || text.includes("fresh fruit");
+        if (activeCategory === "Red Velvet Cakes")
+          return text.includes("red velvet") || text.includes("red-velvet");
 
         return true;
       });
@@ -208,51 +217,37 @@ function ShopContent() {
                 </svg>
               </button>
 
-              <div className="absolute left-0 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col transform group-hover:translate-y-1">
-                <div className="bg-white rounded-2xl border border-stone-100 shadow-2xl overflow-hidden flex flex-col py-2">
-                  <a
-                    href="/shop"
-                    className="text-[#e70064] text-xs font-bold uppercase tracking-widest px-6 py-3.5 border-b border-stone-100"
-                  >
-                    All Cakes
-                  </a>
-                  <a
-                    href="/shop?category=Birthday+Cakes"
-                    className="hover:text-[#e70064] transition text-sm px-6 py-3"
-                  >
-                    Birthday Cakes
-                  </a>
-                  <a
-                    href="/shop?category=Wedding+%26+Anniversary"
-                    className="hover:text-[#e70064] transition text-sm px-6 py-3"
-                  >
-                    Wedding & Anniversary
-                  </a>
-                  <a
-                    href="/shop?category=Kids+Theme+Cakes"
-                    className="hover:text-[#e70064] transition text-sm px-6 py-3"
-                  >
-                    Kids & Theme Cakes
-                  </a>
-                  <a
-                    href="/shop?category=Premium+Signature"
-                    className="hover:text-[#e70064] transition text-sm px-6 py-3"
-                  >
-                    Premium Signature
-                  </a>
-                  <a
-                    href="/shop?category=Dry+%26+Tea+Cakes"
-                    className="hover:text-[#e70064] transition text-sm px-6 py-3"
-                  >
-                    Dry & Tea Cakes
-                  </a>
-                  <div className="bg-[#FFF0F5] p-4 border-t border-pink-100">
-                    <a
-                      href="/shop?category=Festive+Specials"
-                      className="text-[#e70064] font-bold text-sm hover:text-[#3E2723] transition block"
-                    >
-                      🎉 Festive Specials
-                    </a>
+              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[520px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col transform group-hover:translate-y-1">
+                <div className="bg-white rounded-2xl border border-stone-200 shadow-[0_20px_55px_rgba(62,39,35,0.16)] overflow-hidden">
+                  <div className="px-5 py-4 border-b border-stone-100 flex items-center justify-between">
+                    <div>
+                      <p className={`${inter.className} text-[9px] font-bold tracking-[0.22em] uppercase text-[#e70064]`}>Shop by collection</p>
+                      <p className="text-[11px] text-stone-400 mt-1">Freshly baked for every celebration</p>
+                    </div>
+                    <a href="/shop" className={`${inter.className} text-[9px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#e70064]`}>View all →</a>
+                  </div>
+                  <div className="grid grid-cols-2 p-3 gap-1">
+                    {[
+                      ["All Cakes", "/shop"],
+                      ["Birthday Cakes", "/shop?category=Birthday+Cakes"],
+                      ["Wedding & Anniversary", "/shop?category=Wedding+%26+Anniversary"],
+                      ["Kids & Theme Cakes", "/shop?category=Kids+Theme+Cakes"],
+                      ["Premium Signature", "/shop?category=Premium+Signature"],
+                      ["Chocolate Cakes", "/shop?category=Chocolate+Cakes"],
+                      ["Fresh Fruit Cakes", "/shop?category=Fresh+Fruit+Cakes"],
+                      ["Red Velvet Cakes", "/shop?category=Red+Velvet+Cakes"],
+                      ["Dry & Tea Cakes", "/shop?category=Dry+%26+Tea+Cakes"],
+                      ["Festive Specials", "/shop?category=Festive+Specials"],
+                    ].map(([label, href]) => (
+                      <a key={label} href={href} className="group/item flex items-center justify-between rounded-xl px-4 py-3 text-sm text-stone-700 hover:bg-[#FFF0F5] hover:text-[#e70064] transition-colors">
+                        <span>{label}</span>
+                        <span className="opacity-0 group-hover/item:opacity-100 text-[#e70064] transition-opacity">→</span>
+                      </a>
+                    ))}
+                  </div>
+                  <div className="bg-[#3E2723] px-5 py-3.5 flex items-center justify-between">
+                    <span className="text-[10px] text-white/70">Looking for something unique?</span>
+                    <a href="/custom-cake" className={`${inter.className} text-[9px] font-bold uppercase tracking-widest text-white hover:text-[#ffd8e7]`}>Create a custom cake →</a>
                   </div>
                 </div>
               </div>
@@ -344,7 +339,7 @@ function ShopContent() {
              ===================================================== */}
           <aside className="w-full md:w-[260px] lg:w-[285px] shrink-0">
             <div className="md:sticky md:top-32">
-              <div className="bg-white rounded-2xl border border-[#e7e2df] shadow-[0_10px_35px_rgba(62,39,35,0.07)] overflow-hidden">
+              <div className="bg-white rounded-[1.5rem] border border-stone-100 shadow-[0_8px_30px_rgba(62,39,35,0.07)] overflow-hidden">
                 <div className="px-5 py-4 border-b border-[#eee9e6] flex items-center justify-between">
                   <div>
                     <h2 className={`${inter.className} text-base font-extrabold tracking-tight text-[#2f211d]`}>
@@ -398,14 +393,15 @@ function ShopContent() {
 
                   <details open className="group border-t border-[#eee9e6]">
                     <summary className="list-none cursor-pointer py-4 flex items-center justify-between select-none">
-                      <span className={`${inter.className} text-[11px] font-bold uppercase tracking-[0.1em] text-[#3E2723]`}>
-                        Category
-                      </span>
-
-                      <span className="flex items-center gap-2">
-                        <span className={`${inter.className} max-w-[130px] truncate text-[10px] font-semibold text-[#e70064]`}>
+                      <div>
+                        <span className={`${inter.className} text-[11px] font-bold uppercase tracking-[0.1em] text-[#3E2723]`}>
+                          Category
+                        </span>
+                        <span className={`${inter.className} block mt-1 max-w-[165px] truncate text-[10px] font-semibold text-[#e70064]`}>
                           {activeCategory}
                         </span>
+                      </div>
+                      <span className="w-8 h-8 rounded-full border border-[#e7dfda] bg-[#faf8f7] flex items-center justify-center">
                         <svg
                           className="w-4 h-4 text-[#766a64] transition-transform group-open:rotate-180"
                           fill="none"
@@ -422,15 +418,15 @@ function ShopContent() {
                       </span>
                     </summary>
 
-                    <div className="pb-3 space-y-1">
+                    <div className="pb-3 space-y-1.5 max-h-[420px] overflow-y-auto pr-1">
                       {categories.map((cat) => (
                         <button
                           key={cat}
                           onClick={() => setActiveCategory(cat)}
-                          className={`${inter.className} w-full min-h-10 px-3 rounded-lg flex items-center justify-between text-left text-[11px] font-medium transition ${
+                          className={`${inter.className} w-full min-h-10 px-3.5 rounded-xl flex items-center justify-between text-left text-[11px] font-medium transition ${
                             activeCategory === cat
-                              ? "bg-[#3E2723] text-white font-bold"
-                              : "text-[#655954] hover:bg-[#f7f3f1] hover:text-[#3E2723]"
+                              ? "bg-[#3E2723] text-white font-bold shadow-sm"
+                              : "text-[#655954] hover:bg-[#FFF0F5] hover:text-[#e70064]"
                           }`}
                         >
                           <span>{cat}</span>
@@ -621,15 +617,15 @@ function ShopContent() {
                   return (
                     <div
                       key={cake.id}
-                      className="group flex flex-col bg-white border border-stone-100 p-4 rounded-[1.75rem] shadow-[0_8px_30px_rgba(62,39,35,0.045)] hover:shadow-[0_18px_45px_rgba(62,39,35,0.11)] hover:-translate-y-1 transition-all duration-500"
+                      className="group flex flex-col bg-white border border-stone-100 p-3.5 rounded-[1.5rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                     >
                       {/* Product image */}
-                      <div className="w-full aspect-[4/4.5] bg-[#FAF9F6] overflow-hidden mb-5 relative rounded-[1.35rem]">
+                      <div className="w-full aspect-square bg-[#FAF9F6] overflow-hidden mb-4 relative rounded-[1.35rem]">
                         {cake.image_url ? (
                           <img
                             src={cake.image_url}
                             alt={cake.name}
-                            className="object-cover w-full h-full group-hover:scale-[1.045] transition duration-700 ease-out"
+                            className="object-cover w-full h-full group-hover:scale-105 transition duration-700 ease-out"
                           />
                         ) : (
                           <div
@@ -659,9 +655,9 @@ function ShopContent() {
                         </div>
                       </div>
 
-                      <div className="px-1 flex-grow flex flex-col">
+                      <div className="px-2 flex-grow flex flex-col">
                         <h4
-                          className={`${inter.className} text-[17px] font-bold text-[#2f211d] mb-2 leading-tight tracking-[-0.01em]`}
+                          className={`${inter.className} text-[17px] font-bold text-[#2f211d] mb-1.5 leading-tight tracking-[-0.01em]`}
                         >
                           {cake.name}
                         </h4>
@@ -670,7 +666,7 @@ function ShopContent() {
                           {cake.description}
                         </p>
 
-                        <div className="flex justify-between items-end gap-3 pt-4 border-t border-stone-100 mt-auto">
+                        <div className="flex justify-between items-center gap-3 pt-3 border-t border-stone-100 mt-auto">
                           <div className="flex flex-col">
                             {hasMultiplePrices && (
                               <span
@@ -689,7 +685,7 @@ function ShopContent() {
 
                           <a
                             href={`/shop/${cake.id}`}
-                            className={`${inter.className} inline-flex items-center justify-center gap-2 bg-[#3E2723] text-white px-4 py-3 rounded-full font-bold text-[10px] tracking-[0.08em] uppercase shadow-sm hover:bg-[#e70064] hover:shadow-md transition-all duration-300`}
+                            className={`${inter.className} inline-flex items-center justify-center gap-2 bg-[#3E2723] text-white px-4 py-2.5 rounded-full font-bold text-[10px] tracking-[0.08em] uppercase shadow-sm hover:bg-[#e70064] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300`}
                           >
                             View Cake
                             <span className="text-sm leading-none">→</span>
