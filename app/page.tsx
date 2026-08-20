@@ -234,14 +234,14 @@ export default function Home() {
         
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
           {[
-            { title: "Birthday Cakes", sub: "For the special day", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80", link: "/shop?category=Birthday+Cakes" },
-            { title: "Wedding & Anniversary", sub: "For your forever moments", img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80", link: "/shop?category=Wedding+%26+Anniversary" },
-            { title: "Kids & Theme Cakes", sub: "Made for little smiles", img: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80", link: "/shop?category=Kids+Theme+Cakes" },
-            { title: "Premium Signature", sub: "For something extra special", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80", link: "/shop?category=Premium+Signature" },
-            { title: "Dry & Tea Cakes", sub: "Perfect with your chai", img: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80", link: "/shop?category=Dry+%26+Tea+Cakes" },
-            { title: "Festive Specials", sub: "Made for the season", img: "https://images.unsplash.com/photo-1602351447937-745cb720612f?auto=format&fit=crop&q=80", link: "/shop?category=Festive+Specials" },
-            { title: "Chocolate Cakes", sub: "Rich, indulgent favourites", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80", link: "/shop?category=Chocolate+Cakes" },
-            { title: "Custom Cakes", sub: "Your idea. Your cake.", img: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80", link: "/custom-cake" }
+            { title: "Birthday Cakes", sub: "For the special day", img: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_700,h_700,c_fit/FOOD_CATALOG/IMAGES/CMS/2025/1/7/a2d03ca4-96bf-4190-83a1-792bf1f0d4ef_9bbcf863-be6d-407c-b2db-e97f8a5c3d34.jpg", link: "/shop?category=Birthday+Cakes" },
+            { title: "Wedding & Anniversary", sub: "For your forever moments", img: "https://tblg.k-img.com/restaurant/images/Rvw/173415/b9329b90aadcc83532bbedcc4513c434.jpg", link: "/shop?category=Wedding+%26+Anniversary" },
+            { title: "Kids & Theme Cakes", sub: "Made for little smiles", img: "https://riverashbakery.com/cdn/shop/files/Colorful-Car-Theme-Cake_1024x1024.jpg?v=1721743464", link: "/shop?category=Kids+Theme+Cakes" },
+            { title: "Premium Signature", sub: "For something extra special", img: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/0e0e15146806319.62b6d6916709d.jpg", link: "/shop?category=Premium+Signature" },
+            { title: "Dry & Tea Cakes", sub: "Perfect with your chai", img: "https://i0.wp.com/annikaeats.com/wp-content/uploads/2022/03/DSC_0450.jpg?fit=683%2C1024&ssl=1", link: "/shop?category=Dry+%26+Tea+Cakes" },
+            { title: "Festive Specials", sub: "Made for the season", img: "https://cdnnew.igp.com/f_auto%2Cq_auto%2Ct_pnopt20prodlp/products/p-diwali-diya-rangoli-cake-146910-1.jpg", link: "/shop?category=Festive+Specials" },
+            { title: "Chocolate Cakes", sub: "Rich, indulgent favourites", img: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&q=85", link: "/shop?category=Chocolate+Cakes" },
+            { title: "Custom Cakes", sub: "Your idea. Your cake.", img: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&q=85", link: "/custom-cake" }
           ].map((cat, index) => (
             <a key={index} href={cat.link} className="group relative min-w-[260px] md:min-w-0 h-[300px] rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 block border border-stone-100 snap-center">
               <div className="absolute inset-0 bg-gradient-to-t from-[#2A1B18]/90 via-[#2A1B18]/20 to-transparent transition z-10"></div>
@@ -404,9 +404,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6">
             {[
-              { step: "01", title: "Mix", desc: "Fresh ingredients, whisked into smooth batter.", img: "https://static.wixstatic.com/media/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg/v1/fit/w_1400%2Ch_900%2Cal_c/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg" },
-              { step: "02", title: "Bake", desc: "Baked at the right temperature for a soft crumb.", img: "https://cdn.jagonews24.com/media/imgAllNew/BG/2023March/oven-20260516085245.png" },
-              { step: "03", title: "Decorate", desc: "Finished by hand with careful detail.", img: "https://www.thepassionatebaker.in/images/story.jpg" },
+              { step: "01", title: "Mix", desc: "Fresh ingredients, whisked into smooth batter.", img: "https://images.squarespace-cdn.com/content/v1/5a2faed69f07f5374e685f70/1586497366726-L3ONRNRNUWXB46C7B4UG/ziles-kafijas-biskvita-kuka-naskoties-14.JPG" },
+              { step: "02", title: "Bake", desc: "Baked at the right temperature for a soft crumb.", img: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=1000&q=85" },
+              { step: "03", title: "Decorate", desc: "Close-up finishing details that make the cake special.", img: "https://images.unsplash.com/photo-1603532648955-039310d9ed75?auto=format&fit=crop&w=1000&q=85" },
               { step: "04", title: "Pack", desc: "Packed securely, ready for your celebration.", img: "https://image.made-in-china.com/2f0j00HnwWUyoJwdgf/Custom-Printed-Bakery-Packaging-Box-Birthday-Cake-Box-with-Window-and-Handle-1975534572.webp" }
             ].map((process, i) => (
               <div key={i} className="flex flex-col items-center group">
@@ -434,45 +434,72 @@ export default function Home() {
       </div>
 
       {/* ========================================================= */}
-      {/* SECTION 8: CUSTOM CAKES                                   */}
+      {/* SECTION 8: CUSTOM CAKES — HOME KITCHEN BACKGROUND           */}
       {/* ========================================================= */}
-      <section className="py-18 md:py-20 bg-[#FFF0F5] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/40 rounded-full blur-3xl -z-10 -translate-y-1/2 translate-x-1/3"></div>
-        
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row gap-12 lg:gap-16 items-center">
-          <div className="w-full md:w-1/2 space-y-8 z-10 text-center md:text-left">
-            <h3 className={`${playfair.className} text-4xl md:text-5xl font-extrabold text-[#3E2723] leading-[1.1]`}>
-              You Imagine It.<br/>We Bake It.
+      <section
+        className="relative py-20 md:py-24 overflow-hidden bg-[#3E2723]"
+        style={{
+          backgroundImage:
+            "url(https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#2A1713]/72"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2A1713]/90 via-[#2A1713]/65 to-[#2A1713]/30"></div>
+
+        <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+          <div className="max-w-2xl py-4 md:py-8">
+            <span
+              className={`${montserrat.className} inline-flex items-center gap-2 text-[#F6C4D7] font-bold tracking-[0.22em] text-[10px] uppercase mb-6`}
+            >
+              <span className="w-8 h-px bg-[#e70064]"></span>
+              Custom Cakes • From Our Home Kitchen
+            </span>
+
+            <h3
+              className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08]`}
+            >
+              You Imagine It.
+              <br />
+              <span className="italic text-[#F6C4D7]">We Bake It.</span>
             </h3>
-            <p className="text-[#3E2723]/80 leading-relaxed font-light text-base md:text-lg">
-              Birthday, anniversary, baby shower or a special surprise — share your idea and let us create a cake around your celebration.
+
+            <p className="mt-6 text-white/80 leading-relaxed font-light text-base md:text-lg max-w-xl">
+              Birthday, anniversary, baby shower or a special surprise — share
+              your idea and let us create a cake around your celebration.
             </p>
-            
-            <a href="/custom-cake" className={`${montserrat.className} inline-block bg-[#e70064] text-white px-10 py-4 font-bold text-xs tracking-widest uppercase hover:bg-[#3E2723] transition-colors rounded-full shadow-lg`}>
+
+            <a
+              href="/custom-cake"
+              className={`${montserrat.className} inline-flex mt-8 bg-[#e70064] text-white px-9 py-4 font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-[#3E2723] transition-colors rounded-full shadow-lg`}
+            >
               Create My Custom Cake →
             </a>
-            
-            <div className="pt-10 mt-10 border-t border-pink-200/50 text-left">
-              <ul className="space-y-4">
+
+            <div className="mt-10 pt-8 border-t border-white/15 max-w-xl">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   "Share Your Idea",
                   "Choose Your Flavour",
                   "Choose Your Size",
-                  "Confirm on WhatsApp"
+                  "Confirm on WhatsApp",
                 ].map((step, idx) => (
-                  <li key={idx} className="flex items-center gap-4">
-                    <span className={`${montserrat.className} flex items-center justify-center w-6 h-6 rounded-full bg-white text-[#e70064] text-[10px] font-bold shadow-sm`}>
+                  <li key={idx} className="flex items-center gap-3">
+                    <span
+                      className={`${montserrat.className} flex items-center justify-center w-7 h-7 rounded-full bg-white text-[#e70064] text-[10px] font-bold shadow-sm`}
+                    >
                       {idx + 1}
                     </span>
-                    <span className={`${montserrat.className} text-xs font-bold uppercase tracking-widest text-[#3E2723]`}>{step}</span>
+                    <span
+                      className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest text-white/90`}
+                    >
+                      {step}
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
-          
-          <div className="w-full md:w-1/2 relative">
-            <img src="https://static.wixstatic.com/media/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg/v1/fit/w_1400%2Ch_900%2Cal_c/370388_64fa59dd4b004ae9ac3d1165ecb2b93e~mv2.jpg" alt="Confident Indian woman baker preparing cake" className="rounded-t-[45%] rounded-b-[3rem] shadow-2xl border-8 border-white w-full h-[440px] md:h-[600px] object-cover" />
           </div>
         </div>
       </section>
@@ -554,12 +581,12 @@ export default function Home() {
           <h3 className={`${playfair.className} text-4xl font-bold text-[#3E2723] mb-12`}>Made for Moments Like These</h3>
           
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Gallery" />
-            <img src="https://images.unsplash.com/photo-1563716113315-769502b748cb?auto=format&fit=crop&q=80" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Gallery" />
-            <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?auto=format&fit=crop&q=80" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Gallery" />
-            <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Gallery" />
-            <img src="https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&q=80" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Gallery" />
-            <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&q=80" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Gallery" />
+            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=85" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Birthday cake celebration" />
+            <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&q=85" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Fresh bakery celebration treat" />
+            <img src="https://images.unsplash.com/photo-1563716113315-769502b748cb?auto=format&fit=crop&q=85" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Kids celebration cake" />
+            <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&q=85" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Freshly decorated celebration cake" />
+            <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?auto=format&fit=crop&q=85" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Tea time cake" />
+            <img src="https://images.unsplash.com/photo-1602351447937-745cb720612f?auto=format&fit=crop&q=85" className="w-full rounded-2xl object-cover hover:opacity-90 transition" alt="Festive cake celebration" />
           </div>
         </div>
       </section>
@@ -572,18 +599,48 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 gap-4 text-center md:text-left">
             <div>
               <h3 className={`${playfair.className} text-3xl md:text-4xl font-bold text-[#3E2723] mb-2`}>Fresh From Our Kitchen</h3>
-              <p className="text-stone-500 font-light">See what we're baking, decorating and delivering.</p>
+              <p className="text-stone-500 font-light">Real baking, real cakes and real moments from our Instagram.</p>
             </div>
-            <a href="#" className={`${montserrat.className} text-xs font-bold tracking-widest uppercase text-[#e70064] hover:text-[#3E2723] transition flex items-center gap-2`}>
-              Follow @CakeByRupali <span className="text-lg leading-none">→</span>
+            <a
+              href="https://www.instagram.com/cake.by.rupali/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${montserrat.className} text-xs font-bold tracking-widest uppercase text-[#e70064] hover:text-[#3E2723] transition flex items-center gap-2`}
+            >
+              Follow @cake.by.rupali <span className="text-lg leading-none">→</span>
             </a>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&q=80" alt="IG Post" className="aspect-square w-full object-cover rounded-2xl hover:opacity-80 transition cursor-pointer shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&q=80" alt="IG Post" className="aspect-square w-full object-cover rounded-2xl hover:opacity-80 transition cursor-pointer shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80" alt="IG Post" className="aspect-square w-full object-cover rounded-2xl hover:opacity-80 transition cursor-pointer shadow-sm hidden md:block" />
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80" alt="IG Post" className="aspect-square w-full object-cover rounded-2xl hover:opacity-80 transition cursor-pointer shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80" alt="IG Post" className="aspect-square w-full object-cover rounded-2xl hover:opacity-80 transition cursor-pointer shadow-sm" />
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              "https://www.instagram.com/reel/Dbyd26FziMp/",
+              "https://www.instagram.com/reel/DZF7s3Azj4e/",
+              "https://www.instagram.com/reel/DZQKiEsT34o/",
+              "https://www.instagram.com/reel/DYfP4vTtcu6/"
+            ].map((reel, i) => (
+              <a
+                key={reel}
+                href="https://www.instagram.com/cake.by.rupali/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open Cake By Rupali Instagram account - reel ${i + 1}`}
+                className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-stone-100 shadow-sm border border-stone-200"
+              >
+                <iframe
+                  src={`${reel}embed/`}
+                  title={`Cake By Rupali Instagram reel ${i + 1}`}
+                  className="absolute inset-0 w-full h-full pointer-events-none scale-[1.01]"
+                  loading="lazy"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                />
+                <div className="absolute inset-0 z-10 bg-transparent group-hover:bg-[#e70064]/5 transition-colors" />
+                <div className="absolute left-4 bottom-4 z-20 bg-white/95 backdrop-blur rounded-full px-3 py-1.5">
+                  <span className={`${montserrat.className} text-[9px] font-bold uppercase tracking-widest text-[#3E2723]`}>
+                    View on Instagram →
+                  </span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -632,7 +689,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-10 pb-20">
           <div className="bg-[#FFF0F5] rounded-[3rem] overflow-hidden flex flex-col md:flex-row items-center shadow-sm">
             <div className="w-full md:w-1/2 h-[300px] md:h-[450px]">
-              <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80" alt="Celebration" className="w-full h-full object-cover" />
+              <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1200&q=85" alt="Celebration cake ready to serve" className="w-full h-full object-cover" />
             </div>
             <div className="w-full md:w-1/2 p-9 md:p-12 text-center md:text-left">
               <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-[#3E2723] mb-6 leading-tight`}>Koi Special Celebration<br/>Aane Wala Hai?</h2>
@@ -669,7 +726,7 @@ export default function Home() {
               Freshly baked, delicious cakes made with love in Virar. Making your everyday celebrations extra sweet.
             </p>
             <div className="flex gap-4">
-              <a href="#" className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-sm flex items-center justify-center text-xs font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors cursor-pointer text-stone-300 hover:text-white`}>IG</a>
+              <a href="https://www.instagram.com/cake.by.rupali/" target="_blank" rel="noopener noreferrer" className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-sm flex items-center justify-center text-xs font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors cursor-pointer text-stone-300 hover:text-white`}>IG</a>
               <a href="#" className={`${montserrat.className} w-10 h-10 border border-stone-700 rounded-sm flex items-center justify-center text-xs font-bold hover:bg-[#e70064] hover:border-[#e70064] transition-colors cursor-pointer text-stone-300 hover:text-white`}>FB</a>
             </div>
           </div>
