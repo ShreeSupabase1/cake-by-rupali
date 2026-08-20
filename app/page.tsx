@@ -100,17 +100,38 @@ export default function Home() {
               <button className="hover:text-[#e70064] transition flex items-center gap-1 outline-none uppercase tracking-wide font-semibold">
                 Shop <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
-              <div className="absolute left-0 top-full w-60 bg-white border border-stone-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col transform group-hover:translate-y-1">
-                <div className="p-4 text-stone-700 flex flex-col gap-3">
-                  <a href="/shop" className="hover:text-[#e70064] transition text-xs font-bold uppercase tracking-widest border-b border-stone-100 pb-2">All Cakes</a>
-                  <a href="/shop?category=Birthday+Cakes" className="hover:text-[#e70064] transition text-sm capitalize">Birthday Cakes</a>
-                  <a href="/shop?category=Wedding+%26+Anniversary" className="hover:text-[#e70064] transition text-sm capitalize">Wedding & Anniversary</a>
-                  <a href="/shop?category=Kids+Theme+Cakes" className="hover:text-[#e70064] transition text-sm capitalize">Kids & Theme Cakes</a>
-                  <a href="/shop?category=Premium+Signature" className="hover:text-[#e70064] transition text-sm capitalize">Premium Signature</a>
-                  <a href="/shop?category=Dry+%26+Tea+Cakes" className="hover:text-[#e70064] transition text-sm capitalize">Dry & Tea Cakes</a>
-                </div>
-                <div className="bg-stone-50 p-4 border-t border-stone-100">
-                  <a href="/shop?category=Festive+Specials" className="text-[#e70064] font-semibold text-sm hover:text-pink-800 transition capitalize block">🎉 Festive Specials</a>
+              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[520px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col transform group-hover:translate-y-1">
+                <div className="bg-white rounded-2xl border border-stone-200 shadow-[0_20px_55px_rgba(62,39,35,0.16)] overflow-hidden">
+                  <div className="px-5 py-4 border-b border-stone-100 flex items-center justify-between">
+                    <div>
+                      <p className={`${montserrat.className} text-[9px] font-bold tracking-[0.22em] uppercase text-[#e70064]`}>Shop by collection</p>
+                      <p className="text-[11px] text-stone-400 mt-1">Find the right cake for your celebration</p>
+                    </div>
+                    <a href="/shop" className={`${montserrat.className} text-[9px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#e70064]`}>View all →</a>
+                  </div>
+                  <div className="grid grid-cols-2 p-3 gap-1">
+                    {[
+                      ["All Cakes", "/shop"],
+                      ["Birthday Cakes", "/shop?category=Birthday+Cakes"],
+                      ["Wedding & Anniversary", "/shop?category=Wedding+%26+Anniversary"],
+                      ["Kids & Theme Cakes", "/shop?category=Kids+Theme+Cakes"],
+                      ["Premium Signature", "/shop?category=Premium+Signature"],
+                      ["Chocolate Cakes", "/shop?category=Chocolate+Cakes"],
+                      ["Fresh Fruit Cakes", "/shop?category=Fresh+Fruit+Cakes"],
+                      ["Red Velvet Cakes", "/shop?category=Red+Velvet+Cakes"],
+                      ["Dry & Tea Cakes", "/shop?category=Dry+%26+Tea+Cakes"],
+                      ["Festive Specials", "/shop?category=Festive+Specials"],
+                    ].map(([label, href]) => (
+                      <a key={label} href={href} className="group/item flex items-center justify-between rounded-xl px-4 py-3 text-sm text-stone-700 hover:bg-[#FFF0F5] hover:text-[#e70064] transition-colors">
+                        <span>{label}</span>
+                        <span className="opacity-0 group-hover/item:opacity-100 text-[#e70064] transition-opacity">→</span>
+                      </a>
+                    ))}
+                  </div>
+                  <div className="bg-[#3E2723] px-5 py-3.5 flex items-center justify-between">
+                    <span className="text-[10px] text-white/70">Looking for something unique?</span>
+                    <a href="/custom-cake" className={`${montserrat.className} text-[9px] font-bold uppercase tracking-widest text-white hover:text-[#ffd8e7]`}>Create a custom cake →</a>
+                  </div>
                 </div>
               </div>
             </div>
