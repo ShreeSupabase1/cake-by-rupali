@@ -41,6 +41,12 @@ export default function AdminPortal() {
   // Dynamic Multi-Weight & Pricing State
   const [pricingOptions, setPricingOptions] = useState<any[]>([{ weight: "1 KG", price: "" }]);
 
+  // Optional defaults used only when an imported CSV row has no pricing
+  // for that product. If left blank, import uses only the pricing pairs
+  // explicitly provided in the CSV.
+  const [importDefaultWeight, setImportDefaultWeight] = useState("");
+  const [importDefaultPrice, setImportDefaultPrice] = useState("");
+
   // Testimonial States
   const [testAuthor, setTestAuthor] = useState("");
   const [testText, setTestText] = useState("");
@@ -271,58 +277,305 @@ export default function AdminPortal() {
   }
 
   // --- 4. HANDLE IMPORT / EXPORT (EXCEL/CSV) ---
+
+  // Parse one CSV line while respecting commas inside quoted values.
+  function parseCSVLine(line: string): string[] {
+    const values: string[] = [];
+    let current = "";
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      const next = line[i + 1];
+
+      if (char === '"' && inQuotes && next === '"') {
+        current += '"';
+        i++;
+      } else if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === "," && !inQuotes) {
+        values.push(current.trim());
+        current = "";
+      } else {
+        current += char;
+      }
+    }
+
+    values.push(current.trim());
+    return values;
+  }
+
+  function csvEscape(value: any): string {
+    const stringValue = value === null || value === undefined ? "" : String(value);
+    return `"${stringValue.replace(/"/g, '""')}"`;
+  }
+
+  function downloadCSV(filename: string, content: string) {
+    const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  }
+
+  // Sample file intentionally contains only the columns supported by the
+  // importer. Additional weight/price pairs can be added as weight_4/price_4,
+  // weight_5/price_5, etc.
+  function downloadSampleCSV() {
+    const header = [
+      "name",
+      "description",
+      "category",
+      "is_eggless",
+      "weight_1",
+      "price_1",
+      "weight_2",
+      "price_2",
+      "weight_3",
+      "price_3"
+    ];
+
+    const sampleRows = [
+      [
+        "Classic Black Forest",
+        "Chocolate sponge with fresh cream and cherries",
+        "Birthday Cakes",
+        "FALSE",
+        "1 KG",
+        "899",
+        "1.5 KG",
+        "1199",
+        "2 KG",
+        "1499"
+      ],
+      [
+        "Fresh Pineapple Cake",
+        "Vanilla sponge with fresh pineapple and cream",
+        "Birthday Cakes",
+        "FALSE",
+        "0.5 KG",
+        "599",
+        "1 KG",
+        "899",
+        "",
+        ""
+      ]
+    ];
+
+    const csvContent = [
+      header.map(csvEscape).join(","),
+      ...sampleRows.map(row => row.map(csvEscape).join(","))
+    ].join("\n");
+
+    downloadCSV("CakeByRupali_Import_Sample.csv", csvContent);
+  }
+
   function exportToCSV() {
     if (allProducts.length === 0) return alert("No products to export.");
-    const header = ["name", "description", "price", "category", "is_eggless"];
-    const rows = allProducts.map(p => `"${p.name || ''}","${p.description || ''}",${p.price},"${p.category || ''}",${p.is_eggless ? 'TRUE' : 'FALSE'}`);
-    const csvContent = [header.join(","), ...rows].join("\n");
-    
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `CakeByRupali_Catalog_${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
+
+    // Export every pricing pair dynamically. If one cake has 4 weights,
+    // weight_4/price_4 will be included automatically for the whole file.
+    const maxPricingOptions = Math.max(
+      1,
+      ...allProducts.map(product =>
+        Array.isArray(product.pricing) ? product.pricing.length : 0
+      )
+    );
+
+    const header = [
+      "name",
+      "description",
+      "category",
+      "is_eggless"
+    ];
+
+    for (let i = 1; i <= maxPricingOptions; i++) {
+      header.push(`weight_${i}`, `price_${i}`);
+    }
+
+    const rows = allProducts.map(product => {
+      const pricing = Array.isArray(product.pricing)
+        ? product.pricing.filter((option: any) => option?.weight && option?.price)
+        : [];
+
+      const row: string[] = [
+        product.name || "",
+        product.description || "",
+        product.category || "",
+        product.is_eggless ? "TRUE" : "FALSE"
+      ];
+
+      for (let i = 0; i < maxPricingOptions; i++) {
+        const option = pricing[i];
+        row.push(option?.weight || "", option?.price || "");
+      }
+
+      return row.map(csvEscape).join(",");
+    });
+
+    const csvContent = [header.map(csvEscape).join(","), ...rows].join("\n");
+    downloadCSV(
+      `CakeByRupali_Catalog_${new Date().toISOString().split("T")[0]}.csv`,
+      csvContent
+    );
   }
 
   async function handleImportCSV(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    
+
     const reader = new FileReader();
+
     reader.onload = async (event) => {
-      const text = event.target?.result as string;
-      const rows = text.split('\n').slice(1); 
-      const productsToInsert = [];
-      
-      for (const row of rows) {
-        if (!row.trim()) continue;
-        const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-        if (cols && cols.length >= 5) {
-          const parsedPrice = parseFloat(cols[2]) || 0;
-          productsToInsert.push({
-            name: cols[0].replace(/"/g, ''),
-            description: cols[1].replace(/"/g, ''),
-            price: parsedPrice,
-            pricing: [{ weight: "1.0 KG", price: parsedPrice }], 
-            category: cols[3].replace(/"/g, ''),
-            is_eggless: cols[4].toLowerCase().includes('true'),
-            gallery_images: [] 
+      const fileText = event.target?.result as string;
+      if (!fileText?.trim()) return alert("The CSV file is empty.");
+
+      const lines = fileText
+        .replace(/^\uFEFF/, "")
+        .split(/\r?\n/)
+        .filter(line => line.trim());
+
+      if (lines.length < 2) {
+        return alert("The CSV file must contain a header and at least one product row.");
+      }
+
+      const headers = parseCSVLine(lines[0]).map(header =>
+        header.trim().toLowerCase()
+      );
+
+      const getColumnIndex = (name: string) => headers.indexOf(name);
+
+      const nameIndex = getColumnIndex("name");
+      const descriptionIndex = getColumnIndex("description");
+      const categoryIndex = getColumnIndex("category");
+      const egglessIndex = getColumnIndex("is_eggless");
+
+      if (nameIndex === -1 || categoryIndex === -1) {
+        return alert("Invalid CSV. Required columns: name and category.");
+      }
+
+      // Detect every weight_N / price_N pair in the file, not just 3.
+      const pricingIndexes: { weight: number; price: number }[] = [];
+
+      headers.forEach((header, index) => {
+        const match = header.match(/^weight_(\d+)$/);
+        if (!match) return;
+
+        const pairNumber = Number(match[1]);
+        const priceIndex = headers.indexOf(`price_${pairNumber}`);
+
+        if (priceIndex !== -1) {
+          pricingIndexes.push({
+            weight: index,
+            price: priceIndex
           });
         }
-      }
-      
-      if (productsToInsert.length > 0) {
-        setIsUploading(true);
-        const { error } = await supabase.from('products').insert(productsToInsert);
-        setIsUploading(false);
-        if (error) alert("Error importing database: " + error.message);
-        else {
-          alert(`Successfully imported ${productsToInsert.length} products!`);
-          fetchProducts();
+      });
+
+      pricingIndexes.sort((a, b) => a.weight - b.weight);
+
+      const hasDefaultWeight = importDefaultWeight.trim() !== "";
+      const hasDefaultPrice =
+        importDefaultPrice.trim() !== "" &&
+        Number(importDefaultPrice) > 0;
+
+      const defaultPricing =
+        hasDefaultWeight && hasDefaultPrice
+          ? [{ weight: importDefaultWeight.trim(), price: Number(importDefaultPrice) }]
+          : [];
+
+      const productsToInsert: any[] = [];
+      let skippedRows = 0;
+
+      for (let rowIndex = 1; rowIndex < lines.length; rowIndex++) {
+        const cols = parseCSVLine(lines[rowIndex]);
+        if (!cols.some(value => value.trim())) continue;
+
+        const name = (cols[nameIndex] || "").trim();
+        if (!name) {
+          skippedRows++;
+          continue;
         }
+
+        const pricingFromCSV: { weight: string; price: number }[] = [];
+
+        pricingIndexes.forEach(pair => {
+          const weight = (cols[pair.weight] || "").trim();
+          const priceRaw = (cols[pair.price] || "").trim();
+          const price = Number(priceRaw);
+
+          // Ignore incomplete/invalid pricing pairs instead of creating
+          // fake 0-priced options.
+          if (weight && priceRaw && Number.isFinite(price) && price > 0) {
+            pricingFromCSV.push({ weight, price });
+          }
+        });
+
+        // Important behavior:
+        // 1. If CSV has valid pricing, use ONLY the filled CSV pricing.
+        // 2. If CSV has no pricing at all, use the optional default.
+        // 3. If both are empty, skip the row because the website needs
+        //    at least one valid price to publish the product.
+        const finalPricing =
+          pricingFromCSV.length > 0 ? pricingFromCSV : defaultPricing;
+
+        if (finalPricing.length === 0) {
+          skippedRows++;
+          continue;
+        }
+
+        const startingPrice = Math.min(
+          ...finalPricing.map(option => Number(option.price))
+        );
+
+        productsToInsert.push({
+          name,
+          description: descriptionIndex !== -1 ? (cols[descriptionIndex] || "").trim() : "",
+          price: startingPrice,
+          pricing: finalPricing,
+          category: (cols[categoryIndex] || "Birthday Cakes").trim(),
+          is_eggless:
+            egglessIndex !== -1 &&
+            (cols[egglessIndex] || "").trim().toLowerCase() === "true",
+          gallery_images: []
+        });
+      }
+
+      if (productsToInsert.length === 0) {
+        return alert(
+          skippedRows > 0
+            ? `No valid products found. ${skippedRows} row(s) were skipped because they had no valid pricing.`
+            : "No valid products found in the CSV."
+        );
+      }
+
+      setIsUploading(true);
+
+      const { error } = await supabase
+        .from("products")
+        .insert(productsToInsert);
+
+      setIsUploading(false);
+
+      if (error) {
+        alert("Error importing database: " + error.message);
+      } else {
+        const skippedMessage =
+          skippedRows > 0 ? ` ${skippedRows} row(s) skipped.` : "";
+
+        alert(
+          `Successfully imported ${productsToInsert.length} products!${skippedMessage}`
+        );
+
+        fetchProducts();
+        e.target.value = "";
       }
     };
+
     reader.readAsText(file);
   }
 
@@ -625,27 +878,127 @@ export default function AdminPortal() {
                 <p className="text-stone-500 font-light text-sm mt-2">Download your catalog to Excel (CSV) or bulk upload new products.</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Export Card */}
-                <div className="border border-stone-200/80 bg-[#fcfaf9] p-8 rounded-3xl text-center flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all">
-                  <div className="text-4xl mb-4">📥</div>
-                  <h3 className={`${montserrat.className} font-bold uppercase tracking-widest text-stone-900 text-xs mb-4`}>Export Catalog</h3>
-                  <p className="text-xs font-light text-stone-500 mb-6">Download your entire website catalog as a CSV spreadsheet.</p>
-                  <button onClick={exportToCSV} className={`${montserrat.className} w-full bg-[#3d2723] text-white py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase hover:bg-[#e70064] transition-all`}>
-                    Download CSV
+                <div className="border border-stone-200/80 bg-[#fcfaf9] p-7 rounded-3xl flex flex-col hover:bg-white hover:shadow-lg transition-all">
+                  <div className="flex items-start justify-between gap-4 mb-5">
+                    <div>
+                      <div className="text-3xl mb-3">📥</div>
+                      <h3 className={`${montserrat.className} font-bold uppercase tracking-widest text-stone-900 text-xs`}>Export Catalog</h3>
+                    </div>
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-stone-400 bg-white border border-stone-200 px-3 py-1.5 rounded-full">
+                      Multi-Weight
+                    </span>
+                  </div>
+                  <p className="text-xs font-light text-stone-500 mb-6 leading-relaxed">
+                    Export every product and every filled weight/price pair. If a cake has 4 KG options, all 4 are included in the CSV.
+                  </p>
+                  <button onClick={exportToCSV} className={`${montserrat.className} w-full mt-auto bg-[#3d2723] text-white py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase hover:bg-[#e70064] transition-all`}>
+                    Download Full Catalog
                   </button>
                 </div>
 
                 {/* Import Card */}
-                <div className="border border-stone-200/80 bg-[#fcfaf9] p-8 rounded-3xl text-center flex flex-col items-center justify-center hover:bg-white hover:shadow-lg transition-all">
-                  <div className="text-4xl mb-4">📤</div>
-                  <h3 className={`${montserrat.className} font-bold uppercase tracking-widest text-stone-900 text-xs mb-4`}>Bulk Import</h3>
-                  <p className="text-xs font-light text-stone-500 mb-6">Upload a CSV to instantly add multiple products to the website.</p>
-                  <div className="relative w-full">
-                    <input type="file" accept=".csv" onChange={handleImportCSV} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                    <button className={`${montserrat.className} w-full bg-white border border-stone-300 text-stone-900 py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase pointer-events-none`}>
-                      {isUploading ? "Uploading..." : "Select CSV File"}
+                <div className="border border-stone-200/80 bg-[#fcfaf9] p-7 rounded-3xl flex flex-col hover:bg-white hover:shadow-lg transition-all">
+                  <div className="flex items-start justify-between gap-4 mb-5">
+                    <div>
+                      <div className="text-3xl mb-3">📤</div>
+                      <h3 className={`${montserrat.className} font-bold uppercase tracking-widest text-stone-900 text-xs`}>Bulk Import</h3>
+                    </div>
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#e70064] bg-pink-50 border border-pink-100 px-3 py-1.5 rounded-full">
+                      Optional Defaults
+                    </span>
+                  </div>
+
+                  <p className="text-xs font-light text-stone-500 mb-5 leading-relaxed">
+                    Upload the sample format or your own CSV. Filled weight/price columns are imported exactly as provided.
+                  </p>
+
+                  {/* Optional fallback pricing */}
+                  <div className="bg-white border border-stone-200 rounded-2xl p-4 mb-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <p className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest text-stone-700`}>
+                          Default Pricing
+                        </p>
+                        <p className="text-[10px] text-stone-400 mt-1">
+                          Used only when a CSV row has no pricing.
+                        </p>
+                      </div>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-stone-300">Optional</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <select
+                        value={importDefaultWeight}
+                        onChange={e => setImportDefaultWeight(e.target.value)}
+                        className="w-full border border-stone-200/90 p-3 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-xs transition-all"
+                      >
+                        <option value="">Default Weight</option>
+                        <option value="0.5 KG">0.5 KG</option>
+                        <option value="1 KG">1 KG</option>
+                        <option value="1.5 KG">1.5 KG</option>
+                        <option value="2 KG">2 KG</option>
+                        <option value="2.5 KG">2.5 KG</option>
+                        <option value="3 KG">3 KG</option>
+                        <option value="4 KG">4 KG</option>
+                        <option value="5 KG">5 KG</option>
+                        <option value="Custom Box">Custom Box/Piece</option>
+                      </select>
+
+                      <input
+                        type="number"
+                        min="1"
+                        value={importDefaultPrice}
+                        onChange={e => setImportDefaultPrice(e.target.value)}
+                        placeholder="Default Price (₹)"
+                        className="w-full border border-stone-200/90 p-3 rounded-xl focus:outline-none focus:border-[#e70064] focus:ring-4 focus:ring-pink-50/70 bg-white text-xs transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-auto">
+                    <button
+                      type="button"
+                      onClick={downloadSampleCSV}
+                      className={`${montserrat.className} w-full bg-white border border-stone-300 text-stone-900 py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase hover:border-[#e70064] hover:text-[#e70064] transition-all`}
+                    >
+                      Download Sample
                     </button>
+
+                    <div className="relative w-full">
+                      <input
+                        type="file"
+                        accept=".csv"
+                        onChange={handleImportCSV}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                      <button
+                        type="button"
+                        className={`${montserrat.className} w-full bg-[#3d2723] text-white py-3.5 rounded-xl font-bold text-[10px] tracking-widest uppercase pointer-events-none`}
+                      >
+                        {isUploading ? "Uploading..." : "Select CSV File"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Import format guide */}
+              <div className="mt-6 rounded-2xl border border-stone-200 bg-white p-5">
+                <div className="flex flex-col md:flex-row md:items-start gap-4">
+                  <div className="shrink-0 w-9 h-9 rounded-xl bg-[#fff0f5] flex items-center justify-center text-sm">💡</div>
+                  <div>
+                    <p className={`${montserrat.className} text-[10px] font-bold uppercase tracking-widest text-stone-800 mb-2`}>
+                      How pricing works
+                    </p>
+                    <ul className="text-xs text-stone-500 leading-relaxed space-y-1">
+                      <li>• Use <strong>weight_1 / price_1</strong>, <strong>weight_2 / price_2</strong>, etc. for multiple sizes.</li>
+                      <li>• Empty pricing pairs are ignored — they are not created as ₹0 options.</li>
+                      <li>• If a row has pricing in the CSV, those filled pairs are used and the default is ignored for that row.</li>
+                      <li>• If a row has no pricing, the optional Default Weight + Default Price are used. If defaults are blank, that row is skipped.</li>
+                      <li>• Export automatically includes as many weight/price columns as the largest product in your catalog.</li>
+                    </ul>
                   </div>
                 </div>
               </div>
